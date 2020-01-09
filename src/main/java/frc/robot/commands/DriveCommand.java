@@ -7,6 +7,7 @@
 
 package frc.robot.commands;
 
+import edu.wpi.first.wpilibj.GenericHID;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.Robot;
@@ -19,6 +20,7 @@ public class DriveCommand extends CommandBase {
    */
   
   private final DrivetrainSubsystem m_drivetrainSubsystem;
+  public Joystick driveStick = new Joystick(0);
 
   public DriveCommand(DrivetrainSubsystem drivetrainSubsystem) {
     m_drivetrainSubsystem = drivetrainSubsystem;
@@ -36,7 +38,7 @@ public class DriveCommand extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    m_drivetrainSubsystem.Drive(RobotContainer.driveStick.getY(), (.75*stick.getTwist()));
+    m_drivetrainSubsystem.Drive(driveStick.getY(), driveStick.getTwist());
   }
 
   // Called once the command ends or is interrupted.

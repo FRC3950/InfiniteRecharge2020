@@ -17,7 +17,6 @@ import frc.robot.subsystems.ExampleSubsystem;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.button.Button;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
-import edu.wpi.first.wpilibj.GenericHID;
 
 /**
  * This class is where the bulk of the robot should be declared.  Since Command-based is a
@@ -33,38 +32,41 @@ public class RobotContainer {
   private final ExampleCommand m_autoCommand = new ExampleCommand(m_exampleSubsystem);
   private final DriveCommand m_driveCommand = new DriveCommand(m_drivetrainSubsystem);
 
-  public GenericHID driveStick = new Joystick(0);
-  public XboxController xboxController = new XboxController(1);
+    public Joystick driveStick = new Joystick(0);
+    public XboxController xboxController = new XboxController(1);
 
-  public Button driveStick1Button = new JoystickButton(driveStick, 1);
-  public Button driveStick2Button = new JoystickButton(driveStick, 2);
-  public Button driveStick3Button = new JoystickButton(driveStick, 3);
-  public Button driveStick4Button = new JoystickButton(driveStick, 4);
-  public Button driveStick5Button = new JoystickButton(driveStick, 5);
-  public Button driveStick6Button = new JoystickButton(driveStick, 6);
-  public Button driveStick7Button = new JoystickButton(driveStick, 7);
-  public Button driveStick8Button = new JoystickButton(driveStick, 8);
-  public Button driveStick9Button = new JoystickButton(driveStick, 9);
-  public Button driveStick10Button = new JoystickButton(driveStick, 10);
-  public Button driveStick11Button = new JoystickButton(driveStick, 11);
-  public Button driveStick12Button = new JoystickButton(driveStick, 12);  
+    public Button driveStick1Button = new JoystickButton(driveStick, 1);
+    public Button driveStick2Button = new JoystickButton(driveStick, 2);
+    public Button driveStick3Button = new JoystickButton(driveStick, 3);
+    public Button driveStick4Button = new JoystickButton(driveStick, 4);
+    public Button driveStick5Button = new JoystickButton(driveStick, 5);
+    public Button driveStick6Button = new JoystickButton(driveStick, 6);
+    public Button driveStick7Button = new JoystickButton(driveStick, 7);
+    public Button driveStick8Button = new JoystickButton(driveStick, 8);
+    public Button driveStick9Button = new JoystickButton(driveStick, 9);
+    public Button driveStick10Button = new JoystickButton(driveStick, 10);
+    public Button driveStick11Button = new JoystickButton(driveStick, 11);
+    public Button driveStick12Button = new JoystickButton(driveStick, 12);  
+  
+    public Button xboxControllerAButton = new JoystickButton(xboxController, 1);
+    public Button xboxControllerBButton = new JoystickButton(xboxController, 2);
+    public Button xboxControllerXButton = new JoystickButton(xboxController, 3);
+    public Button xboxControllerYButton = new JoystickButton(xboxController, 4);
+    public Button xboxControllerLBButton = new JoystickButton(xboxController, 5);
+    public Button xboxControllerRBButton = new JoystickButton(xboxController, 6);  
+    public Button xboxControllerBackButton = new JoystickButton(xboxController, 7);
+    public Button xboxControllerStartButton = new JoystickButton(xboxController, 8);
+    public Button xboxControllerLeftStickButton = new JoystickButton(xboxController, 9);
+    public Button xboxControllerRightStickButton = new JoystickButton(xboxController, 10);
 
-  public Button xboxControllerAButton = new JoystickButton(xboxController, 1);
-  public Button xboxControllerBButton = new JoystickButton(xboxController, 2);
-  public Button xboxControllerXButton = new JoystickButton(xboxController, 3);
-  public Button xboxControllerYButton = new JoystickButton(xboxController, 4);
-  public Button xboxControllerLBButton = new JoystickButton(xboxController, 5);
-  public Button xboxControllerRBButton = new JoystickButton(xboxController, 6);  
-  public Button xboxControllerBackButton = new JoystickButton(xboxController, 7);
-  public Button xboxControllerStartButton = new JoystickButton(xboxController, 8);
-  public Button xboxControllerLeftStickButton = new JoystickButton(xboxController, 9);
-  public Button xboxControllerRightStickButton = new JoystickButton(xboxController, 10);
+  
   /**
    * The container for the robot.  Contains subsystems, OI devices, and commands.
    */
   public RobotContainer() {
     // Configure the button bindings
     configureButtonBindings();
+    
     
   }
 
@@ -75,6 +77,7 @@ public class RobotContainer {
    * {@link edu.wpi.first.wpilibj2.command.button.JoystickButton}.
    */
   private void configureButtonBindings() {
+    
     
   }
 
