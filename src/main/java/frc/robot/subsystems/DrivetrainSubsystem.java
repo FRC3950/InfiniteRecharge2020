@@ -8,7 +8,10 @@
 package frc.robot.subsystems;
 
 import edu.wpi.first.wpilibj.SpeedControllerGroup;
-import edu.wpi.first.wpilibj.Talon;
+
+import com.ctre.phoenix.motorcontrol.NeutralMode;
+import com.ctre.phoenix.motorcontrol.can.WPI_TalonFX;
+import com.ctre.phoenix.motorcontrol;
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
@@ -17,20 +20,27 @@ public class DrivetrainSubsystem extends SubsystemBase {
    * Creates a new DrivetrainSubystem.
    */
   DifferentialDrive m_drive;
-  private final Talon m_frontLeft;
-  private final Talon m_frontRight;
-  private final Talon m_backLeft;
-  private final Talon m_backRight;
+  private final WPI_TalonFX m_frontLeft;
+  private final WPI_TalonFX m_frontRight;
+  private final WPI_TalonFX m_backLeft;
+  private final WPI_TalonFX m_backRight;
 
   public DrivetrainSubsystem() {
     
-    m_frontLeft = new Talon(0);
-    m_frontRight = new Talon(1);
-    m_backLeft = new Talon(2);
-    m_backRight = new Talon(3);
+    m_frontLeft = new WPI_TalonFX(0);
+    m_frontRight = new WPI_TalonFX(1);
+    m_backLeft = new WPI_TalonFX(2);
+    m_backRight = new WPI_TalonFX(3);
+
     SpeedControllerGroup left = new SpeedControllerGroup(m_frontLeft, m_backLeft);
     SpeedControllerGroup right = new SpeedControllerGroup(m_frontRight, m_backRight);
+
     m_drive = new DifferentialDrive(left, right);
+
+    m_frontLeft.setNeutralMode(NeutralMode.Brake);
+    m_backLeft.setNeutralMode(NeutralMode.Brake);
+    m_frontRight.setNeutralMode(NeutralMode.Brake);
+    m_backRight.setNeutralMode(NeutralMode.Brake);
 
   }
 
