@@ -10,9 +10,11 @@ package frc.robot;
 import edu.wpi.first.wpilibj.GenericHID;
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj.Joystick;
+import frc.robot.commands.ColorValueCommand;
 import frc.robot.commands.DriveCommand;
 import frc.robot.commands.ExampleCommand;
 import frc.robot.commands.LimelightSkewCommand;
+import frc.robot.subsystems.ColorSensorSubsystem;
 import frc.robot.subsystems.DrivetrainSubsystem;
 import frc.robot.subsystems.ExampleSubsystem;
 import frc.robot.subsystems.LimelightSubsystem;
@@ -31,10 +33,13 @@ public class RobotContainer {
   private final ExampleSubsystem m_exampleSubsystem = new ExampleSubsystem();
   private final DrivetrainSubsystem m_drivetrainSubsystem = new DrivetrainSubsystem();
   private final LimelightSubsystem m_limelightSubsystem = new LimelightSubsystem();
+  private final ColorSensorSubsystem m_colorSensorSubsystem = new ColorSensorSubsystem();
 
   private final ExampleCommand m_autoCommand = new ExampleCommand(m_exampleSubsystem);
   private final DriveCommand m_driveCommand = new DriveCommand(m_drivetrainSubsystem);
   private final LimelightSkewCommand m_limelightSkewCommand = new LimelightSkewCommand(m_limelightSubsystem);
+  private final ColorValueCommand m_colorValueCommand = new ColorValueCommand(m_colorSensorSubsystem);
+  
 
     public Joystick driveStick = new Joystick(0);
     public XboxController xboxController = new XboxController(1);
@@ -81,7 +86,9 @@ public class RobotContainer {
    * {@link edu.wpi.first.wpilibj2.command.button.JoystickButton}.
    */
   private void configureButtonBindings() {
-    driveStick1Button.whenPressed(m_limelightSkewCommand);
+    driveStick12Button.whenPressed(m_limelightSkewCommand);
+    driveStick11Button.whileHeld(m_driveCommand);
+    driveStick10Button.whenPressed(m_colorValueCommand);
     
   }
 

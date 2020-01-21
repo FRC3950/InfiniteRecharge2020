@@ -7,45 +7,45 @@
 
 package frc.robot.commands;
 
-import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj2.command.CommandBase;
-import frc.robot.subsystems.DrivetrainSubsystem;
+import frc.robot.subsystems.ColorSensorSubsystem;
 
-public class DriveCommand extends CommandBase {
+public class ColorValueCommand extends CommandBase {
   /**
-   * Creates a new DriveCommand.
+   * Creates a new ColorValueCommand.
    */
-  
-  private final DrivetrainSubsystem m_drivetrainSubsystem;
-
-  public DriveCommand(DrivetrainSubsystem drivetrainSubsystem) {
-    m_drivetrainSubsystem = drivetrainSubsystem;
+  private char color;
+  private final ColorSensorSubsystem m_colorValueSubsystem;
+  public ColorValueCommand(ColorSensorSubsystem colorValueSubsystem) {
+    m_colorValueSubsystem = colorValueSubsystem;
     // Use addRequirements() here to declare subsystem dependencies.
-    addRequirements(drivetrainSubsystem);  
-    
+    addRequirements(colorValueSubsystem);
   }
 
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
-    
+    //set the run motor to some speed
   }
 
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    m_drivetrainSubsystem.motorSpeed();
+    color = m_colorValueSubsystem.getColor();
     
   }
 
   // Called once the command ends or is interrupted.
   @Override
   public void end(boolean interrupted) {
+    //stop motor.
   }
 
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
-    return false;
+    boolean f = m_colorValueSubsystem.isColorCorrect(color);
+    if (f) {System.out.println("color detected");}
+    return f;
   }
 }

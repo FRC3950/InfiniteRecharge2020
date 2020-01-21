@@ -17,11 +17,11 @@ public class LimelightSubsystem extends SubsystemBase {
   /**
    * Creates a new LimelightSubsystem.
    */
-    
+  NetworkTable table;
 
   public LimelightSubsystem() {
     
-    
+    table = NetworkTableInstance.getDefault().getTable("limelight");
     
 
     
@@ -35,9 +35,11 @@ public class LimelightSubsystem extends SubsystemBase {
     
   }
   public void getSkew(){
-    NetworkTable table = NetworkTableInstance.getDefault().getTable("limelight");
-    double ts = table.getEntry("ts").getDouble(0);
-    System.out.println("Skew: " + ts);
+    
+    NetworkTableEntry ts = table.getEntry("ts");
+    double s = ts.getDouble(0);
+    System.out.println("Skew: " + s);
+
   }
 
 }
