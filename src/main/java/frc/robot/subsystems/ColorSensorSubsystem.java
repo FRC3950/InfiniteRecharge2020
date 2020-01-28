@@ -13,6 +13,7 @@ import edu.wpi.first.wpilibj.util.Color;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import com.revrobotics.ColorSensorV3;
 import com.revrobotics.ColorMatchResult;
+import com.ctre.phoenix.motorcontrol.can.WPI_TalonFX;
 import com.revrobotics.ColorMatch;
 
 public class ColorSensorSubsystem extends SubsystemBase {
@@ -31,11 +32,11 @@ public class ColorSensorSubsystem extends SubsystemBase {
   char colorChar;
 
   public ColorSensorSubsystem() {
+  
     m_colorMatcher.addColorMatch(kBlueTarget);
     m_colorMatcher.addColorMatch(kGreenTarget);
     m_colorMatcher.addColorMatch(kRedTarget);
     m_colorMatcher.addColorMatch(kYellowTarget);   
-
   }
 
   @Override
@@ -62,6 +63,7 @@ public class ColorSensorSubsystem extends SubsystemBase {
   }
 
   public boolean isColorCorrect(char c){
+    System.out.println(DriverStation.getInstance().getGameSpecificMessage());
     if (DriverStation.getInstance().getGameSpecificMessage().length() < 1) {
       System.out.println("Field not detected");
       return true;

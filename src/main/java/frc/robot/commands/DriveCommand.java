@@ -9,15 +9,16 @@ package frc.robot.commands;
 
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj2.command.CommandBase;
+import frc.robot.RobotContainer;
 import frc.robot.subsystems.DrivetrainSubsystem;
 
 public class DriveCommand extends CommandBase {
   /**
    * Creates a new DriveCommand.
    */
-  
-  private final DrivetrainSubsystem m_drivetrainSubsystem;
+  public Joystick driveStick = new Joystick(0);
 
+  private final DrivetrainSubsystem m_drivetrainSubsystem;
   public DriveCommand(DrivetrainSubsystem drivetrainSubsystem) {
     m_drivetrainSubsystem = drivetrainSubsystem;
     // Use addRequirements() here to declare subsystem dependencies.
@@ -34,8 +35,8 @@ public class DriveCommand extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    m_drivetrainSubsystem.motorSpeed();
-    
+    //m_drivetrainSubsystem.Drive(driveStick.getX(), driveStick.getY());
+  
   }
 
   // Called once the command ends or is interrupted.

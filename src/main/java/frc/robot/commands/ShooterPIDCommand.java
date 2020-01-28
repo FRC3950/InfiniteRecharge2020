@@ -7,47 +7,41 @@
 
 package frc.robot.commands;
 
-import edu.wpi.first.wpilibj2.command.CommandBase;
-import frc.robot.subsystems.ColorSensorSubsystem;
+import com.ctre.phoenix.motorcontrol.ControlMode;
 
-public class ColorValueCommand extends CommandBase {
+import edu.wpi.first.wpilibj2.command.CommandBase;
+import frc.robot.subsystems.ShooterSubsystem;
+
+public class ShooterPIDCommand extends CommandBase {
   /**
-   * Creates a new ColorValueCommand.
+   * Creates a new ShooterPIDCommand.
    */
-  private char color;
-  private final ColorSensorSubsystem m_colorValueSubsystem;
-  public ColorValueCommand(ColorSensorSubsystem colorValueSubsystem) {
-    m_colorValueSubsystem = colorValueSubsystem;
+  private final ShooterSubsystem m_shooterSubsystem;
+  public ShooterPIDCommand(ShooterSubsystem shooterSubsystem) {
+    m_shooterSubsystem = shooterSubsystem;
     // Use addRequirements() here to declare subsystem dependencies.
-    addRequirements(colorValueSubsystem);
+    addRequirements(shooterSubsystem);   
   }
 
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
-
   }
 
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    color = m_colorValueSubsystem.getColor();
-     //set the run motor to some speed
-   //m_colorValueSubsystem.m_shooter.set(.5);
+    m_shooterSubsystem.m_shooterMotor.set(ControlMode.Velocity, 100);
   }
 
   // Called once the command ends or is interrupted.
   @Override
   public void end(boolean interrupted) {
-    //stop motor.
-    //m_colorValueSubsystem.m_shooter.set(0);
   }
 
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
-    boolean f = m_colorValueSubsystem.isColorCorrect(color);
-    if (f) {System.out.println("color detected");}
-    return f;
+    return false;
   }
 }

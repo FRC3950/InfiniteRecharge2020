@@ -31,14 +31,22 @@ public class LimelightSubsystem extends SubsystemBase {
   public void periodic() {
     // This method will be called once per scheduler run
 
-    
-    
   }
-  public void getSkew(){
+  public double getSkew(){
     
     NetworkTableEntry ts = table.getEntry("ts");
     double s = ts.getDouble(0);
-    System.out.println("Skew: " + s);
+    return s;
+    // System.out.println("Skew: " + s);
+
+  }
+  public double getDistance(){
+    
+    NetworkTableEntry ta = table.getEntry("ta");
+    //ADD CODE BASED ON TESTS TO CONVERT AREA TO DISTANCE
+    double d = ta.getDouble(0);
+    return d;
+    // System.out.println("Area: " + s);
 
   }
 

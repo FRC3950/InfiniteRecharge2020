@@ -30,17 +30,17 @@ public class DrivetrainSubsystem extends SubsystemBase {
     
     m_frontLeft = new WPI_TalonFX(0);
     m_frontRight = new WPI_TalonFX(1);
-    //m_backLeft = new WPI_TalonFX(2);
-    //m_backRight = new WPI_TalonFX(3);
+    // m_backLeft = new WPI_TalonFX(2);
+    // m_backRight = new WPI_TalonFX(3);
 
-    //SpeedControllerGroup left = new SpeedControllerGroup(m_frontLeft, m_backLeft);
-    //SpeedControllerGroup right = new SpeedControllerGroup(m_frontRight, m_backRight);
+    // SpeedControllerGroup left = new SpeedControllerGroup(m_frontLeft, m_backLeft);
+    // SpeedControllerGroup right = new SpeedControllerGroup(m_frontRight, m_backRight);
+
     // m_drive = new DifferentialDrive(left, right);
-
     m_drive = new DifferentialDrive(m_frontLeft, m_frontRight);
 
-    m_frontLeft.setNeutralMode(NeutralMode.Brake);
-    m_frontRight.setNeutralMode(NeutralMode.Brake);
+    // m_frontLeft.setNeutralMode(NeutralMode.Brake);
+    // m_frontRight.setNeutralMode(NeutralMode.Brake);
     // m_backLeft.setNeutralMode(NeutralMode.Brake);
     // m_backRight.setNeutralMode(NeutralMode.Brake);
 
@@ -54,7 +54,5 @@ public class DrivetrainSubsystem extends SubsystemBase {
   public void Drive(double y, double twist){
     m_drive.arcadeDrive(y,twist);
   }
-  public void motorSpeed(){
-    m_frontLeft.set(1);
-  }
+
 }
