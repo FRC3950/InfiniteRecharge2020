@@ -185,11 +185,6 @@ hs_err_pid*
 
 #blacklist
 /*
-build
-.gradle
-
-#whitelist
-!/src
 .gradle/6.0.1/executionHistory/executionHistory.bin
 .gradle/6.0.1/executionHistory/executionHistory.lock
 .gradle/6.0.1/fileHashes/fileHashes.bin
@@ -209,3 +204,14 @@ build/tmp/jniExtractDir/wpiHaljni.dll
 build/tmp/jniExtractDir/wpiutil.dll
 build/tmp/jniExtractDir/wpiutiljni.dll
 vendordeps/ADIS16470.json
+.gradle/6.0.1/executionHistory/executionHistory.lock
+
+#whitelist
+!/src
+
+*.bin
+*.bin
+*.lock
+*.jar
+*.json
+*.dll
