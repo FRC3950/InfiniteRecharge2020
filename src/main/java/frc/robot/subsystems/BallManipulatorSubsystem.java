@@ -34,4 +34,10 @@ public class BallManipulatorSubsystem extends SubsystemBase {
   public void periodic() {
     // This method will be called once per scheduler run
   }
+  public void horizontalBallManipulator(){
+    m_horizontalBallManipulatorMotor.set(.5);
+  }
+  public void verticalBallManipulator(){
+    m_verticalBallManipulatorMotor.set(.5);
+  }
 }

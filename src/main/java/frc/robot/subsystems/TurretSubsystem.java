@@ -17,19 +17,29 @@ public class TurretSubsystem extends SubsystemBase {
    * Creates a new TurretSubsystem.
    */
   private final WPI_TalonSRX m_turretMotor;
-  private final DigitalInput m_homePosition;
-  private final DigitalInput m_maxPosition;
+  private final DigitalInput m_leftPosition;
+  private final DigitalInput m_rightPosition;
 
   public TurretSubsystem() {
 
     m_turretMotor = new WPI_TalonSRX(2);
-    m_homePosition = new DigitalInput(0);
-    m_maxPosition = new DigitalInput(1);
+    m_leftPosition = new DigitalInput(0);
+    m_rightPosition = new DigitalInput(1);
     
   }
 
   @Override
   public void periodic() {
     // This method will be called once per scheduler run
+  }
+  public void turretSpin(){
+    m_turretMotor.set(.5);
+  }
+  public void turretLimit(){
+  if(m_leftPosition.get() == true){
+    m_turretMotor.set(0);
+  } if (m_rightPosition.get() == true){
+    m_turretMotor.set(0);
+  }
   }
 }

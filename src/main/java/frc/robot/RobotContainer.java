@@ -10,14 +10,21 @@ package frc.robot;
 import edu.wpi.first.wpilibj.GenericHID;
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj.Joystick;
+import frc.robot.commands.BallHorizontalManipulatorCommand;
+import frc.robot.commands.BallVerticalManipulatorCommand;
 import frc.robot.commands.ColorValueCommand;
 import frc.robot.commands.DriveCommand;
+import frc.robot.commands.DriveShiftGearCommand;
 import frc.robot.commands.ExampleCommand;
+import frc.robot.commands.IntakeBallCommand;
+import frc.robot.commands.IntakeLiftCommand;
 import frc.robot.commands.LimelightSkewCommand;
+import frc.robot.subsystems.BallManipulatorSubsystem;
 import frc.robot.subsystems.ClimberSubsystem;
 import frc.robot.subsystems.ColorSensorSubsystem;
 import frc.robot.subsystems.DrivetrainSubsystem;
 import frc.robot.subsystems.ExampleSubsystem;
+import frc.robot.subsystems.IntakeSubsystem;
 import frc.robot.subsystems.LevelerSubsystem;
 import frc.robot.subsystems.LimelightSubsystem;
 import frc.robot.subsystems.ShooterSubsystem;
@@ -37,17 +44,24 @@ public class RobotContainer {
   private final ExampleSubsystem m_exampleSubsystem = new ExampleSubsystem();
   private final ExampleCommand m_autoCommand = new ExampleCommand(m_exampleSubsystem);
 
+  private final BallManipulatorSubsystem m_ballManipulatorSubsystem = new BallManipulatorSubsystem();
   private final ClimberSubsystem m_climberSubsystem = new ClimberSubsystem();
   private final ColorSensorSubsystem m_colorSensorSubsystem = new ColorSensorSubsystem();
   private final DrivetrainSubsystem m_drivetrainSubsystem = new DrivetrainSubsystem();
+  private final IntakeSubsystem m_intakeSubsystem = new IntakeSubsystem();
   private final LevelerSubsystem m_levelerSubsystem = new LevelerSubsystem();
   private final LimelightSubsystem m_limelightSubsystem = new LimelightSubsystem();
   private final ShooterSubsystem m_shooterSubsystem  = new ShooterSubsystem();
   private final TurretSubsystem m_turretSubssytem = new TurretSubsystem();
 
-  private final DriveCommand m_driveCommand = new DriveCommand(m_drivetrainSubsystem);
-  private final LimelightSkewCommand m_limelightSkewCommand = new LimelightSkewCommand(m_limelightSubsystem);
+  private final BallHorizontalManipulatorCommand m_ballHorizontalManipulator = new BallHorizontalManipulatorCommand(m_ballManipulatorSubsystem);
+  private final BallVerticalManipulatorCommand m_ballVerticalManipulator = new BallVerticalManipulatorCommand(m_ballManipulatorSubsystem);
   private final ColorValueCommand m_colorValueCommand = new ColorValueCommand(m_colorSensorSubsystem);
+  private final DriveCommand m_driveCommand = new DriveCommand(m_drivetrainSubsystem);
+  private final DriveShiftGearCommand m_driveShiftGearCommand = new DriveShiftGearCommand(m_drivetrainSubsystem);
+  private final LimelightSkewCommand m_limelightSkewCommand = new LimelightSkewCommand(m_limelightSubsystem);
+  private final IntakeBallCommand m_intakeBallCommand = new IntakeBallCommand(m_intakeSubsystem);
+  private final IntakeLiftCommand m_intakeLiftCommand = new IntakeLiftCommand(m_intakeSubsystem);
   
 
     public Joystick driveStick = new Joystick(0);
@@ -95,6 +109,7 @@ public class RobotContainer {
    * {@link edu.wpi.first.wpilibj2.command.button.JoystickButton}.
    */
   private void configureButtonBindings() {
+    driveStick2Button.whenPressed(m_driveShiftGearCommand);
     driveStick12Button.whenPressed(m_limelightSkewCommand);
     driveStick11Button.whileHeld(m_driveCommand);
     driveStick10Button.whenPressed(m_colorValueCommand);

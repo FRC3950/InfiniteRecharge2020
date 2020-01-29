@@ -60,7 +60,17 @@ public class DrivetrainSubsystem extends SubsystemBase {
     m_frontLeft.set(1);
   }
 
-  public void shiftGear(){
-    
+  public void overrideShiftGear(){
+    if(m_frontLeft.getStatorCurrent() >= 55){
+      m_shiftGearSolenoid.set(DoubleSolenoid.Value.kReverse);
+      // check to see if double solenoid should be kReverse or kForward
+    }
+  }
+  public void shiftGear(){ //ADD TO A BUTTON
+    if(m_shiftGearSolenoid.get() == DoubleSolenoid.Value.kReverse){
+      m_shiftGearSolenoid.set(DoubleSolenoid.Value.kForward);
+    } else{
+    m_shiftGearSolenoid.set(DoubleSolenoid.Value.kReverse);
+    }
   }
 }

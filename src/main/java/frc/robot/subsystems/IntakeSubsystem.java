@@ -33,4 +33,16 @@ public class IntakeSubsystem extends SubsystemBase {
   public void periodic() {
     // This method will be called once per scheduler run
   }
+  public void intakeBall(){
+    m_intakeMotor.set(.5);
+  }
+  public void intakeLift(){
+    if(m_intakeLeftSolenoid.get() == DoubleSolenoid.Value.kReverse && m_intakeRightSolenoid.get() == DoubleSolenoid.Value.kReverse){
+      m_intakeLeftSolenoid.set(DoubleSolenoid.Value.kForward);
+      m_intakeRightSolenoid.set(DoubleSolenoid.Value.kForward);
+    } else {
+      m_intakeLeftSolenoid.set(DoubleSolenoid.Value.kReverse);
+      m_intakeRightSolenoid.set(DoubleSolenoid.Value.kReverse);
+    }
+  }
 }

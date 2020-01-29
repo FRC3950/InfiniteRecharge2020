@@ -19,13 +19,16 @@ public class LevelerSubsystem extends SubsystemBase {
   private final WPI_TalonSRX m_levelerMotor;
   
   public LevelerSubsystem() {
-
     m_levelerMotor = new WPI_TalonSRX(4);
-    
   }
 
   @Override
   public void periodic() {
     // This method will be called once per scheduler run
+  }
+  public void levelRobot(){
+    //NEED TO USE ACCELEROMETER to decide whether to move the motor positive or negative and for how long
+    m_levelerMotor.set(.5);
+
   }
 }
