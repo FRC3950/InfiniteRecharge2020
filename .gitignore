@@ -185,6 +185,27 @@ hs_err_pid*
 
 #blacklist
 /*
+build
+.gradle
 
 #whitelist
 !/src
+.gradle/6.0.1/executionHistory/executionHistory.bin
+.gradle/6.0.1/executionHistory/executionHistory.lock
+.gradle/6.0.1/fileHashes/fileHashes.bin
+.gradle/6.0.1/fileHashes/fileHashes.lock
+.gradle/6.0.1/javaCompile/classAnalysis.bin
+.gradle/6.0.1/javaCompile/javaCompile.lock
+.gradle/6.0.1/javaCompile/taskHistory.bin
+.gradle/buildOutputCleanup/buildOutputCleanup.lock
+.gradle/buildOutputCleanup/outputFiles.bin
+build/libs/InfiniteRecharge2020.jar
+build/tmp/jniExtractDir/cscore.dll
+build/tmp/jniExtractDir/cscorejni.dll
+build/tmp/jniExtractDir/ntcore.dll
+build/tmp/jniExtractDir/ntcorejni.dll
+build/tmp/jniExtractDir/wpiHal.dll
+build/tmp/jniExtractDir/wpiHaljni.dll
+build/tmp/jniExtractDir/wpiutil.dll
+build/tmp/jniExtractDir/wpiutiljni.dll
+vendordeps/ADIS16470.json
