@@ -14,10 +14,14 @@ import frc.robot.commands.ColorValueCommand;
 import frc.robot.commands.DriveCommand;
 import frc.robot.commands.ExampleCommand;
 import frc.robot.commands.LimelightSkewCommand;
+import frc.robot.subsystems.ClimberSubsystem;
 import frc.robot.subsystems.ColorSensorSubsystem;
 import frc.robot.subsystems.DrivetrainSubsystem;
 import frc.robot.subsystems.ExampleSubsystem;
+import frc.robot.subsystems.LevelerSubsystem;
 import frc.robot.subsystems.LimelightSubsystem;
+import frc.robot.subsystems.ShooterSubsystem;
+import frc.robot.subsystems.TurretSubsystem;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.button.Button;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
@@ -31,11 +35,16 @@ import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 public class RobotContainer {
   // The robot's subsystems and commands are defined here...
   private final ExampleSubsystem m_exampleSubsystem = new ExampleSubsystem();
-  private final DrivetrainSubsystem m_drivetrainSubsystem = new DrivetrainSubsystem();
-  private final LimelightSubsystem m_limelightSubsystem = new LimelightSubsystem();
-  private final ColorSensorSubsystem m_colorSensorSubsystem = new ColorSensorSubsystem();
-
   private final ExampleCommand m_autoCommand = new ExampleCommand(m_exampleSubsystem);
+
+  private final ClimberSubsystem m_climberSubsystem = new ClimberSubsystem();
+  private final ColorSensorSubsystem m_colorSensorSubsystem = new ColorSensorSubsystem();
+  private final DrivetrainSubsystem m_drivetrainSubsystem = new DrivetrainSubsystem();
+  private final LevelerSubsystem m_levelerSubsystem = new LevelerSubsystem();
+  private final LimelightSubsystem m_limelightSubsystem = new LimelightSubsystem();
+  private final ShooterSubsystem m_shooterSubsystem  = new ShooterSubsystem();
+  private final TurretSubsystem m_turretSubssytem = new TurretSubsystem();
+
   private final DriveCommand m_driveCommand = new DriveCommand(m_drivetrainSubsystem);
   private final LimelightSkewCommand m_limelightSkewCommand = new LimelightSkewCommand(m_limelightSubsystem);
   private final ColorValueCommand m_colorValueCommand = new ColorValueCommand(m_colorSensorSubsystem);

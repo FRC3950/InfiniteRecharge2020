@@ -7,6 +7,7 @@
 
 package frc.robot.subsystems;
 
+import edu.wpi.first.wpilibj.DoubleSolenoid;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.SpeedControllerGroup;
 
@@ -22,39 +23,44 @@ public class DrivetrainSubsystem extends SubsystemBase {
   DifferentialDrive m_drive;
   private final WPI_TalonFX m_frontLeft;
   private final WPI_TalonFX m_frontRight;
-  // private final WPI_TalonFX m_backLeft;
-  // private final WPI_TalonFX m_backRight;
+  private final WPI_TalonFX m_backLeft;
+  private final WPI_TalonFX m_backRight;
+  private final DoubleSolenoid m_shiftGearSolenoid;
+  
   public Joystick driveStick = new Joystick(0);
 
   public DrivetrainSubsystem() {
     
     m_frontLeft = new WPI_TalonFX(0);
     m_frontRight = new WPI_TalonFX(1);
-    //m_backLeft = new WPI_TalonFX(2);
-    //m_backRight = new WPI_TalonFX(3);
+    m_backLeft = new WPI_TalonFX(2);
+    m_backRight = new WPI_TalonFX(3);
 
-    //SpeedControllerGroup left = new SpeedControllerGroup(m_frontLeft, m_backLeft);
-    //SpeedControllerGroup right = new SpeedControllerGroup(m_frontRight, m_backRight);
-    // m_drive = new DifferentialDrive(left, right);
+    m_shiftGearSolenoid = new DoubleSolenoid(6, 7);
 
-    m_drive = new DifferentialDrive(m_frontLeft, m_frontRight);
+    SpeedControllerGroup left = new SpeedControllerGroup(m_frontLeft, m_backLeft);
+    SpeedControllerGroup right = new SpeedControllerGroup(m_frontRight, m_backRight);
+    m_drive = new DifferentialDrive(left, right);
 
     m_frontLeft.setNeutralMode(NeutralMode.Brake);
     m_frontRight.setNeutralMode(NeutralMode.Brake);
-    // m_backLeft.setNeutralMode(NeutralMode.Brake);
-    // m_backRight.setNeutralMode(NeutralMode.Brake);
+    m_backLeft.setNeutralMode(NeutralMode.Brake);
+    m_backRight.setNeutralMode(NeutralMode.Brake);
 
   }
 
   @Override
   public void periodic() {
     // This method will be called once per scheduler run
-    Drive(driveStick.getY(), driveStick.getTwist());
   }
   public void Drive(double y, double twist){
     m_drive.arcadeDrive(y,twist);
   }
   public void motorSpeed(){
     m_frontLeft.set(1);
+  }
+
+  public void shiftGear(){
+    
   }
 }
