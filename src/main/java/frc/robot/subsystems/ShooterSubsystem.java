@@ -41,4 +41,9 @@ public class ShooterSubsystem extends SubsystemBase {
   public double getRPM(){
     return getEncoder() / 4096 * 600;
   }
+  public void setShooterSpeed(double distance){
+    //CREATE FORMULA BASED ON DISTANCE TO CALCULATE THE NECESSARY SPEED
+    double speed = 1;
+    m_shooterMotor.set(speed);
+  }
 }

@@ -18,7 +18,7 @@ import frc.robot.commands.DriveShiftGearCommand;
 import frc.robot.commands.ExampleCommand;
 import frc.robot.commands.IntakeBallCommand;
 import frc.robot.commands.IntakeLiftCommand;
-import frc.robot.commands.LimelightSkewCommand;
+import frc.robot.commands.TurretSetAngleCommand;
 import frc.robot.subsystems.BallManipulatorSubsystem;
 import frc.robot.subsystems.ClimberSubsystem;
 import frc.robot.subsystems.ColorSensorSubsystem;
@@ -52,14 +52,14 @@ public class RobotContainer {
   private final LevelerSubsystem m_levelerSubsystem = new LevelerSubsystem();
   private final LimelightSubsystem m_limelightSubsystem = new LimelightSubsystem();
   private final ShooterSubsystem m_shooterSubsystem  = new ShooterSubsystem();
-  private final TurretSubsystem m_turretSubssytem = new TurretSubsystem();
+  private final TurretSubsystem m_turretSubsytem = new TurretSubsystem();
 
   private final BallHorizontalManipulatorCommand m_ballHorizontalManipulator = new BallHorizontalManipulatorCommand(m_ballManipulatorSubsystem);
   private final BallVerticalManipulatorCommand m_ballVerticalManipulator = new BallVerticalManipulatorCommand(m_ballManipulatorSubsystem);
   private final ColorValueCommand m_colorValueCommand = new ColorValueCommand(m_colorSensorSubsystem);
   private final DriveCommand m_driveCommand = new DriveCommand(m_drivetrainSubsystem);
   private final DriveShiftGearCommand m_driveShiftGearCommand = new DriveShiftGearCommand(m_drivetrainSubsystem);
-  private final LimelightSkewCommand m_limelightSkewCommand = new LimelightSkewCommand(m_limelightSubsystem);
+  private final TurretSetAngleCommand m_turretSetAngleCommand = new TurretSetAngleCommand(m_limelightSubsystem, m_turretSubsytem);
   private final IntakeBallCommand m_intakeBallCommand = new IntakeBallCommand(m_intakeSubsystem);
   private final IntakeLiftCommand m_intakeLiftCommand = new IntakeLiftCommand(m_intakeSubsystem);
   
@@ -110,7 +110,6 @@ public class RobotContainer {
    */
   private void configureButtonBindings() {
     driveStick2Button.whenPressed(m_driveShiftGearCommand);
-    driveStick12Button.whenPressed(m_limelightSkewCommand);
     driveStick11Button.whileHeld(m_driveCommand);
     driveStick10Button.whenPressed(m_colorValueCommand);
     

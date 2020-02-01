@@ -9,17 +9,21 @@ package frc.robot.commands;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.subsystems.LimelightSubsystem;
+import frc.robot.subsystems.TurretSubsystem;
 
-public class LimelightSkewCommand extends CommandBase {
+public class TurretSetAngleCommand extends CommandBase {
   /**
    * Creates a new LimelightSkewCommand.
    */
   private final LimelightSubsystem m_limelightSubsystem;
+  private final TurretSubsystem m_turretSubsystem;
 
-  public LimelightSkewCommand(LimelightSubsystem limelightSubsystem) {
+  public TurretSetAngleCommand(LimelightSubsystem limelightSubsystem, TurretSubsystem turretSubsystem) {
     m_limelightSubsystem = limelightSubsystem;
+    m_turretSubsystem = turretSubsystem;
     // Use addRequirements() here to declare subsystem dependencies.
     addRequirements(limelightSubsystem);
+    addRequirements(turretSubsystem);
   }
 
   // Called when the command is initially scheduled.
@@ -30,7 +34,8 @@ public class LimelightSkewCommand extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    m_limelightSubsystem.getSkew();
+    m_turretSubsystem.setRelativeAngle(m_limelightSubsystem.getAngle());
+    m_turretSubsystem.turretLimit();
   }
 
   // Called once the command ends or is interrupted.

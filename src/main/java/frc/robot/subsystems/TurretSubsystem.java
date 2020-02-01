@@ -42,4 +42,13 @@ public class TurretSubsystem extends SubsystemBase {
     m_turretMotor.set(0);
   }
   }
+  public void setRelativeAngle(double offset){
+    if (offset > 1){
+      m_turretMotor.set(.15);
+    } else if(offset < -1){
+      m_turretMotor.set(-.15);
+    }else{
+      m_turretMotor.set(0);
+    }
+  }
 }

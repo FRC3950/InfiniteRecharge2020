@@ -8,13 +8,22 @@
 package frc.robot.commands;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
+import frc.robot.subsystems.LimelightSubsystem;
+import frc.robot.subsystems.ShooterSubsystem;
 
 public class ShooterSpeedCommand extends CommandBase {
   /**
    * Creates a new ShooterSpeedCommand.
    */
-  public ShooterSpeedCommand() {
+  private final ShooterSubsystem m_shooterSubsystem;
+  private final LimelightSubsystem m_limelightSubsytem;
+
+  public ShooterSpeedCommand(ShooterSubsystem shooterSubsystem, LimelightSubsystem limelightSubsystem) {
+    m_shooterSubsystem = shooterSubsystem;
+    m_limelightSubsytem = limelightSubsystem;
     // Use addRequirements() here to declare subsystem dependencies.
+    addRequirements(shooterSubsystem);
+    addRequirements(limelightSubsystem);
   }
 
   // Called when the command is initially scheduled.
@@ -25,6 +34,7 @@ public class ShooterSpeedCommand extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
+    m_shooterSubsystem.setShooterSpeed(m_limelightSubsytem.calculateDistance());
   }
 
   // Called once the command ends or is interrupted.
