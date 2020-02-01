@@ -31,10 +31,10 @@ public class DrivetrainSubsystem extends SubsystemBase {
 
   public DrivetrainSubsystem() {
     
-    m_frontLeft = new WPI_TalonFX(0);
-    m_frontRight = new WPI_TalonFX(1);
-    m_backLeft = new WPI_TalonFX(2);
-    m_backRight = new WPI_TalonFX(3);
+    m_frontLeft = new WPI_TalonFX(20);
+    m_frontRight = new WPI_TalonFX(21);
+    m_backLeft = new WPI_TalonFX(22);
+    m_backRight = new WPI_TalonFX(23);
 
     m_shiftGearSolenoid = new DoubleSolenoid(6, 7);
 

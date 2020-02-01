@@ -41,5 +41,19 @@ public class LimelightSubsystem extends SubsystemBase {
     System.out.println("Skew: " + s);
 
   }
+  public double calculateDistance(){
+    //NEED To SET VALUES FOR THESE
+    double mountingAngle = 1;
+    double cameraHeight = 1;
+    double targetHeight = 1;
+    
+    double angleToTarget = table.getEntry("ty").getDouble(0);
+    double distance = ((targetHeight - cameraHeight) / Math.tan(mountingAngle + angleToTarget));
+    return distance;
+  }
+  public double getAngle(){
+    double horizontalOffset = table.getEntry("tx").getDouble(0);
+    return horizontalOffset;
+    }
 
 }
