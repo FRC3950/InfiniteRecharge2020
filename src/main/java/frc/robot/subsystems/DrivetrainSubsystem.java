@@ -73,4 +73,7 @@ public class DrivetrainSubsystem extends SubsystemBase {
     m_shiftGearSolenoid.set(DoubleSolenoid.Value.kReverse);
     }
   }
+  public void getEncoderCount(){
+    m_backLeft.getSelectedSensorPosition();
+  }
 }
