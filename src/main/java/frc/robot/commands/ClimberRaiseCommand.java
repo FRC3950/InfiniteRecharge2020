@@ -32,13 +32,13 @@ public class ClimberRaiseCommand extends CommandBase {
   @Override
   public void execute() {
     m_climberSubsystem.raiseClimber();
+    m_climberSubsystem.isClimberAtTop();
   }
 
   // Called once the command ends or is interrupted.
   @Override
   public void end(boolean interrupted) {
     m_climberSubsystem.setLockGear(true);
-    m_climberSubsystem.turnOffClimber();
   }
 
   // Returns true when the command should end.

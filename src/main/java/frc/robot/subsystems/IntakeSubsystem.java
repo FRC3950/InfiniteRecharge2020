@@ -18,13 +18,16 @@ public class IntakeSubsystem extends SubsystemBase {
    */
 
   private final WPI_TalonSRX m_intakeMotor;
+  private final WPI_TalonSRX m_singulatorMotor;
+
   private final DoubleSolenoid m_intakeLeftSolenoid;
   private final DoubleSolenoid m_intakeRightSolenoid;
 
   public IntakeSubsystem() {
 
     m_intakeMotor = new WPI_TalonSRX(3);
-    
+    m_singulatorMotor = new WPI_TalonSRX(11);
+
     m_intakeLeftSolenoid = new DoubleSolenoid(2, 3);
     m_intakeRightSolenoid = new DoubleSolenoid(4, 5);
   }
@@ -36,6 +39,9 @@ public class IntakeSubsystem extends SubsystemBase {
   public void intakeBall(){
     m_intakeMotor.set(.5);
   }
+  public void singulatorMotor(){
+    m_singulatorMotor.set(5);
+  }
   public void intakeLift(){
     if(m_intakeLeftSolenoid.get() == DoubleSolenoid.Value.kReverse && m_intakeRightSolenoid.get() == DoubleSolenoid.Value.kReverse){
       m_intakeLeftSolenoid.set(DoubleSolenoid.Value.kForward);
@@ -45,4 +51,5 @@ public class IntakeSubsystem extends SubsystemBase {
       m_intakeRightSolenoid.set(DoubleSolenoid.Value.kReverse);
     }
   }
+
 }
