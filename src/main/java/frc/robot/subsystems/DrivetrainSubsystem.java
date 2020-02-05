@@ -57,7 +57,7 @@ public class DrivetrainSubsystem extends SubsystemBase {
     m_drive.arcadeDrive(y,twist);
   }
   public void motorSpeed(){
-    m_frontLeft.set(1);
+    m_drive.arcadeDrive(.5,0);
   }
 
   public void overrideShiftGear(){
@@ -73,7 +73,7 @@ public class DrivetrainSubsystem extends SubsystemBase {
     m_shiftGearSolenoid.set(DoubleSolenoid.Value.kReverse);
     }
   }
-  public void getEncoderCount(){
-    m_backLeft.getSelectedSensorPosition();
+  public int getEncoderCount(){
+    return m_backLeft.getSelectedSensorPosition();
   }
 }
