@@ -39,7 +39,7 @@ public class ClimberLowerCommand extends CommandBase {
   public void end(boolean interrupted) {
     m_climberSubsystem.setLockGear(true);
     m_climberSubsystem.isLimitSwitchTrue();
-
+    m_climberSubsystem.resetEncoderValue();
   }
 
   // Returns true when the command should end.

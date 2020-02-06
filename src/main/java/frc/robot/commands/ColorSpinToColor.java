@@ -8,44 +8,33 @@
 package frc.robot.commands;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
-import frc.robot.subsystems.ColorSensorSubsystem;
 
-public class ColorValueCommand extends CommandBase {
+public class ColorSpinToColor extends CommandBase {
   /**
-   * Creates a new ColorValueCommand.
+   * Creates a new ColorSpinToColor.
    */
-  private char color;
-  private final ColorSensorSubsystem m_colorValueSubsystem;
-  public ColorValueCommand(ColorSensorSubsystem colorValueSubsystem) {
-    m_colorValueSubsystem = colorValueSubsystem;
+  public ColorSpinToColor() {
     // Use addRequirements() here to declare subsystem dependencies.
-    addRequirements(colorValueSubsystem);
   }
 
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
-    //set the run motor to some speed
   }
 
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    color = m_colorValueSubsystem.getColor();
-    
   }
 
   // Called once the command ends or is interrupted.
   @Override
   public void end(boolean interrupted) {
-    //stop motor.
   }
 
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
-    boolean f = m_colorValueSubsystem.isColorCorrect(color);
-    if (f) {System.out.println("color detected");}
-    return f;
+    return false;
   }
 }
