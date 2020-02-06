@@ -40,7 +40,7 @@ public class IntakeSubsystem extends SubsystemBase {
     m_intakeMotor.set(.5);
   }
   public void singulatorMotor(){
-    m_singulatorMotor.set(5);
+    m_singulatorMotor.set(-.5);
   }
   public void intakeLift(){
     if(m_intakeLeftSolenoid.get() == DoubleSolenoid.Value.kReverse && m_intakeRightSolenoid.get() == DoubleSolenoid.Value.kReverse){

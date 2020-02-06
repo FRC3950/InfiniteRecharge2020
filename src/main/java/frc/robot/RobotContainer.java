@@ -10,9 +10,13 @@ package frc.robot;
 import edu.wpi.first.wpilibj.GenericHID;
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj.Joystick;
+import frc.robot.commands.AutoDriveCommand;
 import frc.robot.commands.BallHorizontalManipulatorCommand;
 import frc.robot.commands.BallVerticalManipulatorCommand;
-import frc.robot.commands.ColorValueCommand;
+import frc.robot.commands.ClimberLowerCommand;
+import frc.robot.commands.ClimberRaiseCommand;
+import frc.robot.commands.ColorSpinNumberOfTimes;
+import frc.robot.commands.ColorSpinToColor;
 import frc.robot.commands.DriveCommand;
 import frc.robot.commands.DriveShiftGearCommand;
 import frc.robot.commands.ExampleCommand;
@@ -54,9 +58,13 @@ public class RobotContainer {
   private final ShooterSubsystem m_shooterSubsystem  = new ShooterSubsystem();
   private final TurretSubsystem m_turretSubsytem = new TurretSubsystem();
 
+  private final AutoDriveCommand m_autoDriveCommand = new AutoDriveCommand(m_drivetrainSubsystem);
   private final BallHorizontalManipulatorCommand m_ballHorizontalManipulator = new BallHorizontalManipulatorCommand(m_ballManipulatorSubsystem);
   private final BallVerticalManipulatorCommand m_ballVerticalManipulator = new BallVerticalManipulatorCommand(m_ballManipulatorSubsystem);
-  private final ColorValueCommand m_colorValueCommand = new ColorValueCommand(m_colorSensorSubsystem);
+  private final ClimberLowerCommand m_climberLowerCommand = new ClimberLowerCommand(m_climberSubsystem);
+  private final ClimberRaiseCommand m_climberRaiseCommand = new ClimberRaiseCommand(m_climberSubsystem);
+  private final ColorSpinNumberOfTimes m_colorSpinNumberOfTimes = new ColorSpinNumberOfTimes(m_colorSensorSubsystem);
+  private final ColorSpinToColor m_colorSpinToColor = new ColorSpinToColor(m_colorSensorSubsystem);
   private final DriveCommand m_driveCommand = new DriveCommand(m_drivetrainSubsystem);
   private final DriveShiftGearCommand m_driveShiftGearCommand = new DriveShiftGearCommand(m_drivetrainSubsystem);
   private final TurretSetAngleCommand m_turretSetAngleCommand = new TurretSetAngleCommand(m_limelightSubsystem, m_turretSubsytem);
@@ -111,7 +119,6 @@ public class RobotContainer {
   private void configureButtonBindings() {
     driveStick2Button.whenPressed(m_driveShiftGearCommand);
     driveStick11Button.whileHeld(m_driveCommand);
-    driveStick10Button.whenPressed(m_colorValueCommand);
     
   }
 

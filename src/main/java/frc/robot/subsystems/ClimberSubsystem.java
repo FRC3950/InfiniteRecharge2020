@@ -58,11 +58,15 @@ public class ClimberSubsystem extends SubsystemBase {
   public void turnOffClimber(){
     m_climberMotor.set(0);
   }
+  public void resetEncoderValue(){
+    m_climberMotor.setSelectedSensorPosition(0);
+  }
   public void isClimberAtTop(){
     if(m_climberMotor.getSelectedSensorPosition() >= 18000){ //NEED TO FIX WHEN WE TEST CLIMBER
     turnOffClimber();
     }
   }
+
   public void isLimitSwitchTrue(){
     if(m_climberLimitSwitch.get()){
       turnOffClimber();

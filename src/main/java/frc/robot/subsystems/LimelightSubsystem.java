@@ -45,10 +45,11 @@ public class LimelightSubsystem extends SubsystemBase {
     //NEED To SET VALUES FOR THESE
     double mountingAngle = 1;
     double cameraHeight = 1;
-    double targetHeight = 1;
+    double targetHeight = 98.25;
     
     double angleToTarget = table.getEntry("ty").getDouble(0);
     double distance = ((targetHeight - cameraHeight) / Math.tan(mountingAngle + angleToTarget));
+    //CREATE THE CALCULATION FROM DISTANCE TO SPEED 
     return distance;
   }
   public double getAngle(){

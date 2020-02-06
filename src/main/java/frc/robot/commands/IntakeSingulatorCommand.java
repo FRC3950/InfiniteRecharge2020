@@ -8,40 +8,34 @@
 package frc.robot.commands;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
-import frc.robot.subsystems.ColorSensorSubsystem;
+import frc.robot.subsystems.IntakeSubsystem;
 
-public class ColorSpinNumberOfTimes extends CommandBase {
+public class IntakeSingulatorCommand extends CommandBase {
   /**
-   * Creates a new ColorValueCommand.
+   * Creates a new IntakeSingulatorCommand.
    */
-  private char color;
-  private final ColorSensorSubsystem m_colorValueSubsystem;
-  public ColorSpinNumberOfTimes(ColorSensorSubsystem colorValueSubsystem) {
-    m_colorValueSubsystem = colorValueSubsystem;
+  private final IntakeSubsystem m_intakeSubsystem;
+
+  public IntakeSingulatorCommand(IntakeSubsystem intakeSubsystem) {
+    m_intakeSubsystem = intakeSubsystem;
     // Use addRequirements() here to declare subsystem dependencies.
-    addRequirements(colorValueSubsystem);
+    addRequirements(intakeSubsystem);
   }
 
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
-    //set the run motor to some speed
-    color = m_colorValueSubsystem.getColor();
-
   }
 
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    m_colorValueSubsystem.spinNumberOfTimes(color);
-
-    
+    m_intakeSubsystem.singulatorMotor();
   }
 
   // Called once the command ends or is interrupted.
   @Override
   public void end(boolean interrupted) {
-    m_colorValueSubsystem.stopMotor(); 
   }
 
   // Returns true when the command should end.

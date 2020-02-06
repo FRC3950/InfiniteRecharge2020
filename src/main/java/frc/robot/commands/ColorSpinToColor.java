@@ -8,13 +8,17 @@
 package frc.robot.commands;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
+import frc.robot.subsystems.ColorSensorSubsystem;
 
 public class ColorSpinToColor extends CommandBase {
   /**
    * Creates a new ColorSpinToColor.
    */
-  public ColorSpinToColor() {
+  private final ColorSensorSubsystem m_colorValueSubsystem;
+  public ColorSpinToColor(ColorSensorSubsystem colorValueSubsystem) {
+    m_colorValueSubsystem = colorValueSubsystem;
     // Use addRequirements() here to declare subsystem dependencies.
+    addRequirements(colorValueSubsystem);
   }
 
   // Called when the command is initially scheduled.
@@ -25,6 +29,8 @@ public class ColorSpinToColor extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
+    m_colorValueSubsystem.spinToColor(m_colorValueSubsystem.desiredColor()
+    );
   }
 
   // Called once the command ends or is interrupted.

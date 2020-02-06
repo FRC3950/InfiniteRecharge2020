@@ -13,12 +13,15 @@ import edu.wpi.first.wpilibj.util.Color;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import com.revrobotics.ColorSensorV3;
 import com.revrobotics.ColorMatchResult;
+import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 import com.revrobotics.ColorMatch;
 
 public class ColorSensorSubsystem extends SubsystemBase {
   /**
    * Creates a new ColorSensorSubsystem.
    */
+
+  private final WPI_TalonSRX m_wheelSpinnerMotor;
   private final I2C.Port i2cPort = I2C.Port.kOnboard;
   private final ColorSensorV3 m_colorSensor = new ColorSensorV3(i2cPort);
 
@@ -29,8 +32,11 @@ public class ColorSensorSubsystem extends SubsystemBase {
   private final Color kRedTarget = ColorMatch.makeColor(0.561, 0.232, 0.114);
   private final Color kYellowTarget = ColorMatch.makeColor(0.361, 0.524, 0.113);
   char colorChar;
+  int colorCounter;
 
   public ColorSensorSubsystem() {
+
+    m_wheelSpinnerMotor = new  WPI_TalonSRX(15); //Need to Change to appropriate value
     m_colorMatcher.addColorMatch(kBlueTarget);
     m_colorMatcher.addColorMatch(kGreenTarget);
     m_colorMatcher.addColorMatch(kRedTarget);
@@ -61,12 +67,35 @@ public class ColorSensorSubsystem extends SubsystemBase {
     return colorChar;
   }
 
-  public boolean isColorCorrect(char c){
-    if (DriverStation.getInstance().getGameSpecificMessage().length() < 1) {
-      System.out.println("Field not detected");
-      return true;
+  // public boolean isColorCorrect(char c){
+  //   if (DriverStation.getInstance().getGameSpecificMessage().length() < 1) {
+  //     System.out.println("Field not detected");
+  //     return true;
+  //   }
+  //   System.out.printf("color target: %c\n", DriverStation.getInstance().getGameSpecificMessage().charAt(0)); 
+  //   return c == DriverStation.getInstance().getGameSpecificMessage().charAt(0);
+  // }
+  public char desiredColor(){
+    return DriverStation.getInstance().getGameSpecificMessage().charAt(0);
+
+  }
+  public void stopMotor(){
+    m_wheelSpinnerMotor.set(0);
+  }
+  public void spinToColor(char desiredColor){
+    if(desiredColor == getColor()){
+      stopMotor();
+    }else{
+      m_wheelSpinnerMotor.set(.1);
     }
-    System.out.printf("color target: %c\n", DriverStation.getInstance().getGameSpecificMessage().charAt(0)); 
-    return c == DriverStation.getInstance().getGameSpecificMessage().charAt(0);
+  }
+  public void spinNumberOfTimes(char initialColor){
+    while(colorCounter <= 8){
+      m_wheelSpinnerMotor.set(.3);//Need to set speed once we actually test on robot
+      if(initialColor == getColor()){
+        colorCounter++;
+      }
+    }
+  
   }
 }
