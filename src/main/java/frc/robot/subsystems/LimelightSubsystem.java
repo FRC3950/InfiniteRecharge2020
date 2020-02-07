@@ -23,24 +23,22 @@ public class LimelightSubsystem extends SubsystemBase {
     
     table = NetworkTableInstance.getDefault().getTable("limelight");
     
-
-    
   }
 
   @Override
   public void periodic() {
     // This method will be called once per scheduler run
-
-    
-    
   }
-  public void getSkew(){
-    
-    NetworkTableEntry ts = table.getEntry("ts");
-    double s = ts.getDouble(0);
-    System.out.println("Skew: " + s);
 
-  }
+  
+  // public void getSkew(){ 
+  //   NetworkTableEntry ts = table.getEntry("ts");
+  //   double s = ts.getDouble(0);
+  //   System.out.println("Skew: " + s);
+  // }
+
+  //Uses a formula and the values from the limelight to calculate the distance the robot is from the target
+  //Will be used to create a formula to calculate the speed the ball needs to travel based on distance
   public double calculateDistance(){
     //NEED To SET VALUES FOR THESE
     double mountingAngle = 1;
@@ -52,6 +50,8 @@ public class LimelightSubsystem extends SubsystemBase {
     //CREATE THE CALCULATION FROM DISTANCE TO SPEED 
     return distance;
   }
+
+  //Gets the horizontal offset of the robot from the target to be used to turn the turret when shooting
   public double getAngle(){
     double horizontalOffset = table.getEntry("tx").getDouble(0);
     return horizontalOffset;

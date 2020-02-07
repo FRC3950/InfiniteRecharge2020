@@ -34,14 +34,14 @@ public class ColorSpinNumberOfTimes extends CommandBase {
   @Override
   public void execute() {
     m_colorValueSubsystem.spinNumberOfTimes(color);
-
     
   }
 
   // Called once the command ends or is interrupted.
   @Override
   public void end(boolean interrupted) {
-    m_colorValueSubsystem.stopMotor(); 
+    m_colorValueSubsystem.stopMotor();
+    m_colorValueSubsystem.resetColorCounter(); 
   }
 
   // Returns true when the command should end.

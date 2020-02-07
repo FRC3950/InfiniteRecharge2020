@@ -53,19 +53,27 @@ public class DrivetrainSubsystem extends SubsystemBase {
   public void periodic() {
     // This method will be called once per scheduler run
   }
+
+  //Drives the robot based on joystick values
   public void Drive(double y, double twist){
     m_drive.arcadeDrive(y,twist);
   }
+
+  //Sets the motor to a certain speed without the joystick 
+  //Used for Autonomous Code
   public void motorSpeed(){
     m_drive.arcadeDrive(.5,0);
   }
 
+  //Makes sure that if the drivetrain motors ever exceed 55 Amps the gear will automatically shift to low gear
   public void overrideShiftGear(){
     if(m_frontLeft.getStatorCurrent() >= 55){
       m_shiftGearSolenoid.set(DoubleSolenoid.Value.kReverse);
       // check to see if double solenoid should be kReverse or kForward
     }
   }
+
+  //Allows the driver to switch between high and low gear
   public void shiftGear(){ //ADD TO A BUTTON
     if(m_shiftGearSolenoid.get() == DoubleSolenoid.Value.kReverse){
       m_shiftGearSolenoid.set(DoubleSolenoid.Value.kForward);
@@ -73,6 +81,8 @@ public class DrivetrainSubsystem extends SubsystemBase {
     m_shiftGearSolenoid.set(DoubleSolenoid.Value.kReverse);
     }
   }
+
+  //Gets the position of one of the drivetrain motors from the encoder
   public int getEncoderCount(){
     return m_backLeft.getSelectedSensorPosition();
   }

@@ -36,12 +36,18 @@ public class IntakeSubsystem extends SubsystemBase {
   public void periodic() {
     // This method will be called once per scheduler run
   }
+
+  //Sets the motor for the intake rollers to a certain speed
   public void intakeBall(){
     m_intakeMotor.set(.5);
   }
+
+  //Sets the motor for the mecanum intake wheels to a certain speed
   public void singulatorMotor(){
     m_singulatorMotor.set(-.5);
   }
+
+  //Allows the driver to raise or lower the intake with a button
   public void intakeLift(){
     if(m_intakeLeftSolenoid.get() == DoubleSolenoid.Value.kReverse && m_intakeRightSolenoid.get() == DoubleSolenoid.Value.kReverse){
       m_intakeLeftSolenoid.set(DoubleSolenoid.Value.kForward);

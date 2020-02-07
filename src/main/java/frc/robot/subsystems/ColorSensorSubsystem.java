@@ -47,9 +47,9 @@ public class ColorSensorSubsystem extends SubsystemBase {
   @Override
   public void periodic() {
     // This method will be called once per scheduler run
-    
-     
   }
+
+  //Gets the color seen by the color sensor
   public char getColor() {
     Color detectedColor = m_colorSensor.getColor();
     ColorMatchResult match = m_colorMatcher.matchClosestColor(detectedColor);
@@ -75,13 +75,19 @@ public class ColorSensorSubsystem extends SubsystemBase {
   //   System.out.printf("color target: %c\n", DriverStation.getInstance().getGameSpecificMessage().charAt(0)); 
   //   return c == DriverStation.getInstance().getGameSpecificMessage().charAt(0);
   // }
-  public char desiredColor(){
-    return DriverStation.getInstance().getGameSpecificMessage().charAt(0);
 
+  // Gets the desired color from the field and tells the code what that color is 
+  public char getDesiredColor(){
+    return DriverStation.getInstance().getGameSpecificMessage().charAt(0);
   }
+
+  //Turns off the motor that spins the color wheel 
   public void stopMotor(){
     m_wheelSpinnerMotor.set(0);
   }
+
+  //Turns on the spinner motor to a certain speed until it has reached the desired color 
+  //Which is recieved from the getDesiredColor() Method
   public void spinToColor(char desiredColor){
     if(desiredColor == getColor()){
       stopMotor();
@@ -89,13 +95,19 @@ public class ColorSensorSubsystem extends SubsystemBase {
       m_wheelSpinnerMotor.set(.1);
     }
   }
+
+  //Turns on the spinner motor to a certain speed until it has spun a specified number of times 
   public void spinNumberOfTimes(char initialColor){
-    while(colorCounter <= 8){
+    while(colorCounter <= 8){ //Might want to change the number of times it has seen a color based on testing
       m_wheelSpinnerMotor.set(.3);//Need to set speed once we actually test on robot
       if(initialColor == getColor()){
         colorCounter++;
       }
     }
+  }
   
+  //Sets the counter used to determine how many rotations the spinner has made back to zero
+  public void resetColorCounter(){
+    colorCounter = 0;
   }
 }

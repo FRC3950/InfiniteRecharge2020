@@ -29,7 +29,7 @@ public class ColorSpinToColor extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    m_colorValueSubsystem.spinToColor(m_colorValueSubsystem.desiredColor()
+    m_colorValueSubsystem.spinToColor(m_colorValueSubsystem.getDesiredColor()
     );
   }
 

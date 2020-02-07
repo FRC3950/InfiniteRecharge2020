@@ -34,9 +34,13 @@ public class BallManipulatorSubsystem extends SubsystemBase {
   public void periodic() {
     // This method will be called once per scheduler run
   }
+
+  //Sets the conveyer belt to a certain speed
   public void horizontalBallManipulator(){
     m_horizontalBallManipulatorMotor.set(.5);
   }
+  
+  //Sets the part of the robot that moves the ball from the conveyer belt to the shooter to a certain speed
   public void verticalBallManipulator(){
     m_verticalBallManipulatorMotor.set(.5);
   }

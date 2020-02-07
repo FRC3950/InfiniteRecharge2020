@@ -35,12 +35,18 @@ public class ShooterSubsystem extends SubsystemBase {
   public void periodic() {
     // This method will be called once per scheduler run
   }
-  public double getEncoder(){
+
+  //Gets the velocity of the shooter motor from the encoder
+  public double getVelocityFromEncoder(){
     return m_shooterMotor.getSelectedSensorVelocity(0);
   }
+
+  //Converts the velocity from the encoder to an RPM
   public double getRPM(){
-    return getEncoder() / 4096 * 600;
+    return getVelocityFromEncoder() / 4096 * 600;
   }
+
+  //Converts the distance determined by a formula and the limelight to the speed the ball needs to be shot at
   public void setShooterSpeed(double distance){
     //CREATE FORMULA BASED ON DISTANCE TO CALCULATE THE NECESSARY SPEED
     double speed = 1;

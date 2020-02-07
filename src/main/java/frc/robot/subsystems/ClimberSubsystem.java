@@ -38,35 +38,50 @@ public class ClimberSubsystem extends SubsystemBase {
   public void periodic() {
     // This method will be called once per scheduler run
   }
+
+  //Switches the position of the gear from whatever position it is to the opposite position
   public void toggleLockGear(){
     if (m_climberSolenoid.get() == DoubleSolenoid.Value.kForward){
       m_climberSolenoid.set(DoubleSolenoid.Value.kReverse);
     } else{
       m_climberSolenoid.set(DoubleSolenoid.Value.kForward);
     }
-
   }
+
+  //Sets the gear to whatever position you choose based off of a boolean value the user sets
   public void setLockGear(boolean s) {
     m_climberSolenoid.set(s ? DoubleSolenoid.Value.kForward : DoubleSolenoid.Value.kReverse); //One line if statement
   }
+
+  //Sets the motor for the climber to a certain POSITIVE speed to raise the climber
   public void raiseClimber(){
     m_climberMotor.set(.5);
   }
+
+  //Sets the motor for the climber to a certain POSITIVE speed to raise the climber
   public void lowerClimber(){
     m_climberMotor.set(-.5);
   }
+  
+  //Turns off the motor that moves the climber
   public void turnOffClimber(){
     m_climberMotor.set(0);
   }
+  
+  //Sets the value of the climber motor encoder to zero
   public void resetEncoderValue(){
     m_climberMotor.setSelectedSensorPosition(0);
   }
+  
+  //Checks the climber motor encoder value to see if the climber is fully extended
   public void isClimberAtTop(){
     if(m_climberMotor.getSelectedSensorPosition() >= 18000){ //NEED TO FIX WHEN WE TEST CLIMBER
     turnOffClimber();
     }
   }
-
+  
+  //Checks to see if the climber is at the bottom position by seeing if the climber limit switch is set off
+  //Safety check to make sure that if the climber is at the bottom it turns the motor off
   public void isLimitSwitchTrue(){
     if(m_climberLimitSwitch.get()){
       turnOffClimber();
