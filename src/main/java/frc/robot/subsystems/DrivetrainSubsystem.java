@@ -56,6 +56,8 @@ public class DrivetrainSubsystem extends SubsystemBase {
 
   //Drives the robot based on joystick values
   public void Drive(double y, double twist){
+    y = y * y * y;
+    //Might need to create a dead band for the direction and rotation
     m_drive.arcadeDrive(y,twist);
   }
 

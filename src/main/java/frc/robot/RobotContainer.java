@@ -12,7 +12,7 @@ import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj.Joystick;
 import frc.robot.commands.AutoDriveCommand;
 import frc.robot.commands.BallHorizontalManipulatorCommand;
-import frc.robot.commands.BallVerticalManipulatorCommand;
+import frc.robot.commands.BallIndexerCommand;
 import frc.robot.commands.ClimberLowerCommand;
 import frc.robot.commands.ClimberRaiseCommand;
 import frc.robot.commands.ColorSpinNumberOfTimes;
@@ -22,7 +22,11 @@ import frc.robot.commands.DriveShiftGearCommand;
 import frc.robot.commands.ExampleCommand;
 import frc.robot.commands.IntakeBallCommand;
 import frc.robot.commands.IntakeLiftCommand;
+import frc.robot.commands.IntakeSingulatorCommand;
+import frc.robot.commands.ShootBallCommand;
 import frc.robot.commands.TurretSetAngleCommand;
+import frc.robot.commands.TurretSpinCommand;
+import frc.robot.subsystems.BallCounterSubsystem;
 import frc.robot.subsystems.BallManipulatorSubsystem;
 import frc.robot.subsystems.ClimberSubsystem;
 import frc.robot.subsystems.ColorSensorSubsystem;
@@ -48,6 +52,7 @@ public class RobotContainer {
   private final ExampleSubsystem m_exampleSubsystem = new ExampleSubsystem();
   private final ExampleCommand m_autoCommand = new ExampleCommand(m_exampleSubsystem);
 
+  private final BallCounterSubsystem m_ballCounterSubsystem = new BallCounterSubsystem();
   private final BallManipulatorSubsystem m_ballManipulatorSubsystem = new BallManipulatorSubsystem();
   private final ClimberSubsystem m_climberSubsystem = new ClimberSubsystem();
   private final ColorSensorSubsystem m_colorSensorSubsystem = new ColorSensorSubsystem();
@@ -56,20 +61,23 @@ public class RobotContainer {
   private final LevelerSubsystem m_levelerSubsystem = new LevelerSubsystem();
   private final LimelightSubsystem m_limelightSubsystem = new LimelightSubsystem();
   private final ShooterSubsystem m_shooterSubsystem  = new ShooterSubsystem();
-  private final TurretSubsystem m_turretSubsytem = new TurretSubsystem();
+  private final TurretSubsystem m_turretSubsystem = new TurretSubsystem();
 
   private final AutoDriveCommand m_autoDriveCommand = new AutoDriveCommand(m_drivetrainSubsystem);
-  private final BallHorizontalManipulatorCommand m_ballHorizontalManipulator = new BallHorizontalManipulatorCommand(m_ballManipulatorSubsystem);
-  private final BallVerticalManipulatorCommand m_ballVerticalManipulator = new BallVerticalManipulatorCommand(m_ballManipulatorSubsystem);
+  private final BallHorizontalManipulatorCommand m_ballHorizontalManipulator = new BallHorizontalManipulatorCommand(m_ballManipulatorSubsystem, m_ballCounterSubsystem);
+  private final BallIndexerCommand m_ballIndexerManipulator = new BallIndexerCommand(m_ballManipulatorSubsystem, m_ballCounterSubsystem);
   private final ClimberLowerCommand m_climberLowerCommand = new ClimberLowerCommand(m_climberSubsystem);
   private final ClimberRaiseCommand m_climberRaiseCommand = new ClimberRaiseCommand(m_climberSubsystem);
   private final ColorSpinNumberOfTimes m_colorSpinNumberOfTimes = new ColorSpinNumberOfTimes(m_colorSensorSubsystem);
   private final ColorSpinToColor m_colorSpinToColor = new ColorSpinToColor(m_colorSensorSubsystem);
   private final DriveCommand m_driveCommand = new DriveCommand(m_drivetrainSubsystem);
   private final DriveShiftGearCommand m_driveShiftGearCommand = new DriveShiftGearCommand(m_drivetrainSubsystem);
-  private final TurretSetAngleCommand m_turretSetAngleCommand = new TurretSetAngleCommand(m_limelightSubsystem, m_turretSubsytem);
   private final IntakeBallCommand m_intakeBallCommand = new IntakeBallCommand(m_intakeSubsystem);
   private final IntakeLiftCommand m_intakeLiftCommand = new IntakeLiftCommand(m_intakeSubsystem);
+  private final IntakeSingulatorCommand m_intakeSingulatorCommand = new IntakeSingulatorCommand(m_intakeSubsystem);
+  private final ShootBallCommand m_shootBallCommand = new ShootBallCommand(m_shooterSubsystem, m_ballCounterSubsystem, m_limelightSubsystem);
+  private final TurretSetAngleCommand m_turretSetAngleCommand = new TurretSetAngleCommand(m_limelightSubsystem, m_turretSubsystem);
+  private final TurretSpinCommand m_turretSpinCommand = new TurretSpinCommand(m_turretSubsystem);
   
 
     public Joystick driveStick = new Joystick(0);

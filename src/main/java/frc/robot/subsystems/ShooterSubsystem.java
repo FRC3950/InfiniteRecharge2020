@@ -10,6 +10,7 @@ package frc.robot.subsystems;
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
+import frc.robot.RobotContainer;
 
 public class ShooterSubsystem extends SubsystemBase {
   /**
@@ -47,9 +48,19 @@ public class ShooterSubsystem extends SubsystemBase {
   }
 
   //Converts the distance determined by a formula and the limelight to the speed the ball needs to be shot at
-  public void setShooterSpeed(double distance){
+  public double setShooterSpeed(double distance){
     //CREATE FORMULA BASED ON DISTANCE TO CALCULATE THE NECESSARY SPEED
     double speed = 1;
-    m_shooterMotor.set(speed);
+    return speed;
+  }
+
+  //Sets the motor to a speed if there is a ball in the shooter
+  public void shootBall(boolean ballInShooter, double speed){
+    if(ballInShooter){
+      m_shooterMotor.set(speed);
+    }else{
+      m_shooterMotor.set(0);
+    }
+    
   }
 }

@@ -8,18 +8,27 @@
 package frc.robot.commands;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
-import frc.robot.subsystems.BallManipulatorSubsystem;
+import frc.robot.subsystems.BallCounterSubsystem;
+import frc.robot.subsystems.LimelightSubsystem;
+import frc.robot.subsystems.ShooterSubsystem;
 
-public class BallVerticalManipulatorCommand extends CommandBase {
+public class ShootBallCommand extends CommandBase {
   /**
-   * Creates a new BallVerticalManipulatorCommand.
+   * Creates a new ShootBallCommand.
    */
-  public BallManipulatorSubsystem m_ballManipulatorSubsystem;
 
-  public BallVerticalManipulatorCommand(BallManipulatorSubsystem ballManipulatorSubsystem) {
-    m_ballManipulatorSubsystem = ballManipulatorSubsystem;
+  private final ShooterSubsystem m_shooterSubsystem;
+  private final BallCounterSubsystem m_ballCounterSubsystem;
+  private final LimelightSubsystem m_limelightSubsytem;
+
+  public ShootBallCommand(ShooterSubsystem shooterSubsystem, BallCounterSubsystem ballCounterSubsystem, LimelightSubsystem limelightSubsystem) {
+    m_shooterSubsystem = shooterSubsystem;
+    m_ballCounterSubsystem = ballCounterSubsystem;
+    m_limelightSubsytem = limelightSubsystem;
     // Use addRequirements() here to declare subsystem dependencies.
-    addRequirements(ballManipulatorSubsystem);
+    addRequirements(shooterSubsystem);
+    addRequirements(ballCounterSubsystem);
+    addRequirements(limelightSubsystem);
   }
 
   // Called when the command is initially scheduled.
@@ -30,7 +39,10 @@ public class BallVerticalManipulatorCommand extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    m_ballManipulatorSubsystem.verticalBallManipulator();
+    boolean ballInShooter = m_ballCounterSubsystem.isBallInShooter();
+    double speed = m_shooterSubsystem.setShooterSpeed(m_limelightSubsytem.calculateDistance());
+    m_shooterSubsystem.shootBall(ballInShooter, speed);
+    
   }
 
   // Called once the command ends or is interrupted.

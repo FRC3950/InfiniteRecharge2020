@@ -38,17 +38,18 @@ public class IntakeSubsystem extends SubsystemBase {
   }
 
   //Sets the motor for the intake rollers to a certain speed
-  public void intakeBall(){
-    m_intakeMotor.set(.5);
+  public void setIntakeMotor(double speed){
+    m_intakeMotor.set(speed);
   }
 
   //Sets the motor for the mecanum intake wheels to a certain speed
-  public void singulatorMotor(){
-    m_singulatorMotor.set(-.5);
+  //Should it be negative?
+  public void setSingulatorMotor(double speed){
+    m_singulatorMotor.set(speed);
   }
 
   //Allows the driver to raise or lower the intake with a button
-  public void intakeLift(){
+  public void changeIntakePosition(){
     if(m_intakeLeftSolenoid.get() == DoubleSolenoid.Value.kReverse && m_intakeRightSolenoid.get() == DoubleSolenoid.Value.kReverse){
       m_intakeLeftSolenoid.set(DoubleSolenoid.Value.kForward);
       m_intakeRightSolenoid.set(DoubleSolenoid.Value.kForward);
@@ -57,5 +58,44 @@ public class IntakeSubsystem extends SubsystemBase {
       m_intakeRightSolenoid.set(DoubleSolenoid.Value.kReverse);
     }
   }
+
+  //Sets the intake to a position based on a boolean value
+  public void setIntakePosition(boolean upOrDown){
+    if(upOrDown == true){
+      m_intakeLeftSolenoid.set(DoubleSolenoid.Value.kForward);
+      m_intakeRightSolenoid.set(DoubleSolenoid.Value.kForward);
+    } else {
+      m_intakeLeftSolenoid.set(DoubleSolenoid.Value.kReverse);
+      m_intakeRightSolenoid.set(DoubleSolenoid.Value.kReverse);
+    }
+  }
+
+  //Checks whether the intake is in the raised position or the lowered position
+  public boolean intakePosition(){
+    if(m_intakeLeftSolenoid.get() == DoubleSolenoid.Value.kReverse && m_intakeRightSolenoid.get() == DoubleSolenoid.Value.kReverse){
+      return true;
+    } else {
+     return false;
+    }
+  }
+
+  //Turns off the intake motor if the intake is up
+  public void ifUpStopIntakeMotor(boolean intakePosition){
+    if(intakePosition == true){
+      setIntakeMotor(0);
+      setSingulatorMotor(0);
+    }
+  }
+
+  //Turns off the intake motor if there are more than 5 balls
+  public void ifFullStopIntakeMotor(int numberOfBalls){
+    if(numberOfBalls > 5){
+      setIntakeMotor(0);
+      setSingulatorMotor(0);
+      setIntakePosition(false);
+
+    }
+  }
+
 
 }

@@ -7,8 +7,7 @@
 
 package frc.robot.subsystems;
 
-import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
-
+import com.ctre.phoenix.motorcontrol.can.WPI_TalonFX;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
 public class LevelerSubsystem extends SubsystemBase {
@@ -16,10 +15,10 @@ public class LevelerSubsystem extends SubsystemBase {
    * Creates a new LevelerSubsystem.
    */
 
-  private final WPI_TalonSRX m_levelerMotor;
+  private final WPI_TalonFX m_levelerMotor;
   
   public LevelerSubsystem() {
-    m_levelerMotor = new WPI_TalonSRX(4);
+    m_levelerMotor = new WPI_TalonFX(4);
   }
 
   @Override

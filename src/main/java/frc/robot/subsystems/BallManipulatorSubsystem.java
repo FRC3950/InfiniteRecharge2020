@@ -18,15 +18,13 @@ public class BallManipulatorSubsystem extends SubsystemBase {
    */
 
   private final WPI_TalonSRX m_horizontalBallManipulatorMotor;
-  private final WPI_TalonSRX m_verticalBallManipulatorMotor;
-  private final AnalogInput m_ballPositionSensor;
+  private final WPI_TalonSRX m_ballIndexerMotor;
 
   public BallManipulatorSubsystem() {
 
     m_horizontalBallManipulatorMotor = new WPI_TalonSRX(5);
-    m_verticalBallManipulatorMotor = new WPI_TalonSRX(5);
+    m_ballIndexerMotor = new WPI_TalonSRX(5);
 
-    m_ballPositionSensor = new AnalogInput(0);
 
   }
 
@@ -36,12 +34,28 @@ public class BallManipulatorSubsystem extends SubsystemBase {
   }
 
   //Sets the conveyer belt to a certain speed
-  public void horizontalBallManipulator(){
-    m_horizontalBallManipulatorMotor.set(.5);
+  public void setHorizontalBallManipulator(double speed, int ballsInConveyer, boolean ballsInIndexer){
+    if(ballsInConveyer > 0 && ballsInIndexer == false){
+      m_horizontalBallManipulatorMotor.set(speed);
+    }
   }
   
   //Sets the part of the robot that moves the ball from the conveyer belt to the shooter to a certain speed
-  public void verticalBallManipulator(){
-    m_verticalBallManipulatorMotor.set(.5);
+  public void setBallIndexerMotor(double speed){
+    m_ballIndexerMotor.set(speed);
   }
+
+  //If there is a ball in the robot, try to get one ball into the indexer
+  public void putBallInShooter(boolean ballInShooter, boolean ballInIndexer, double speed, int ballCount){
+    if(ballInShooter == true && ballCount > 0){
+      setBallIndexerMotor(0);
+    }else if(ballInShooter == false && ballInIndexer == true && ballCount > 0){
+      setBallIndexerMotor(.5);
+    }else if(ballInShooter == false && ballInIndexer == false && ballCount > 0 ){
+      setBallIndexerMotor(.5);    
+    }
+  }
+
+
+  
 }

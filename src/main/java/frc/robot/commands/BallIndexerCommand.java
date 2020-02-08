@@ -8,22 +8,22 @@
 package frc.robot.commands;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
-import frc.robot.subsystems.LimelightSubsystem;
-import frc.robot.subsystems.ShooterSubsystem;
+import frc.robot.subsystems.BallCounterSubsystem;
+import frc.robot.subsystems.BallManipulatorSubsystem;
 
-public class ShooterSpeedCommand extends CommandBase {
+public class BallIndexerCommand extends CommandBase {
   /**
-   * Creates a new ShooterSpeedCommand.
+   * Creates a new BallVerticalManipulatorCommand.
    */
-  private final ShooterSubsystem m_shooterSubsystem;
-  private final LimelightSubsystem m_limelightSubsytem;
+  public BallManipulatorSubsystem m_ballManipulatorSubsystem;
+  public BallCounterSubsystem m_ballCounterSubsystem;
 
-  public ShooterSpeedCommand(ShooterSubsystem shooterSubsystem, LimelightSubsystem limelightSubsystem) {
-    m_shooterSubsystem = shooterSubsystem;
-    m_limelightSubsytem = limelightSubsystem;
+  public BallIndexerCommand(BallManipulatorSubsystem ballManipulatorSubsystem, BallCounterSubsystem ballCounterSubsystem) {
+    m_ballManipulatorSubsystem = ballManipulatorSubsystem;
+    m_ballCounterSubsystem = ballCounterSubsystem;
     // Use addRequirements() here to declare subsystem dependencies.
-    addRequirements(shooterSubsystem);
-    addRequirements(limelightSubsystem);
+    addRequirements(ballManipulatorSubsystem);
+    addRequirements(ballCounterSubsystem);
   }
 
   // Called when the command is initially scheduled.
@@ -34,12 +34,17 @@ public class ShooterSpeedCommand extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    m_shooterSubsystem.setShooterSpeed(m_limelightSubsytem.calculateDistance());
+    boolean ballInShooter = m_ballCounterSubsystem.isBallInShooter();
+    boolean ballInIndexer = m_ballCounterSubsystem.isBallInIndexer();
+    double speed = .5;
+    int ballCount = m_ballCounterSubsystem.ballsInRobot();
+    m_ballManipulatorSubsystem.putBallInShooter(ballInShooter, ballInIndexer, speed, ballCount);
   }
 
   // Called once the command ends or is interrupted.
   @Override
   public void end(boolean interrupted) {
+    m_ballManipulatorSubsystem.setBallIndexerMotor(0);
   }
 
   // Returns true when the command should end.
