@@ -21,7 +21,6 @@ public class BallManipulatorCommandGroup extends ParallelCommandGroup {
   public BallManipulatorCommandGroup() {
     // Add your commands in the super() call, e.g.
     // super(new FooCommand(), new BarCommand());super();
-    
 
   }
 }

@@ -7,50 +7,72 @@
 
 package frc.robot.subsystems;
 
-import edu.wpi.first.wpilibj.AnalogInput;
+import edu.wpi.first.wpilibj.DigitalInput;
+import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
 public class BallCounterSubsystem extends SubsystemBase {
   /**
    * Creates a new BallCounterSubsystem.
    */
-  private final AnalogInput entryBallSensor;
-  private final AnalogInput indexerBallSensor;
-  private final AnalogInput shooterBallSensor;
-  private int ballCount;
+  private final DigitalInput entryBallSensor;
+  private final DigitalInput indexerBallSensor;
+  private final DigitalInput shooterBallSensor;
+  public int ballCount;
   private boolean ballInShooter;
   private boolean ballInIndexer;
   private int ballsInConveyer;
+  private boolean previousEntryBallValue;
+  private boolean previousShooterBallValue;
+
 
   public BallCounterSubsystem() {
-    entryBallSensor = new AnalogInput(0);
-    indexerBallSensor = new AnalogInput(1);
-    shooterBallSensor = new AnalogInput(2);
+    entryBallSensor = new DigitalInput(0);
+    indexerBallSensor = new DigitalInput(1);
+    shooterBallSensor = new DigitalInput(2);
 
     ballCount = 0;
     ballInShooter = false;
     ballInIndexer = false;
   }
 
+  //Gets a value for the ball sensors every 50 ms
   @Override
   public void periodic() {
     // This method will be called once per scheduler run
+    Timer.delay(50);
+    previousEntryBallValue = entryBallSensor.get();
+    previousShooterBallValue = shooterBallSensor.get();
   }
   
-  //Determines how many balls are inside the robot
-  public int ballsInRobot(){
-    if(entryBallSensor.getVoltage() >= 4){
+  //returns the entry ball sensors value
+  public boolean getEntryBallSensorValue(){
+    return entryBallSensor.get();
+  }
+
+  //returns the shooter ball sensors value
+  public boolean getShooterBallSensorValue(){
+    return shooterBallSensor.get();
+  }
+
+  //Determines how many balls are inside the robot by comparing the current sensor value to the previous sensor value with a 50 ms delay
+  public void ballsInRobot(){
+    if(getEntryBallSensorValue() && !previousEntryBallValue){
       ballCount++;
     }
-    if(shooterBallSensor.getVoltage() >= 4){
+    if(!shooterBallSensor.get() && previousShooterBallValue){
       ballCount--;
     }
+  }
+
+  //Returns the ball count inside the robot
+  public int getBallsInRobot(int ballCount){
     return ballCount;
   }
 
   //Determines if there is a ball in the shooter 
   public boolean isBallInShooter(){
-    if(shooterBallSensor.getVoltage() >= 4){
+    if(shooterBallSensor.get()){
       ballInShooter = true;
     }else{
       ballInShooter = false;
@@ -59,7 +81,7 @@ public class BallCounterSubsystem extends SubsystemBase {
   }
   //Determines if there is a ball in the indexer 
   public boolean isBallInIndexer(){
-    if(indexerBallSensor.getVoltage() >= 4){
+    if(indexerBallSensor.get()){
       ballInIndexer = true;
     }else{
       ballInIndexer = false;

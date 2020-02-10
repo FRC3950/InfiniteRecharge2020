@@ -17,29 +17,30 @@ public class DriveCommand extends CommandBase {
   /**
    * Creates a new DriveCommand.
    */
-  public Joystick stick = new Joystick(0);
+  private final Joystick stick = new Joystick(0);
+
   private final DrivetrainSubsystem m_drivetrainSubsystem;
 
   public DriveCommand(DrivetrainSubsystem drivetrainSubsystem) {
     m_drivetrainSubsystem = drivetrainSubsystem;
     // Use addRequirements() here to declare subsystem dependencies.
     addRequirements(drivetrainSubsystem);
-    
-    
+        
     
   }
 
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
-    
+        System.out.println("HELP");
+
   }
 
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    m_drivetrainSubsystem.Drive(stick.getY(), stick.getTwist());
-    
+    m_drivetrainSubsystem.drive(stick.getY(), stick.getTwist());  
+    // System.out.println("HELP");
   }
 
   // Called once the command ends or is interrupted.

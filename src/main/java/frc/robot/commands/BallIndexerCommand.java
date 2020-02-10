@@ -37,7 +37,7 @@ public class BallIndexerCommand extends CommandBase {
     boolean ballInShooter = m_ballCounterSubsystem.isBallInShooter();
     boolean ballInIndexer = m_ballCounterSubsystem.isBallInIndexer();
     double speed = .5;
-    int ballCount = m_ballCounterSubsystem.ballsInRobot();
+    int ballCount = m_ballCounterSubsystem.getBallsInRobot(m_ballCounterSubsystem.ballCount);
     m_ballManipulatorSubsystem.putBallInShooter(ballInShooter, ballInIndexer, speed, ballCount);
   }
 

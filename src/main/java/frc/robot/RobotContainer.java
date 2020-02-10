@@ -56,7 +56,7 @@ public class RobotContainer {
   private final BallManipulatorSubsystem m_ballManipulatorSubsystem = new BallManipulatorSubsystem();
   private final ClimberSubsystem m_climberSubsystem = new ClimberSubsystem();
   private final ColorSensorSubsystem m_colorSensorSubsystem = new ColorSensorSubsystem();
-  private final DrivetrainSubsystem m_drivetrainSubsystem = new DrivetrainSubsystem();
+  public final DrivetrainSubsystem m_drivetrainSubsystem = new DrivetrainSubsystem();
   private final IntakeSubsystem m_intakeSubsystem = new IntakeSubsystem();
   private final LevelerSubsystem m_levelerSubsystem = new LevelerSubsystem();
   private final LimelightSubsystem m_limelightSubsystem = new LimelightSubsystem();
@@ -70,7 +70,7 @@ public class RobotContainer {
   private final ClimberRaiseCommand m_climberRaiseCommand = new ClimberRaiseCommand(m_climberSubsystem);
   private final ColorSpinNumberOfTimes m_colorSpinNumberOfTimes = new ColorSpinNumberOfTimes(m_colorSensorSubsystem);
   private final ColorSpinToColor m_colorSpinToColor = new ColorSpinToColor(m_colorSensorSubsystem);
-  private final DriveCommand m_driveCommand = new DriveCommand(m_drivetrainSubsystem);
+  public final DriveCommand m_driveCommand = new DriveCommand(m_drivetrainSubsystem);
   private final DriveShiftGearCommand m_driveShiftGearCommand = new DriveShiftGearCommand(m_drivetrainSubsystem);
   private final IntakeBallCommand m_intakeBallCommand = new IntakeBallCommand(m_intakeSubsystem);
   private final IntakeLiftCommand m_intakeLiftCommand = new IntakeLiftCommand(m_intakeSubsystem);
@@ -78,8 +78,7 @@ public class RobotContainer {
   private final ShootBallCommand m_shootBallCommand = new ShootBallCommand(m_shooterSubsystem, m_ballCounterSubsystem, m_limelightSubsystem);
   private final TurretSetAngleCommand m_turretSetAngleCommand = new TurretSetAngleCommand(m_limelightSubsystem, m_turretSubsystem);
   private final TurretSpinCommand m_turretSpinCommand = new TurretSpinCommand(m_turretSubsystem);
-  
-
+    
     public Joystick driveStick = new Joystick(0);
     public XboxController xboxController = new XboxController(1);
 
@@ -113,8 +112,9 @@ public class RobotContainer {
    */
   public RobotContainer() {
     // Configure the button bindings
-    configureButtonBindings();
-    
+    configureButtonBindings();    
+
+    m_drivetrainSubsystem.setDefaultCommand(m_driveCommand);
     
   }
 
@@ -126,7 +126,6 @@ public class RobotContainer {
    */
   private void configureButtonBindings() {
     driveStick2Button.whenPressed(m_driveShiftGearCommand);
-    driveStick11Button.whileHeld(m_driveCommand);
     
   }
 
