@@ -17,34 +17,36 @@ public class BallHorizontalManipulatorCommand extends CommandBase {
    */
 
   public BallManipulatorSubsystem m_ballManipulatorSubsystem;
-  public BallCounterSubsystem m_ballCounterSubsystem;
+  BallCounterSubsystem m_ballCounterSubsystem;
+  boolean ballInIndexer;
 
-  public BallHorizontalManipulatorCommand(BallManipulatorSubsystem ballManipulatorSubsystem, BallCounterSubsystem ballCounterSubsystem) {
+  public BallHorizontalManipulatorCommand(BallManipulatorSubsystem ballManipulatorSubsystem) {
     m_ballManipulatorSubsystem = ballManipulatorSubsystem;
-    m_ballCounterSubsystem = ballCounterSubsystem;
     // Use addRequirements() here to declare subsystem dependencies.
     addRequirements(ballManipulatorSubsystem);
-    addRequirements(ballCounterSubsystem);
   }
 
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
+    
   }
 
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    double speed = .5;
-    int ballsInConveyer = m_ballCounterSubsystem.ballsInConveyer();
-    boolean ballsInIndexer = m_ballCounterSubsystem.isBallInIndexer();
-    m_ballManipulatorSubsystem.setHorizontalBallManipulator(speed, ballsInConveyer, ballsInIndexer);
-    
+    // double speed = .5;
+    // // int ballsInConveyer = m_ballCounterSubsystem.ballsInConveyer();
+    // ballInIndexer = m_ballCounterSubsystem.isBallInIndexer();
+    // //m_ballManipulatorSubsystem.setHorizontalBallManipulator(speed, ballsInConveyer, ballsInIndexer);
+    // m_ballManipulatorSubsystem.setHorizontalBallManipulator(speed, 3, ballInIndexer);
+    m_ballCounterSubsystem.getIndexerBallSensorValue();
   }
 
   // Called once the command ends or is interrupted.
   @Override
   public void end(boolean interrupted) {
+    m_ballManipulatorSubsystem.setHorizontalBallManipulator(0, 0, false);
   }
 
   // Returns true when the command should end.

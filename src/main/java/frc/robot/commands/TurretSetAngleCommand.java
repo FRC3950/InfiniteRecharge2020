@@ -15,14 +15,12 @@ public class TurretSetAngleCommand extends CommandBase {
   /**
    * Creates a new LimelightSkewCommand.
    */
-  private final LimelightSubsystem m_limelightSubsystem;
+  LimelightSubsystem m_limelightSubsystem;
   private final TurretSubsystem m_turretSubsystem;
 
-  public TurretSetAngleCommand(LimelightSubsystem limelightSubsystem, TurretSubsystem turretSubsystem) {
-    m_limelightSubsystem = limelightSubsystem;
+  public TurretSetAngleCommand(TurretSubsystem turretSubsystem) {
     m_turretSubsystem = turretSubsystem;
     // Use addRequirements() here to declare subsystem dependencies.
-    addRequirements(limelightSubsystem);
     addRequirements(turretSubsystem);
   }
 

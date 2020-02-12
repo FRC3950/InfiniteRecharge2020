@@ -30,13 +30,13 @@ public class AutoDriveCommand extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    int initialCount = m_drivetrainSubsystem.getEncoderCount();
-    int currentCount = initialCount;
-    int totalCount = 4096; //Need to fix value when we determine how far to move
-    while(currentCount - initialCount < totalCount){
-      currentCount = m_drivetrainSubsystem.getEncoderCount();
-      m_drivetrainSubsystem.motorSpeed();
-    }
+    // int initialCount = m_drivetrainSubsystem.getEncoderCount();
+    // int currentCount = initialCount;
+    // int totalCount = 4096; //Need to fix value when we determine how far to move
+    // while(currentCount - initialCount < totalCount){
+    //   currentCount = m_drivetrainSubsystem.getEncoderCount();
+    //   m_drivetrainSubsystem.motorSpeed();
+    // }
   }
 
   // Called once the command ends or is interrupted.

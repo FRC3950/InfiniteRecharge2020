@@ -22,7 +22,7 @@ public class TurretSubsystem extends SubsystemBase {
 /** Hey guys whats up hally here yall are dumb haha bye */
   public TurretSubsystem() {
 
-    m_turretMotor = new WPI_TalonSRX(2);
+    m_turretMotor = new WPI_TalonSRX(12); //Fix later
     // m_leftPosition = new DigitalInput(0);
     // m_rightPosition = new DigitalInput(1);
     
@@ -31,11 +31,12 @@ public class TurretSubsystem extends SubsystemBase {
   @Override
   public void periodic() {
     // This method will be called once per scheduler run
+    
   }
 
   //Sets the turret motor to a certain velocity
   public void turretSpin(){
-    m_turretMotor.set(.1);
+    m_turretMotor.set(1);
   }
 
   //Makes sure that if the turret begins to turn to far it will stop based off limit switches
