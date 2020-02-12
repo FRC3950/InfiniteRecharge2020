@@ -9,15 +9,17 @@ package frc.robot.commands;
 
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj2.command.CommandBase;
+import frc.robot.Robot;
+import frc.robot.RobotContainer;
 import frc.robot.subsystems.DrivetrainSubsystem;
 
 public class DriveCommand extends CommandBase {
   /**
    * Creates a new DriveCommand.
    */
-  
-  private final DrivetrainSubsystem m_drivetrainSubsystem;
   private final Joystick stick = new Joystick(0);
+
+  private final DrivetrainSubsystem m_drivetrainSubsystem;
 
   public DriveCommand(DrivetrainSubsystem drivetrainSubsystem) {
     m_drivetrainSubsystem = drivetrainSubsystem;
@@ -30,6 +32,7 @@ public class DriveCommand extends CommandBase {
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
+        System.out.println("HELP");
 
   }
 
@@ -37,6 +40,7 @@ public class DriveCommand extends CommandBase {
   @Override
   public void execute() {
     m_drivetrainSubsystem.drive(stick.getY(), stick.getTwist());  
+    // System.out.println("HELP");
   }
 
   // Called once the command ends or is interrupted.

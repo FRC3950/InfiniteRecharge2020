@@ -7,7 +7,6 @@
 
 package frc.robot.subsystems;
 
-import edu.wpi.first.wpilibj.AnalogInput;
 import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
@@ -16,26 +15,25 @@ public class BallCounterSubsystem extends SubsystemBase {
   /**
    * Creates a new BallCounterSubsystem.
    */
-  private DigitalInput entryBallSensor;
-  private final DigitalInput indexerBallSensor = new DigitalInput(0);
-  private DigitalInput shooterBallSensor;
+  private final DigitalInput entryBallSensor;
+  private final DigitalInput indexerBallSensor;
+  private final DigitalInput shooterBallSensor;
   public int ballCount;
   private boolean ballInShooter;
   private boolean ballInIndexer;
   private int ballsInConveyer;
   private boolean previousEntryBallValue;
   private boolean previousShooterBallValue;
-  private boolean indexerSensor;
+
 
   public BallCounterSubsystem() {
-    entryBallSensor = new DigitalInput(1);
-    //indexerBallSensor = new DigitalInput(0);
+    entryBallSensor = new DigitalInput(0);
+    indexerBallSensor = new DigitalInput(1);
     shooterBallSensor = new DigitalInput(2);
 
     ballCount = 0;
     ballInShooter = false;
     ballInIndexer = false;
-    indexerSensor = false;
   }
 
   //Gets a value for the ball sensors every 50 ms
@@ -45,7 +43,6 @@ public class BallCounterSubsystem extends SubsystemBase {
     Timer.delay(50);
     previousEntryBallValue = entryBallSensor.get();
     previousShooterBallValue = shooterBallSensor.get();
-    indexerSensor = indexerBallSensor.get();
   }
   
   //returns the entry ball sensors value
@@ -57,11 +54,6 @@ public class BallCounterSubsystem extends SubsystemBase {
   public boolean getShooterBallSensorValue(){
     return shooterBallSensor.get();
   }
-  public void getIndexerBallSensorValue(){
-    System.out.println(indexerSensor);
-    //return indexerBallSensor.get();
-  }
-
 
   //Determines how many balls are inside the robot by comparing the current sensor value to the previous sensor value with a 50 ms delay
   public void ballsInRobot(){

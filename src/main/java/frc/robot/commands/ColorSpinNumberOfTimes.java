@@ -16,7 +16,6 @@ public class ColorSpinNumberOfTimes extends CommandBase {
    */
   private char color;
   private final ColorSensorSubsystem m_colorValueSubsystem;
-  
   public ColorSpinNumberOfTimes(ColorSensorSubsystem colorValueSubsystem) {
     m_colorValueSubsystem = colorValueSubsystem;
     // Use addRequirements() here to declare subsystem dependencies.

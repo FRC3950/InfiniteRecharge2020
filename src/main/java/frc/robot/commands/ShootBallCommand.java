@@ -18,15 +18,17 @@ public class ShootBallCommand extends CommandBase {
    */
 
   private final ShooterSubsystem m_shooterSubsystem;
-  BallCounterSubsystem m_ballCounterSubsystem;
-  LimelightSubsystem m_limelightSubsytem;
+  private final BallCounterSubsystem m_ballCounterSubsystem;
+  private final LimelightSubsystem m_limelightSubsytem;
 
-  public ShootBallCommand(ShooterSubsystem shooterSubsystem) {
+  public ShootBallCommand(ShooterSubsystem shooterSubsystem, BallCounterSubsystem ballCounterSubsystem, LimelightSubsystem limelightSubsystem) {
     m_shooterSubsystem = shooterSubsystem;
+    m_ballCounterSubsystem = ballCounterSubsystem;
+    m_limelightSubsytem = limelightSubsystem;
     // Use addRequirements() here to declare subsystem dependencies.
     addRequirements(shooterSubsystem);
-    // addRequirements(ballCounterSubsystem);
-    // addRequirements(limelightSubsystem);
+    addRequirements(ballCounterSubsystem);
+    addRequirements(limelightSubsystem);
   }
 
   // Called when the command is initially scheduled.
@@ -37,17 +39,15 @@ public class ShootBallCommand extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    // boolean ballInShooter = m_ballCounterSubsystem.isBallInShooter();
-    // double speed = m_shooterSubsystem.setShooterSpeed(m_limelightSubsytem.calculateDistance());
-    // m_shooterSubsystem.shootBall(ballInShooter, speed);
-    m_shooterSubsystem.shootBall(true, -1);
-
+    boolean ballInShooter = m_ballCounterSubsystem.isBallInShooter();
+    double speed = m_shooterSubsystem.setShooterSpeed(m_limelightSubsytem.calculateDistance());
+    m_shooterSubsystem.shootBall(ballInShooter, speed);
+    
   }
 
   // Called once the command ends or is interrupted.
   @Override
   public void end(boolean interrupted) {
-    m_shooterSubsystem.shootBall(false,0);
   }
 
   // Returns true when the command should end.

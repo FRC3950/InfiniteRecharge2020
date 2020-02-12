@@ -32,8 +32,7 @@ public class TurretSpinCommand extends CommandBase {
   @Override
   public void execute() {
     m_turretSubsystem.turretSpin();
-    // m_turretSubsystem.turretLimit();
-    //System.out.println("HELP");
+    m_turretSubsystem.turretLimit();
     //Need to figure out connection to limelight
   }
 
