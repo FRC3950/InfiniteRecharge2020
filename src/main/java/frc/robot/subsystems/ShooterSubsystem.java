@@ -10,7 +10,6 @@ package frc.robot.subsystems;
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
-import frc.robot.RobotContainer;
 
 public class ShooterSubsystem extends SubsystemBase {
   /**
@@ -21,8 +20,8 @@ public class ShooterSubsystem extends SubsystemBase {
 
   public ShooterSubsystem() {
 
-    m_shooterMotor = new WPI_TalonSRX(0);
-    m_shooterMotorFollower = new WPI_TalonSRX(1);
+    m_shooterMotor = new WPI_TalonSRX(1);
+    m_shooterMotorFollower = new WPI_TalonSRX(2);
     
     m_shooterMotor.setInverted(true);
     m_shooterMotorFollower.setInverted(true);

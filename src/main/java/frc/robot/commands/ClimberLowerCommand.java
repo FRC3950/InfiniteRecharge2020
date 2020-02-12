@@ -14,6 +14,8 @@ public class ClimberLowerCommand extends CommandBase {
   /**
    * Creates a new ClimbCommand.
    */
+  // if you yeet then you yeet, nein
+  
   private final ClimberSubsystem m_climberSubsystem;
 
   public ClimberLowerCommand(ClimberSubsystem climberSubsystem) {

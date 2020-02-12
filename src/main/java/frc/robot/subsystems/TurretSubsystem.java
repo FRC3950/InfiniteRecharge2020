@@ -22,7 +22,7 @@ public class TurretSubsystem extends SubsystemBase {
 /** Hey guys whats up hally here yall are dumb haha bye */
   public TurretSubsystem() {
 
-    m_turretMotor = new WPI_TalonSRX(2);
+    m_turretMotor = new WPI_TalonSRX(12);//FIX LATER
     // m_leftPosition = new DigitalInput(0);
     // m_rightPosition = new DigitalInput(1);
     

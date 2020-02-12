@@ -16,14 +16,12 @@ public class BallIndexerCommand extends CommandBase {
    * Creates a new BallVerticalManipulatorCommand.
    */
   public BallManipulatorSubsystem m_ballManipulatorSubsystem;
-  public BallCounterSubsystem m_ballCounterSubsystem;
+  BallCounterSubsystem m_ballCounterSubsystem;
 
-  public BallIndexerCommand(BallManipulatorSubsystem ballManipulatorSubsystem, BallCounterSubsystem ballCounterSubsystem) {
+  public BallIndexerCommand(BallManipulatorSubsystem ballManipulatorSubsystem) {
     m_ballManipulatorSubsystem = ballManipulatorSubsystem;
-    m_ballCounterSubsystem = ballCounterSubsystem;
     // Use addRequirements() here to declare subsystem dependencies.
     addRequirements(ballManipulatorSubsystem);
-    addRequirements(ballCounterSubsystem);
   }
 
   // Called when the command is initially scheduled.

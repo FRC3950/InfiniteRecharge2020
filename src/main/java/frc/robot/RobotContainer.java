@@ -38,6 +38,7 @@ import frc.robot.subsystems.LimelightSubsystem;
 import frc.robot.subsystems.ShooterSubsystem;
 import frc.robot.subsystems.TurretSubsystem;
 import edu.wpi.first.wpilibj2.command.Command;
+import edu.wpi.first.wpilibj2.command.CommandScheduler;
 import edu.wpi.first.wpilibj2.command.button.Button;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 
@@ -52,32 +53,32 @@ public class RobotContainer {
   private final ExampleSubsystem m_exampleSubsystem = new ExampleSubsystem();
   private final ExampleCommand m_autoCommand = new ExampleCommand(m_exampleSubsystem);
 
-  private final BallCounterSubsystem m_ballCounterSubsystem = new BallCounterSubsystem();
-  private final BallManipulatorSubsystem m_ballManipulatorSubsystem = new BallManipulatorSubsystem();
-  private final ClimberSubsystem m_climberSubsystem = new ClimberSubsystem();
-  private final ColorSensorSubsystem m_colorSensorSubsystem = new ColorSensorSubsystem();
-  public final DrivetrainSubsystem m_drivetrainSubsystem = new DrivetrainSubsystem();
-  private final IntakeSubsystem m_intakeSubsystem = new IntakeSubsystem();
-  private final LevelerSubsystem m_levelerSubsystem = new LevelerSubsystem();
-  private final LimelightSubsystem m_limelightSubsystem = new LimelightSubsystem();
-  private final ShooterSubsystem m_shooterSubsystem  = new ShooterSubsystem();
-  private final TurretSubsystem m_turretSubsystem = new TurretSubsystem();
+  // private final BallCounterSubsystem m_ballCounterSubsystem = new BallCounterSubsystem();
+  // private final BallManipulatorSubsystem m_ballManipulatorSubsystem = new BallManipulatorSubsystem();
+  // private final ClimberSubsystem m_climberSubsystem = new ClimberSubsystem();
+  // private final ColorSensorSubsystem m_colorSensorSubsystem = new ColorSensorSubsystem();
+   public final DrivetrainSubsystem m_drivetrainSubsystem = new DrivetrainSubsystem();
+  // private final IntakeSubsystem m_intakeSubsystem = new IntakeSubsystem();
+  // private final LevelerSubsystem m_levelerSubsystem = new LevelerSubsystem();
+  // private final LimelightSubsystem m_limelightSubsystem = new LimelightSubsystem();
+  // private final ShooterSubsystem m_shooterSubsystem  = new ShooterSubsystem();
+  // private final TurretSubsystem m_turretSubsystem = new TurretSubsystem();
 
-  private final AutoDriveCommand m_autoDriveCommand = new AutoDriveCommand(m_drivetrainSubsystem);
-  private final BallHorizontalManipulatorCommand m_ballHorizontalManipulator = new BallHorizontalManipulatorCommand(m_ballManipulatorSubsystem, m_ballCounterSubsystem);
-  private final BallIndexerCommand m_ballIndexerManipulator = new BallIndexerCommand(m_ballManipulatorSubsystem, m_ballCounterSubsystem);
-  private final ClimberLowerCommand m_climberLowerCommand = new ClimberLowerCommand(m_climberSubsystem);
-  private final ClimberRaiseCommand m_climberRaiseCommand = new ClimberRaiseCommand(m_climberSubsystem);
-  private final ColorSpinNumberOfTimes m_colorSpinNumberOfTimes = new ColorSpinNumberOfTimes(m_colorSensorSubsystem);
-  private final ColorSpinToColor m_colorSpinToColor = new ColorSpinToColor(m_colorSensorSubsystem);
+  // private final AutoDriveCommand m_autoDriveCommand = new AutoDriveCommand(m_drivetrainSubsystem);
+  // private final BallHorizontalManipulatorCommand m_ballHorizontalManipulator = new BallHorizontalManipulatorCommand(m_ballManipulatorSubsystem, m_ballCounterSubsystem);
+  // private final BallIndexerCommand m_ballIndexerManipulator = new BallIndexerCommand(m_ballManipulatorSubsystem, m_ballCounterSubsystem);
+  // private final ClimberLowerCommand m_climberLowerCommand = new ClimberLowerCommand(m_climberSubsystem);
+  // private final ClimberRaiseCommand m_climberRaiseCommand = new ClimberRaiseCommand(m_climberSubsystem);
+  // private final ColorSpinNumberOfTimes m_colorSpinNumberOfTimes = new ColorSpinNumberOfTimes(m_colorSensorSubsystem);
+  // private final ColorSpinToColor m_colorSpinToColor = new ColorSpinToColor(m_colorSensorSubsystem);
   public final DriveCommand m_driveCommand = new DriveCommand(m_drivetrainSubsystem);
-  private final DriveShiftGearCommand m_driveShiftGearCommand = new DriveShiftGearCommand(m_drivetrainSubsystem);
-  private final IntakeBallCommand m_intakeBallCommand = new IntakeBallCommand(m_intakeSubsystem);
-  private final IntakeLiftCommand m_intakeLiftCommand = new IntakeLiftCommand(m_intakeSubsystem);
-  private final IntakeSingulatorCommand m_intakeSingulatorCommand = new IntakeSingulatorCommand(m_intakeSubsystem);
-  private final ShootBallCommand m_shootBallCommand = new ShootBallCommand(m_shooterSubsystem, m_ballCounterSubsystem, m_limelightSubsystem);
-  private final TurretSetAngleCommand m_turretSetAngleCommand = new TurretSetAngleCommand(m_limelightSubsystem, m_turretSubsystem);
-  private final TurretSpinCommand m_turretSpinCommand = new TurretSpinCommand(m_turretSubsystem);
+  // private final DriveShiftGearCommand m_driveShiftGearCommand = new DriveShiftGearCommand(m_drivetrainSubsystem);
+  // private final IntakeBallCommand m_intakeBallCommand = new IntakeBallCommand(m_intakeSubsystem);
+  // private final IntakeLiftCommand m_intakeLiftCommand = new IntakeLiftCommand(m_intakeSubsystem);
+  // private final IntakeSingulatorCommand m_intakeSingulatorCommand = new IntakeSingulatorCommand(m_intakeSubsystem);
+  // private final ShootBallCommand m_shootBallCommand = new ShootBallCommand(m_shooterSubsystem, m_ballCounterSubsystem, m_limelightSubsystem);
+  // private final TurretSetAngleCommand m_turretSetAngleCommand = new TurretSetAngleCommand(m_limelightSubsystem, m_turretSubsystem);
+  // private final TurretSpinCommand m_turretSpinCommand = new TurretSpinCommand(m_turretSubsystem);
     
     public Joystick driveStick = new Joystick(0);
     public XboxController xboxController = new XboxController(1);
@@ -113,9 +114,7 @@ public class RobotContainer {
   public RobotContainer() {
     // Configure the button bindings
     configureButtonBindings();    
-
-    m_drivetrainSubsystem.setDefaultCommand(m_driveCommand);
-    
+    CommandScheduler.getInstance().setDefaultCommand(m_drivetrainSubsystem, new DriveCommand(m_drivetrainSubsystem));    
   }
 
 /**
@@ -125,8 +124,9 @@ public class RobotContainer {
    * {@link edu.wpi.first.wpilibj2.command.button.JoystickButton}.
    */
   private void configureButtonBindings() {
-    driveStick2Button.whenPressed(m_driveShiftGearCommand);
-    
+    //driveStick2Button.whenPressed(m_driveShiftGearCommand);
+    driveStick11Button.toggleWhenPressed(new ShootBallCommand(new ShooterSubsystem()));
+    driveStick12Button.toggleWhenPressed(new BallHorizontalManipulatorCommand(new BallManipulatorSubsystem()));
   }
 
 

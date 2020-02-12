@@ -9,7 +9,6 @@ package frc.robot.subsystems;
 
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 
-import edu.wpi.first.wpilibj.AnalogInput;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
 public class BallManipulatorSubsystem extends SubsystemBase {
@@ -22,7 +21,7 @@ public class BallManipulatorSubsystem extends SubsystemBase {
 
   public BallManipulatorSubsystem() {
 
-    m_horizontalBallManipulatorMotor = new WPI_TalonSRX(5);
+    m_horizontalBallManipulatorMotor = new WPI_TalonSRX(8);
     m_ballIndexerMotor = new WPI_TalonSRX(5);
 
 
@@ -34,9 +33,11 @@ public class BallManipulatorSubsystem extends SubsystemBase {
   }
 
   //Sets the conveyer belt to a certain speed
-  public void setHorizontalBallManipulator(double speed, int ballsInConveyer, boolean ballsInIndexer){
+  public void setConveyorMotor(double speed, int ballsInConveyer, boolean ballsInIndexer){
     if(ballsInConveyer > 0 && ballsInIndexer == false){
       m_horizontalBallManipulatorMotor.set(speed);
+    } else{
+      m_horizontalBallManipulatorMotor.set(0);
     }
   }
   

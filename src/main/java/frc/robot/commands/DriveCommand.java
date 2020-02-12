@@ -32,7 +32,6 @@ public class DriveCommand extends CommandBase {
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
-        System.out.println("HELP");
 
   }
 
@@ -40,7 +39,7 @@ public class DriveCommand extends CommandBase {
   @Override
   public void execute() {
     m_drivetrainSubsystem.drive(stick.getY(), stick.getTwist());  
-    // System.out.println("HELP");
+
   }
 
   // Called once the command ends or is interrupted.

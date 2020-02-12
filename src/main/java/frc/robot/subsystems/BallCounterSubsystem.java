@@ -17,7 +17,7 @@ public class BallCounterSubsystem extends SubsystemBase {
    * Creates a new BallCounterSubsystem.
    */
   private DigitalInput entryBallSensor;
-  private DigitalInput indexerBallSensor;
+  private final DigitalInput indexerBallSensor = new DigitalInput(0);
   private DigitalInput shooterBallSensor;
   public int ballCount;
   private boolean ballInShooter;
@@ -29,7 +29,7 @@ public class BallCounterSubsystem extends SubsystemBase {
 
   public BallCounterSubsystem() {
     entryBallSensor = new DigitalInput(1);
-    indexerBallSensor = new DigitalInput(0);
+    //indexerBallSensor = new DigitalInput(0);
     shooterBallSensor = new DigitalInput(2);
 
     ballCount = 0;
