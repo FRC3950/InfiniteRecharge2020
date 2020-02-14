@@ -64,13 +64,14 @@ public class BallCounterSubsystem extends SubsystemBase {
 
 
   //Determines how many balls are inside the robot by comparing the current sensor value to the previous sensor value with a 50 ms delay
-  public void ballsInRobot(){
+  public int ballsInRobot(){
     if(getEntryBallSensorValue() && !previousEntryBallValue){
       ballCount++;
     }
     if(!shooterBallSensor.get() && previousShooterBallValue){
       ballCount--;
     }
+    return ballCount;
   }
 
   //Returns the ball count inside the robot

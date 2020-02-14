@@ -14,6 +14,7 @@ public class ClimberRaiseCommand extends CommandBase {
   /**
    * Creates a new ClimbCommand.
    */
+  private boolean finished = false;
   private final ClimberSubsystem m_climberSubsystem;
 
   public ClimberRaiseCommand(ClimberSubsystem climberSubsystem) {
@@ -32,19 +33,23 @@ public class ClimberRaiseCommand extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    m_climberSubsystem.raiseClimber();
-    m_climberSubsystem.isClimberAtTop();
+    m_climberSubsystem.setClimberMotor(.5);
+    if(m_climberSubsystem.isClimberAtTop()){
+      finished = true;
+    }
+
   }
 
   // Called once the command ends or is interrupted.
   @Override
   public void end(boolean interrupted) {
+    m_climberSubsystem.setClimberMotor(0);
     m_climberSubsystem.setLockGear(true);
   }
 
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
-    return false;
+    return finished;
   }
 }

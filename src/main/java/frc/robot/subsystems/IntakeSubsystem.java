@@ -26,7 +26,7 @@ public class IntakeSubsystem extends SubsystemBase {
   public IntakeSubsystem() {
 
     m_intakeMotor = new WPI_TalonSRX(3);
-    m_singulatorMotor = new WPI_TalonSRX(11);
+    m_singulatorMotor = new WPI_TalonSRX(7);
 
     m_intakeLeftSolenoid = new DoubleSolenoid(2, 3);
     m_intakeRightSolenoid = new DoubleSolenoid(4, 5);
@@ -86,16 +86,4 @@ public class IntakeSubsystem extends SubsystemBase {
       setSingulatorMotor(0);
     }
   }
-
-  //Turns off the intake motor if there are more than 5 balls
-  public void ifFullStopIntakeMotor(int numberOfBalls){
-    if(numberOfBalls > 5){
-      setIntakeMotor(0);
-      setSingulatorMotor(0);
-      setIntakePosition(false);
-
-    }
-  }
-
-
 }

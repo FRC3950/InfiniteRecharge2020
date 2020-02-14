@@ -22,7 +22,6 @@ import frc.robot.commands.DriveShiftGearCommand;
 import frc.robot.commands.ExampleCommand;
 import frc.robot.commands.IntakeBallCommand;
 import frc.robot.commands.IntakeLiftCommand;
-import frc.robot.commands.IntakeSingulatorCommand;
 import frc.robot.commands.ShootBallCommand;
 import frc.robot.commands.TurretSetAngleCommand;
 import frc.robot.commands.TurretSpinCommand;
@@ -127,6 +126,8 @@ public class RobotContainer {
     //driveStick2Button.whenPressed(m_driveShiftGearCommand);
     driveStick11Button.toggleWhenPressed(new ShootBallCommand(new ShooterSubsystem()));
     driveStick12Button.toggleWhenPressed(new BallHorizontalManipulatorCommand(new BallManipulatorSubsystem()));
+    driveStick7Button.whenPressed(new ClimberLowerCommand(new ClimberSubsystem()));
+    driveStick8Button.toggleWhenPressed(new IntakeBallCommand(new IntakeSubsystem()));
   }
 
 

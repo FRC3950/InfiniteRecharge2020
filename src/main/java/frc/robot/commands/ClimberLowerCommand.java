@@ -15,7 +15,7 @@ public class ClimberLowerCommand extends CommandBase {
    * Creates a new ClimbCommand.
    */
   // if you yeet then you yeet, nein
-  
+  private boolean finished = false;
   private final ClimberSubsystem m_climberSubsystem;
 
   public ClimberLowerCommand(ClimberSubsystem climberSubsystem) {
@@ -28,25 +28,29 @@ public class ClimberLowerCommand extends CommandBase {
   @Override
   public void initialize() {
     m_climberSubsystem.setLockGear(false);
+
   }
 
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-
+    m_climberSubsystem.setClimberMotor(-.5);
+    // if(m_climberSubsystem.isLimitSwitchTrue()){
+    //   finished = true;
+    // }
   }
 
   // Called once the command ends or is interrupted.
   @Override
   public void end(boolean interrupted) {
+    m_climberSubsystem.setClimberMotor(0);
     m_climberSubsystem.setLockGear(true);
-    m_climberSubsystem.isLimitSwitchTrue();
     m_climberSubsystem.resetEncoderValue();
   }
 
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
-    return false;
+    return finished;
   }
 }

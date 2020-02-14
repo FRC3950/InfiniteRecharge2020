@@ -8,7 +8,6 @@
 package frc.robot.subsystems;
 
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonFX;
-
 import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.DoubleSolenoid;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
@@ -30,7 +29,6 @@ public class ClimberSubsystem extends SubsystemBase {
     m_climberSolenoid = new DoubleSolenoid(0, 1);
 
     m_climberLimitSwitch = new DigitalInput(7);
-
     m_climberMotorFollower.follow(m_climberMotor);
   }
 
@@ -53,19 +51,9 @@ public class ClimberSubsystem extends SubsystemBase {
     m_climberSolenoid.set(s ? DoubleSolenoid.Value.kForward : DoubleSolenoid.Value.kReverse); //One line if statement
   }
 
-  //Sets the motor for the climber to a certain POSITIVE speed to raise the climber
-  public void raiseClimber(){
-    m_climberMotor.set(.5);
-  }
-
-  //Sets the motor for the climber to a certain POSITIVE speed to raise the climber
-  public void lowerClimber(){
-    m_climberMotor.set(-.5);
-  }
-  
-  //Turns off the motor that moves the climber
-  public void turnOffClimber(){
-    m_climberMotor.set(0);
+  //Sets the motor for the climber to a certain  speed
+  public void setClimberMotor(double speed){
+    m_climberMotor.set(speed);
   }
   
   //Sets the value of the climber motor encoder to zero
@@ -74,17 +62,21 @@ public class ClimberSubsystem extends SubsystemBase {
   }
   
   //Checks the climber motor encoder value to see if the climber is fully extended
-  public void isClimberAtTop(){
-    if(m_climberMotor.getSelectedSensorPosition() >= 18000){ //NEED TO FIX WHEN WE TEST CLIMBER
-    turnOffClimber();
+  public boolean isClimberAtTop(){
+    boolean climberAtTop = m_climberMotor.getSelectedSensorPosition() >= 18000;
+    if(climberAtTop){ //NEED TO FIX WHEN WE TEST CLIMBER
+      setClimberMotor(0);
     }
+    return climberAtTop;
   }
   
   //Checks to see if the climber is at the bottom position by seeing if the climber limit switch is set off
   //Safety check to make sure that if the climber is at the bottom it turns the motor off
-  public void isLimitSwitchTrue(){
-    if(m_climberLimitSwitch.get()){
-      turnOffClimber();
+  public boolean isLimitSwitchTrue(){
+    boolean climberAtBottom = m_climberLimitSwitch.get();
+    if(climberAtBottom){
+      setClimberMotor(0);
     }
+    return climberAtBottom;
   }
 }
