@@ -42,7 +42,9 @@ public class ShootBallCommand extends CommandBase {
 
     // Use addRequirements() here to declare subsystem dependencies.
     addRequirements(shooterSubsystem);
-  }en the command is initially scheduled.
+  }
+
+  //Called when when the command is initially scheduled.
   @Override
   public void initialize() {
   }
