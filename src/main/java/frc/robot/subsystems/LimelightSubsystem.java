@@ -56,5 +56,4 @@ public class LimelightSubsystem extends SubsystemBase {
     double horizontalOffset = table.getEntry("tx").getDouble(0);
     return horizontalOffset;
     }
-
 }

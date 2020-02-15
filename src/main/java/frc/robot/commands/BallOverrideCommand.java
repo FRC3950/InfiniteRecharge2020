@@ -10,46 +10,41 @@ package frc.robot.commands;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.subsystems.BallCounterSubsystem;
 import frc.robot.subsystems.BallManipulatorSubsystem;
+import frc.robot.subsystems.IntakeSubsystem;
 
-public class BallHorizontalManipulatorCommand extends CommandBase {
+public class BallOverrideCommand extends CommandBase {
   /**
-   * Creates a new BallHorizontalManipulator.
+   * Creates a new BallOverrideCommand.
    */
 
-  public BallManipulatorSubsystem m_ballManipulatorSubsystem; 
-  BallCounterSubsystem m_ballCounterSubsystem;
-  boolean ballInIndexer;
-  int ballsInRobot;
-  String sensorValues;
-
-  public BallHorizontalManipulatorCommand(BallManipulatorSubsystem ballManipulatorSubsystem) {
-    m_ballManipulatorSubsystem = ballManipulatorSubsystem;
+  public BallManipulatorSubsystem m_ballManipulatorSubsystem;
+  public BallCounterSubsystem m_ballCounterSubsystem;
+  public IntakeSubsystem m_intakeSubsystem;
+  
+  public BallOverrideCommand(BallManipulatorSubsystem ballManipulatorSubsystem, BallCounterSubsystem ballCounterSubsystem, IntakeSubsystem intakeSubsystem) {
     // Use addRequirements() here to declare subsystem dependencies.
+    m_ballManipulatorSubsystem = ballManipulatorSubsystem;
+    m_ballCounterSubsystem = ballCounterSubsystem;
+    m_intakeSubsystem = intakeSubsystem;
     addRequirements(ballManipulatorSubsystem);
   }
 
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
+    m_ballManipulatorSubsystem.reverseMotors();
+    m_intakeSubsystem.reverseMotors();
+    m_ballCounterSubsystem.resetBallCount();
   }
 
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    // double speed = .5;
-    // int ballsInConveyer = m_ballCounterSubsystem.ballsInConveyer();
-    // ballInIndexer = m_ballCounterSubsystem.isBallInIndexer();
-    // m_ballManipulatorSubsystem.setConveyorMotor(speed, ballsInConveyer, ballInIndexer);
-    // m_ballCounterSubsystem.isBallInIndexer();
-    ballsInRobot = m_ballCounterSubsystem.ballsInConveyer();
-    sensorValues = m_ballCounterSubsystem.getSensorValues();
-    m_ballManipulatorSubsystem.manipulate(ballsInRobot, sensorValues);
   }
 
   // Called once the command ends or is interrupted.
   @Override
   public void end(boolean interrupted) {
-    m_ballManipulatorSubsystem.setConveyorMotor(0, 0, false);
   }
 
   // Returns true when the command should end.

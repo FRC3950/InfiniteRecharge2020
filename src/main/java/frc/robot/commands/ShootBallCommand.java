@@ -7,27 +7,42 @@
 
 package frc.robot.commands;
 
+import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.subsystems.BallCounterSubsystem;
+import frc.robot.subsystems.BallManipulatorSubsystem;
+import frc.robot.subsystems.IntakeSubsystem;
 import frc.robot.subsystems.LimelightSubsystem;
 import frc.robot.subsystems.ShooterSubsystem;
+import frc.robot.subsystems.TurretSubsystem;
 
 public class ShootBallCommand extends CommandBase {
   /**
    * Creates a new ShootBallCommand.
    */
 
-  private final ShooterSubsystem m_shooterSubsystem;
-  BallCounterSubsystem m_ballCounterSubsystem;
-  LimelightSubsystem m_limelightSubsytem;
+  public ShooterSubsystem m_shooterSubsystem;
+  public BallManipulatorSubsystem m_ballManipulatorSubsystem;
+  public BallCounterSubsystem m_ballCounterSubsystem;
+  public IntakeSubsystem m_intakeSubsystem;
+  public LimelightSubsystem m_limelightSubsystem;
+  public TurretSubsystem m_turretSubsystem;
+  boolean shoot;
+  boolean finished;
 
-  public ShootBallCommand(ShooterSubsystem shooterSubsystem) {
+  public ShootBallCommand(ShooterSubsystem shooterSubsystem, BallManipulatorSubsystem ballManipulatorSubsystem, BallCounterSubsystem ballCounterSubsystem, IntakeSubsystem intakeSubsystem, LimelightSubsystem limelightSubsystem, TurretSubsystem turretSubsystem){
     m_shooterSubsystem = shooterSubsystem;
+    m_ballManipulatorSubsystem = ballManipulatorSubsystem;
+    m_ballCounterSubsystem = ballCounterSubsystem;
+    m_intakeSubsystem = intakeSubsystem;
+    m_limelightSubsystem = limelightSubsystem;
+    m_turretSubsystem = turretSubsystem;
+    shoot = false;
+    finished = false;
+
     // Use addRequirements() here to declare subsystem dependencies.
     addRequirements(shooterSubsystem);
-  }
-
-  // Called when the command is initially scheduled.
+  }en the command is initially scheduled.
   @Override
   public void initialize() {
   }
@@ -35,17 +50,26 @@ public class ShootBallCommand extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    // boolean ballInShooter = m_ballCounterSubsystem.isBallInShooter();
-    // double speed = m_shooterSubsystem.setShooterSpeed(m_limelightSubsytem.calculateDistance());
-    // m_shooterSubsystem.shootBall(ballInShooter, speed);
-    m_shooterSubsystem.shootBall(true, -1);
+    int ballCount = m_ballCounterSubsystem.getBallsInRobot();
+    double horizontalOffset = m_limelightSubsystem.getAngle();
+    double distance = m_limelightSubsystem.calculateDistance();
+    shoot = m_shooterSubsystem.shootBall(horizontalOffset);
+    if (shoot){
+      m_ballManipulatorSubsystem.setConveyorMotor(.5);
+      m_ballManipulatorSubsystem.setBallIndexerMotor(.5);
+      m_shooterSubsystem.setShooterSpeed(distance);
+    }    
+    if(ballCount == 0){
+      Timer.delay(6); //may need to change this value
+      finished = true;
+    }
     
   }
 
   // Called once the command ends or is interrupted.
   @Override
   public void end(boolean interrupted) {
-    m_shooterSubsystem.shootBall(false, 0);
+    
   }
 
   // Returns true when the command should end.

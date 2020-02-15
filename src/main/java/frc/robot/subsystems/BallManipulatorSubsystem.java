@@ -16,13 +16,13 @@ public class BallManipulatorSubsystem extends SubsystemBase {
    * Creates a new BallManipulatorSubsystem.
    */
 
-  private final WPI_TalonSRX m_horizontalBallManipulatorMotor;
-  private final WPI_TalonSRX m_ballIndexerMotor;
+  private final WPI_TalonSRX m_conveyorMotor;
+  private final WPI_TalonSRX m_indexerMotor;
 
   public BallManipulatorSubsystem() {
 
-    m_horizontalBallManipulatorMotor = new WPI_TalonSRX(8);
-    m_ballIndexerMotor = new WPI_TalonSRX(5);
+    m_conveyorMotor = new WPI_TalonSRX(8);
+    m_indexerMotor = new WPI_TalonSRX(5);
 
 
   }
@@ -35,28 +35,121 @@ public class BallManipulatorSubsystem extends SubsystemBase {
   //Sets the conveyer belt to a certain speed
   public void setConveyorMotor(double speed, int ballsInConveyer, boolean ballsInIndexer){
     if(ballsInConveyer > 0 && ballsInIndexer == false){
-      m_horizontalBallManipulatorMotor.set(speed);
+      m_conveyorMotor.set(speed);
     } else{
-      m_horizontalBallManipulatorMotor.set(0);
+      m_conveyorMotor.set(0);
     }
   }
-  
+  public void setConveyorMotor(double speed){
+    m_conveyorMotor.set(speed);
+  }
+
   //Sets the part of the robot that moves the ball from the conveyer belt to the shooter to a certain speed
   public void setBallIndexerMotor(double speed){
-    m_ballIndexerMotor.set(speed);
+    m_indexerMotor.set(speed);
   }
 
   //If there is a ball in the robot, try to get one ball into the indexer
-  public void putBallInShooter(boolean ballInShooter, boolean ballInIndexer, double speed, int ballCount){
-    if(ballInShooter == true && ballCount > 0){
-      setBallIndexerMotor(0);
-    }else if(ballInShooter == false && ballInIndexer == true && ballCount > 0){
-      setBallIndexerMotor(.5);
-    }else if(ballInShooter == false && ballInIndexer == false && ballCount > 0 ){
-      setBallIndexerMotor(.5);    
+  public void putBallInShooter(boolean ballInIndexer, double speed, int ballCount){
+  if(ballInIndexer == false && ballCount > 0 ){
+      setBallIndexerMotor(speed);
     }
   }
 
+  //Used when there is one ball in the robot
+  public String oneBall(String values){
+    if(values.charAt(3) == '1'){
+      m_indexerMotor.set(0);
+      m_conveyorMotor.set(0);
+      return "off";
+    } else{
+      m_indexerMotor.set(.5);
+      m_conveyorMotor.set(.5);
+      return "both on";
+    }
+  }
 
+  //Used when there are two balls in the robot
+  public String twoBalls(String values){
+    String results = "2";
+    if(values.charAt(3) == '1'){
+      m_indexerMotor.set(0);
+      results += "indexer off, ";
+    } else if(values.charAt(3) == '0'){
+      m_indexerMotor.set(.5);
+      results += "indexer on, ";
+
+    }
+    if(values.charAt(2) == '1'){
+      m_conveyorMotor.set(0);
+      results += "conveyor off";
+    } else if(values.charAt(2) == '0'){
+      m_conveyorMotor.set(.5);
+      results += "conveyor on";
+    }
+    return results;
+    
+  }
+
+  //Used when there are three balls in the robot
+  public String threeBalls(String values){
+    String results = "3";
+    if(values.charAt(3) == '1'){
+      m_indexerMotor.set(0);
+      results += "indexer off, ";      
+    } else{
+      m_indexerMotor.set(.5);
+      results += "indexer on, ";
+    }
+    if(values.charAt(2) == '1' && values.charAt(1) == '0'){
+      m_conveyorMotor.set(0);
+      results += "conveyor off";    
+    } else{
+      m_conveyorMotor.set(.5);
+      results += "conveyor on";
+    }    
+    return results;
+  }
+
+    //Used when four are three balls in the robot
+    public String fourBalls(String values){
+      String results = "";
+      if(values.charAt(3) == '1'){  
+        m_indexerMotor.set(0);
+        results += "indexer off, ";      
+      } else{
+        m_indexerMotor.set(.5);
+        results += "indexer on, ";      
+      }
+      if(values.charAt(2) == '1' && values.charAt(1) == '1'){
+        m_conveyorMotor.set(0);
+        results += "conveyor off";    
+      } else{
+        m_conveyorMotor.set(.5);
+        results += "conveyor on";    
+      }    
+      return results;
+    }
+    
+  public String manipulate(int numberOfBalls, String sensorValues){
+    switch(numberOfBalls){
+      case 1: 
+        return oneBall(sensorValues);
+      case 2:
+        return twoBalls(sensorValues);        
+      case 3:
+        return threeBalls(sensorValues);
+      case 4:
+        return fourBalls(sensorValues);
+      default:
+        return "Error";
+    }
+
+  }
   
+  public void reverseMotors(){
+    m_conveyorMotor.set(-.5);
+    m_indexerMotor.set(-.5);
+  }
+
 }

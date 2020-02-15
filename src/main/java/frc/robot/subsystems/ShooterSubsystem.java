@@ -54,12 +54,11 @@ public class ShooterSubsystem extends SubsystemBase {
   }
 
   //Sets the motor to a speed if there is a ball in the shooter
-  public void shootBall(boolean ballInShooter, double speed){
-    if(ballInShooter){
-      m_shooterMotor.set(speed);
-    }else{
-      m_shooterMotor.set(0);
+  public boolean shootBall(double horizontalOffset){
+    if(getRPM() >= 4200 && (horizontalOffset < 1 && horizontalOffset > -1)){
+       return true;
+      } else {
+        return false;
+      }
     }
-    
-  }
 }

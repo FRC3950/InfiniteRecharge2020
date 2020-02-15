@@ -10,103 +10,103 @@ package frc.robot.subsystems;
 import edu.wpi.first.wpilibj.AnalogInput;
 import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.Timer;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
+import frc.robot.Robot;
 
 public class BallCounterSubsystem extends SubsystemBase {
   /**
    * Creates a new BallCounterSubsystem.
    */
-  private DigitalInput entryBallSensor;
-  private final DigitalInput indexerBallSensor = new DigitalInput(0);
-  private DigitalInput shooterBallSensor;
-  public int ballCount;
-  private boolean ballInShooter;
+  public DigitalInput entrySensor = new DigitalInput(0); //sensor at singulator. May need to change channel
+  public DigitalInput initialConveyorSensor = new DigitalInput(1); //sensor right after singulator. May need to change channel
+  public DigitalInput endConveyorSensor = new DigitalInput(2);
+  public DigitalInput indexerSensor = new DigitalInput(3);
+  //sensor right before indexer. May need to change channel
+  private int ballCount; // initial ball sensor and indexer ball sensor contribute to ball count
   private boolean ballInIndexer;
+  private boolean ballInInitialConveyor;
+  private boolean ballInEntry;
+  private boolean ballInEndConveyor;
   private int ballsInConveyer;
-  private boolean previousEntryBallValue;
-  private boolean previousShooterBallValue;
-  private boolean indexerSensor;
+  private boolean previousEntryValue;
+  private boolean previousIndexerValue;
+
 
   public BallCounterSubsystem() {
-    entryBallSensor = new DigitalInput(1);
-    //indexerBallSensor = new DigitalInput(0);
-    shooterBallSensor = new DigitalInput(2);
 
     ballCount = 0;
-    ballInShooter = false;
+    ballInInitialConveyor = false;
+    ballInEndConveyor = false;
+    ballInEntry = false;
     ballInIndexer = false;
-    indexerSensor = false;
   }
 
   //Gets a value for the ball sensors every 50 ms
   @Override
   public void periodic() {
     // This method will be called once per scheduler run
-    Timer.delay(50);
-    previousEntryBallValue = entryBallSensor.get();
-    previousShooterBallValue = shooterBallSensor.get();
-    indexerSensor = indexerBallSensor.get();
+      if (previousEntryValue == true && entrySensor.get() == false) {
+        ballCount++;
+      }
+      if (previousIndexerValue && !indexerSensor.get()) {
+        ballCount--;
+      }
+      previousEntryValue = entrySensor.get();
+      previousIndexerValue = indexerSensor.get();
   }
   
   //returns the entry ball sensors value
-  public boolean getEntryBallSensorValue(){
-    return entryBallSensor.get();
+  public int getEntrySensorValue(){
+    return (entrySensor.get() ? 1 : 0);
   }
 
-  //returns the shooter ball sensors value
-  public boolean getShooterBallSensorValue(){
-    return shooterBallSensor.get();
+  //returns the initial conveyor sensors value
+  public int getInitialConveyorSensorValue(){
+    return (initialConveyorSensor.get() ? 1 : 0) ;
   }
-  public void getIndexerBallSensorValue(){
-    System.out.println(indexerSensor);
-    //return indexerBallSensor.get();
+
+  //returns the end conveyor sensors value
+  public int getEndConveyorSensorValue(){
+    return (endConveyorSensor.get() ? 1 : 0);
   }
+
+  //returns the end conveyor sensors value
+  public int getIndexerSensorValue(){
+    return (indexerSensor.get() ? 1 : 0);
+  }
+
+  public String getSensorValues(){
+    String sensorValues = "" + getEntrySensorValue() + getInitialConveyorSensorValue() + getEndConveyorSensorValue() + getIndexerSensorValue(); 
+    return sensorValues;
+  }
+
+  // public void getIndexerBallSensorValue(){
+  //   System.out.println(indexerSensor);
+  //   //return indexerBallSensor.get();
+  // }
 
 
   //Determines how many balls are inside the robot by comparing the current sensor value to the previous sensor value with a 50 ms delay
-  public int ballsInRobot(){
-    if(getEntryBallSensorValue() && !previousEntryBallValue){
-      ballCount++;
-    }
-    if(!shooterBallSensor.get() && previousShooterBallValue){
-      ballCount--;
-    }
+  public int getBallsInRobot(){
     return ballCount;
   }
 
-  //Returns the ball count inside the robot
-  public int getBallsInRobot(int ballCount){
-    return ballCount;
-  }
-
-  //Determines if there is a ball in the shooter 
-  public boolean isBallInShooter(){
-    if(shooterBallSensor.get()){
-      ballInShooter = true;
-    }else{
-      ballInShooter = false;
-    }
-    return ballInShooter;
-  }
   //Determines if there is a ball in the indexer 
   public boolean isBallInIndexer(){
-    if(indexerBallSensor.get()){
-      ballInIndexer = true;
-    }else{
-      ballInIndexer = false;
-    }
-    return ballInIndexer;
+    return indexerSensor.get();
   }
 
   //Determines how many balls are in the conveyer belt 
   public int ballsInConveyer(){
     ballsInConveyer = ballCount;
-    if(isBallInShooter()){
-      ballsInConveyer--;
-    }
     if(isBallInIndexer()){
       ballsInConveyer--;
     }
     return ballsInConveyer;
+  }
+
+  public void resetBallCount(){
+    ballCount = 0;
   }
 }

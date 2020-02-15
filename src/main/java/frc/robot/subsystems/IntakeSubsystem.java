@@ -79,11 +79,21 @@ public class IntakeSubsystem extends SubsystemBase {
     }
   }
 
-  //Turns off the intake motor if the intake is up
-  public void ifUpStopIntakeMotor(boolean intakePosition){
-    if(intakePosition == true){
-      setIntakeMotor(0);
-      setSingulatorMotor(0);
+  public void reverseMotors(){
+    m_singulatorMotor.set(-.5);
+    m_intakeMotor.set(-.5);
+
+  }
+
+  public boolean intakeBalls(int ballCount, int ballInIntake, boolean intakePosition){
+    if(ballCount == 4 && ballInIntake == 1){
+      return true;
+    } else if(intakePosition){
+      return true;
+    } else{
+      setIntakeMotor(1);
+      setSingulatorMotor(.5); 
+      return false;  
     }
   }
 }

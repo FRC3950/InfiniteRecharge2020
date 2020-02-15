@@ -7,6 +7,7 @@
 
 package frc.robot.commands;
 
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.subsystems.BallCounterSubsystem;
 import frc.robot.subsystems.IntakeSubsystem;
@@ -17,14 +18,18 @@ public class IntakeBallCommand extends CommandBase {
    */
 
    private final IntakeSubsystem m_intakeSubsystem;
-   BallCounterSubsystem m_ballCounterSubsystem;
+   private final BallCounterSubsystem m_ballCounterSubsystem;
    int ballsInRobot;
    private boolean finished;
+   
 
-  public IntakeBallCommand(IntakeSubsystem intakeSubsystem) {
+  public IntakeBallCommand(IntakeSubsystem intakeSubsystem, BallCounterSubsystem ballCounterSubsystem) {
     m_intakeSubsystem = intakeSubsystem;
+    m_ballCounterSubsystem = ballCounterSubsystem;
     // Use addRequirements() here to declare subsystem dependencies.
     addRequirements(intakeSubsystem);
+    SmartDashboard.putString("intake" ,"");
+
   }
 
   // Called when the command is initially scheduled.
@@ -35,14 +40,11 @@ public class IntakeBallCommand extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    ballsInRobot = m_ballCounterSubsystem.ballsInRobot();
-    if(ballsInRobot > 5){
-      finished = true;
-    } else{
-      m_intakeSubsystem.ifUpStopIntakeMotor(m_intakeSubsystem.intakePosition());
-      m_intakeSubsystem.setIntakeMotor(.5);
-      m_intakeSubsystem.setSingulatorMotor(.5);   
-    }     
+    int ballCount = m_ballCounterSubsystem.getBallsInRobot();
+    int ballInIntake = m_ballCounterSubsystem.getEntrySensorValue();
+    boolean intakePosition = m_intakeSubsystem.intakePosition();
+    finished = m_intakeSubsystem.intakeBalls(ballCount, ballInIntake, intakePosition);
+    SmartDashboard.putString("intake" ,"on");
 
   }
 
@@ -51,6 +53,8 @@ public class IntakeBallCommand extends CommandBase {
   public void end(boolean interrupted) {
     m_intakeSubsystem.setIntakeMotor(0);
     m_intakeSubsystem.setSingulatorMotor(0);
+    SmartDashboard.putString("intake" ," off");
+
   }
 
   // Returns true when the command should end.
