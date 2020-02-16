@@ -34,18 +34,12 @@ public class ClimberLowerCommand extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    m_climberSubsystem.setClimberMotor(-.5);
-    // if(m_climberSubsystem.isLimitSwitchTrue()){
-    //   finished = true;
-    // }
+    finished = m_climberSubsystem.lowerClimber();
   }
 
   // Called once the command ends or is interrupted.
   @Override
   public void end(boolean interrupted) {
-    m_climberSubsystem.setClimberMotor(0);
-    m_climberSubsystem.setLockGear(true);
-    m_climberSubsystem.resetEncoderValue();
   }
 
   // Returns true when the command should end.

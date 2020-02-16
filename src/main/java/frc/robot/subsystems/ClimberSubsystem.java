@@ -62,21 +62,34 @@ public class ClimberSubsystem extends SubsystemBase {
   }
   
   //Checks the climber motor encoder value to see if the climber is fully extended
-  public boolean isClimberAtTop(){
-    boolean climberAtTop = m_climberMotor.getSelectedSensorPosition() >= 18000;
-    if(climberAtTop){ //NEED TO FIX WHEN WE TEST CLIMBER
-      setClimberMotor(0);
+  public boolean raiseClimber(){
+    if(m_climberLimitSwitch.get() && m_climberMotor.getSelectedSensorPosition() != 0){
+      resetEncoderValue();
     }
-    return climberAtTop;
+    boolean climberAtTop = m_climberMotor.getSelectedSensorPosition() >= 18000; //NEED TO FIX WHEN WE TEST CLIMBER
+    if(climberAtTop){ 
+      setClimberMotor(0);
+      setLockGear(true);
+      return true;
+    }else{
+      setClimberMotor(.5);
+      return false;
+    }
   }
   
   //Checks to see if the climber is at the bottom position by seeing if the climber limit switch is set off
   //Safety check to make sure that if the climber is at the bottom it turns the motor off
-  public boolean isLimitSwitchTrue(){
+  public boolean lowerClimber(){
     boolean climberAtBottom = m_climberLimitSwitch.get();
     if(climberAtBottom){
       setClimberMotor(0);
+      setLockGear(true);
+      resetEncoderValue();
+      return true;
+    }else{
+      setClimberMotor(.5);
+      return false;
     }
-    return climberAtBottom;
+    
   }
 }

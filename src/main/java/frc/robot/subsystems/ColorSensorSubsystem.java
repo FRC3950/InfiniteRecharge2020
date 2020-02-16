@@ -88,22 +88,26 @@ public class ColorSensorSubsystem extends SubsystemBase {
 
   //Turns on the spinner motor to a certain speed until it has reached the desired color 
   //Which is recieved from the getDesiredColor() Method
-  public void spinToColor(char desiredColor){
+  public boolean spinToColor(char desiredColor){
     if(desiredColor == getColor()){
       stopMotor();
+      return true;
     }else{
       m_wheelSpinnerMotor.set(.1);
+      return false;
     }
   }
 
   //Turns on the spinner motor to a certain speed until it has spun a specified number of times 
-  public void spinNumberOfTimes(char initialColor){
+  public boolean spinNumberOfTimes(char initialColor){
     while(colorCounter <= 8){ //Might want to change the number of times it has seen a color based on testing
       m_wheelSpinnerMotor.set(.3);//Need to set speed once we actually test on robot
       if(initialColor == getColor()){
         colorCounter++;
       }
+      return false;
     }
+    return true;
   }
   
   //Sets the counter used to determine how many rotations the spinner has made back to zero

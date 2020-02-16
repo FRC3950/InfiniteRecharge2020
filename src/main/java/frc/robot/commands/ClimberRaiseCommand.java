@@ -27,24 +27,18 @@ public class ClimberRaiseCommand extends CommandBase {
   @Override
   public void initialize() {
     m_climberSubsystem.setLockGear(false);
-    m_climberSubsystem.resetEncoderValue();
   }
 
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    m_climberSubsystem.setClimberMotor(.5);
-    if(m_climberSubsystem.isClimberAtTop()){
-      finished = true;
-    }
-
+    finished = m_climberSubsystem.raiseClimber();
   }
 
   // Called once the command ends or is interrupted.
   @Override
   public void end(boolean interrupted) {
-    m_climberSubsystem.setClimberMotor(0);
-    m_climberSubsystem.setLockGear(true);
+    
   }
 
   // Returns true when the command should end.

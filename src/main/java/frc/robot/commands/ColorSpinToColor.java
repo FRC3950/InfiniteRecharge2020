@@ -14,6 +14,7 @@ public class ColorSpinToColor extends CommandBase {
   /**
    * Creates a new ColorSpinToColor.
    */
+  boolean finished;
   private final ColorSensorSubsystem m_colorValueSubsystem;
   public ColorSpinToColor(ColorSensorSubsystem colorValueSubsystem) {
     m_colorValueSubsystem = colorValueSubsystem;
@@ -29,8 +30,8 @@ public class ColorSpinToColor extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    m_colorValueSubsystem.spinToColor(m_colorValueSubsystem.getDesiredColor()
-    );
+    finished = m_colorValueSubsystem.spinToColor(m_colorValueSubsystem.getDesiredColor());
+
   }
 
   // Called once the command ends or is interrupted.
@@ -41,6 +42,6 @@ public class ColorSpinToColor extends CommandBase {
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
-    return false;
+    return finished;
   }
 }

@@ -7,12 +7,8 @@
 
 package frc.robot.subsystems;
 
-import edu.wpi.first.wpilibj.AnalogInput;
 import edu.wpi.first.wpilibj.DigitalInput;
-import edu.wpi.first.wpilibj.Timer;
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
-import frc.robot.Robot;
 
 public class BallCounterSubsystem extends SubsystemBase {
   /**
@@ -24,22 +20,13 @@ public class BallCounterSubsystem extends SubsystemBase {
   public DigitalInput indexerSensor = new DigitalInput(3);
   //sensor right before indexer. May need to change channel
   private int ballCount; // initial ball sensor and indexer ball sensor contribute to ball count
-  private boolean ballInIndexer;
-  private boolean ballInInitialConveyor;
-  private boolean ballInEntry;
-  private boolean ballInEndConveyor;
   private int ballsInConveyer;
   private boolean previousEntryValue;
   private boolean previousIndexerValue;
 
 
   public BallCounterSubsystem() {
-
     ballCount = 0;
-    ballInInitialConveyor = false;
-    ballInEndConveyor = false;
-    ballInEntry = false;
-    ballInIndexer = false;
   }
 
   //Gets a value for the ball sensors every 50 ms

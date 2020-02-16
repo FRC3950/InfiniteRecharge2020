@@ -15,7 +15,8 @@ public class IntakeLiftCommand extends CommandBase {
    * Creates a new IntakeLiftCommand.
    */
 
-   private final IntakeSubsystem m_intakeSubsystem;
+  private final IntakeSubsystem m_intakeSubsystem;
+  boolean finished;
   public IntakeLiftCommand(IntakeSubsystem intakeSubsystem) {
     m_intakeSubsystem = intakeSubsystem;
     // Use addRequirements() here to declare subsystem dependencies.
@@ -41,6 +42,6 @@ public class IntakeLiftCommand extends CommandBase {
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
-    return false;
+    return finished;
   }
 }

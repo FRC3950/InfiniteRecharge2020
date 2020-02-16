@@ -40,11 +40,11 @@ public class TurretSubsystem extends SubsystemBase {
 
   //Makes sure that if the turret begins to turn to far it will stop based off limit switches
   public void turretLimit(){
-  // if(m_leftPosition.get() == true){
-  //   m_turretMotor.set(0);
-  // } if (m_rightPosition.get() == true){
-  //   m_turretMotor.set(0);
-  //   }
+  if(m_leftPosition.get() == true){
+    m_turretMotor.set(0);
+  } if (m_rightPosition.get() == true){
+    m_turretMotor.set(0);
+    }
   }
 
   //Sets the robot to move a certain direction based off the horizontal offset of the shooter from the target 
