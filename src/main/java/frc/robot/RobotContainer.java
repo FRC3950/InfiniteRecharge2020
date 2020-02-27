@@ -7,6 +7,8 @@
 
 package frc.robot;
 
+import com.analog.adis16470.frc.ADIS16470_IMU;
+
 import edu.wpi.first.wpilibj.GenericHID;
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj.Joystick;
@@ -102,7 +104,6 @@ public class RobotContainer {
     public Button xboxControllerStartButton = new JoystickButton(xboxController, 8);
     public Button xboxControllerLeftStickButton = new JoystickButton(xboxController, 9);
     public Button xboxControllerRightStickButton = new JoystickButton(xboxController, 10);
-
   
   /**
    * The container for the robot.  Contains subsystems, OI devices, and commands.

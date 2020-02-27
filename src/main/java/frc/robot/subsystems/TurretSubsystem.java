@@ -19,12 +19,12 @@ public class TurretSubsystem extends SubsystemBase {
   private final WPI_TalonSRX m_turretMotor;
   private final DigitalInput m_leftPosition = new DigitalInput(4);
   private final DigitalInput m_rightPosition = new DigitalInput(5);
-
+ 
 
 /** Hey guys whats up hally here yall are dumb haha bye */
   public TurretSubsystem() {
 
-    m_turretMotor = new WPI_TalonSRX(12);//FIX LATER
+    m_turretMotor = new WPI_TalonSRX(0);//FIX LATER
 
   }
 

@@ -36,7 +36,7 @@ public class ColorSensorSubsystem extends SubsystemBase {
 
   public ColorSensorSubsystem() {
 
-    m_wheelSpinnerMotor = new  WPI_TalonSRX(15); //Need to Change to appropriate value
+    m_wheelSpinnerMotor = new  WPI_TalonSRX(4); //Need to Change to appropriate value
     m_colorMatcher.addColorMatch(kBlueTarget);
     m_colorMatcher.addColorMatch(kGreenTarget);
     m_colorMatcher.addColorMatch(kRedTarget);

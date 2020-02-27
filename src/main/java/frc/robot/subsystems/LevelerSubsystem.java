@@ -9,11 +9,13 @@ package frc.robot.subsystems;
 
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonFX;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
+import com.analog.adis16470.frc.ADIS16470_IMU;
 
 public class LevelerSubsystem extends SubsystemBase {
   /**
    * Creates a new LevelerSubsystem.
    */
+  public static final ADIS16470_IMU imu = new ADIS16470_IMU();
 
   private final WPI_TalonFX m_levelerMotor;
   
@@ -28,7 +30,14 @@ public class LevelerSubsystem extends SubsystemBase {
   
   public void levelRobot(){
     //NEED TO USE ACCELEROMETER to decide whether to move the motor positive or negative and for how long
-    m_levelerMotor.set(.5);
+    if(imu.getAngle() > 3){
+      m_levelerMotor.set(.1);
+    } else if(imu.getAngle() < 3){
+      m_levelerMotor.set(-.1);
+    } else {
+      m_levelerMotor.set(0);
+    }
+    
 
   }
 }
