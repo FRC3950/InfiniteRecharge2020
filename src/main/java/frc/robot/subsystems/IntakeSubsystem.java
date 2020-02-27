@@ -80,12 +80,13 @@ public class IntakeSubsystem extends SubsystemBase {
     }
   }
 
+  //if there are too many balls in the robot it will reverse the motors to get rid of balls 
   public void reverseMotors(){
     m_singulatorMotor.set(-.5);
     m_intakeMotor.set(-.5);
-
   }
 
+  //Turns off the ball intake when the conveyor is full and intake sensor is lit
   public boolean intakeBalls(int ballCount, int ballInIntake, boolean intakePosition){
     if(ballCount == 4 && ballInIntake == 1){
       return true;

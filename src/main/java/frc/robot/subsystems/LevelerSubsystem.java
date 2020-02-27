@@ -28,6 +28,7 @@ public class LevelerSubsystem extends SubsystemBase {
     // This method will be called once per scheduler run
   }
   
+  //Uses the accelerometer values to turn on the leveler motors to level the bar
   public void levelRobot(){
     //NEED TO USE ACCELEROMETER to decide whether to move the motor positive or negative and for how long
     if(imu.getAngle() > 3){

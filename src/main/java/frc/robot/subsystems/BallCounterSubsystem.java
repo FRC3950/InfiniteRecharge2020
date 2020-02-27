@@ -63,16 +63,11 @@ public class BallCounterSubsystem extends SubsystemBase {
     return (indexerSensor.get() ? 1 : 0);
   }
 
+  //Gets the values of the four sensors and makes their values into a string
   public String getSensorValues(){
     String sensorValues = "" + getEntrySensorValue() + getInitialConveyorSensorValue() + getEndConveyorSensorValue() + getIndexerSensorValue(); 
     return sensorValues;
   }
-
-  // public void getIndexerBallSensorValue(){
-  //   System.out.println(indexerSensor);
-  //   //return indexerBallSensor.get();
-  // }
-
 
   //Determines how many balls are inside the robot by comparing the current sensor value to the previous sensor value with a 50 ms delay
   public int getBallsInRobot(){
@@ -93,6 +88,7 @@ public class BallCounterSubsystem extends SubsystemBase {
     return ballsInConveyer;
   }
 
+  //Resets the ball count to zero
   public void resetBallCount(){
     ballCount = 0;
   }

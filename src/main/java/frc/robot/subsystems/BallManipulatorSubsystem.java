@@ -40,6 +40,8 @@ public class BallManipulatorSubsystem extends SubsystemBase {
       m_conveyorMotor.set(0);
     }
   }
+
+  //Sets the conveyor motor to a desired speed
   public void setConveyorMotor(double speed){
     m_conveyorMotor.set(speed);
   }
@@ -131,6 +133,7 @@ public class BallManipulatorSubsystem extends SubsystemBase {
       return results;
     }
     
+  //takes the sensor values from the four manipulator sensors and runs a command based on the ball count 
   public String manipulate(int numberOfBalls, String sensorValues){
     switch(numberOfBalls){
       case 1: 
@@ -146,7 +149,8 @@ public class BallManipulatorSubsystem extends SubsystemBase {
     }
 
   }
-  
+
+  //Override if a ball gets stuck in the conveyor or indexer by reversing the motors
   public void reverseMotors(){
     m_conveyorMotor.set(-.5);
     m_indexerMotor.set(-.5);
