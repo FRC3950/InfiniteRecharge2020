@@ -41,6 +41,7 @@ public class BallCounterSubsystem extends SubsystemBase {
       }
       previousEntryValue = entrySensor.get();
       previousIndexerValue = indexerSensor.get();
+      
   }
   
   //returns the entry ball sensors value

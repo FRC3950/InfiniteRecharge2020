@@ -89,4 +89,32 @@ public class DrivetrainSubsystem extends SubsystemBase {
   public int getEncoderCount(){
     return m_backLeft.getSelectedSensorPosition();
   }
+
+  public void resetEncoderCount(){
+    m_backLeft.setSelectedSensorPosition(0);
+  }
+
+  public void autoDriveToBall(int fieldPosition, int ballCount){
+    
+    int encoderCount = getEncoderCount();
+    if(fieldPosition == 3){
+      while(ballCount < 4){ 
+        drive(.5, 0); //NEED TO FIX POSITIVE OR NEGATIVE AND SPEED 
+      }
+      resetEncoderCount();
+      if(ballCount == 4 && encoderCount < 4000){ //Need to fix encoder count when testing
+        drive(-.5,0); //NEED TO FIX POSITIVE OR NEGATIVE AND SPEED 
+      } else{
+        drive(0,0);
+      }
+      
+    }
+    if(fieldPosition == 2){
+      //Add code for when robot is directly in front of power port at start
+    }
+    if(fieldPosition == 1){
+      //Add code for when robot is near loading bay at start
+    }
+  }
 }
+

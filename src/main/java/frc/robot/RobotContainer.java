@@ -12,6 +12,7 @@ import com.analog.adis16470.frc.ADIS16470_IMU;
 import edu.wpi.first.wpilibj.GenericHID;
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj.Joystick;
+import frc.robot.commands.AutoDriveCommand;
 import frc.robot.commands.BallManipulateCommand;
 import frc.robot.commands.BallOverrideCommand;
 import frc.robot.commands.ClimberLowerCommand;
@@ -62,7 +63,7 @@ public class RobotContainer {
   public final ShooterSubsystem m_shooterSubsystem  = new ShooterSubsystem();
   public final TurretSubsystem m_turretSubsystem = new TurretSubsystem();
 
-  //public final AutoDriveCommand m_autoDriveCommand = new AutoDriveCommand(m_drivetrainSubsystem);
+  public final AutoDriveCommand m_autoDriveCommand = new AutoDriveCommand(m_drivetrainSubsystem);
   public final BallOverrideCommand m_ballOverrideCommand = new BallOverrideCommand(m_ballManipulatorSubsystem, m_ballCounterSubsystem, m_intakeSubsystem);
   public final BallManipulateCommand m_ballManipulateCommand = new BallManipulateCommand(m_ballManipulatorSubsystem, m_ballCounterSubsystem);
   public final ClimberLowerCommand m_climberLowerCommand = new ClimberLowerCommand(m_climberSubsystem);

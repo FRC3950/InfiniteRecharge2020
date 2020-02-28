@@ -35,6 +35,7 @@ public class IntakeBallCommand extends CommandBase {
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {    
+    m_intakeSubsystem.setIntakePosition(true);//Might need to change to false
   }
 
   // Called every time the scheduler runs while the command is scheduled.
