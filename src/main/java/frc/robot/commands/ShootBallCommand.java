@@ -55,7 +55,8 @@ public class ShootBallCommand extends CommandBase {
     int ballCount = m_ballCounterSubsystem.getBallsInRobot();
     double horizontalOffset = m_limelightSubsystem.getAngle();
     double distance = m_limelightSubsystem.calculateDistance();
-    shoot = m_shooterSubsystem.shootBall(horizontalOffset);
+    double speed = m_shooterSubsystem.setShooterSpeed(distance);
+    shoot = m_shooterSubsystem.shootBall(horizontalOffset, speed, distance);
     if (shoot){
       m_ballManipulatorSubsystem.setConveyorMotor(.5);
       m_ballManipulatorSubsystem.setBallIndexerMotor(.5);

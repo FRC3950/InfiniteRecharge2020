@@ -53,12 +53,10 @@ public class DrivetrainSubsystem extends SubsystemBase {
 
   //Drives the robot based on joystick values
   public void drive(double y, double twist){
-    if (y < .25){
+    if (y < .05){ //May need to change the deadzone
       y = 0;
     }
-    // y = y * y * y;
-    // x = x * x * x;
-    //Might need to create a dead band for the direction and rotation
+    y = y * y * y;
     m_drive.arcadeDrive(y, twist);
   }
 
@@ -77,7 +75,7 @@ public class DrivetrainSubsystem extends SubsystemBase {
   }
 
   //Allows the driver to switch between high and low gear
-  public void shiftGear(){ //ADD TO A BUTTON
+  public void shiftGear(){ 
     if(m_shiftGearSolenoid.get() == DoubleSolenoid.Value.kReverse){
       m_shiftGearSolenoid.set(DoubleSolenoid.Value.kForward);
     } else{
@@ -94,11 +92,11 @@ public class DrivetrainSubsystem extends SubsystemBase {
     m_backLeft.setSelectedSensorPosition(0);
   }
 
-  public void autoDriveToBall(int fieldPosition, int ballCount){
+  public void autoDriveToBall(int fieldPosition, int ballCount, int ballInIntake){
     
     int encoderCount = getEncoderCount();
     if(fieldPosition == 3){
-      while(ballCount < 4){ 
+      while(ballCount < 4 && ballInIntake == 1){ 
         drive(.5, 0); //NEED TO FIX POSITIVE OR NEGATIVE AND SPEED 
       }
       resetEncoderCount();

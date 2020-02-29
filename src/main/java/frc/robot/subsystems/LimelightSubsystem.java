@@ -42,16 +42,14 @@ public class LimelightSubsystem extends SubsystemBase {
     double mountingAngle = 1;
     double cameraHeight = 1;
     double targetHeight = 98.25;
-    
     double angleToTarget = table.getEntry("ty").getDouble(0);
     double distance = ((targetHeight - cameraHeight) / Math.tan(mountingAngle + angleToTarget));
-    //CREATE THE CALCULATION FROM DISTANCE TO SPEED 
     return distance;
   }
-
+  
   //Gets the horizontal offset of the robot from the target to be used to turn the turret when shooting
   public double getAngle(){
     double horizontalOffset = table.getEntry("tx").getDouble(0);
     return horizontalOffset;
-    }
+  }  
 }

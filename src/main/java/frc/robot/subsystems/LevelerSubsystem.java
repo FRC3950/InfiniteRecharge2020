@@ -38,7 +38,5 @@ public class LevelerSubsystem extends SubsystemBase {
     } else {
       m_levelerMotor.set(0);
     }
-    
-
   }
 }
