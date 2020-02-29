@@ -8,7 +8,6 @@
 package frc.robot.commands;
 
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
-import frc.robot.RobotContainer;
 import frc.robot.subsystems.BallCounterSubsystem;
 import frc.robot.subsystems.BallManipulatorSubsystem;
 import frc.robot.subsystems.DrivetrainSubsystem;
@@ -31,7 +30,6 @@ public class AutoBasicCommandGroup extends SequentialCommandGroup {
     super();
     addCommands(
       new AutoDriveCommand(drivetrainSubsystem),
-
       new ShootBallCommand(shooterSubsystem, ballManipulatorSubsystem, ballCounterSubsystem, intakeSubsystem, limelightSubsystem, turretSubsystem)
     );
   }

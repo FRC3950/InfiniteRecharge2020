@@ -12,7 +12,9 @@ import com.analog.adis16470.frc.ADIS16470_IMU;
 import edu.wpi.first.wpilibj.GenericHID;
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj.Joystick;
+import frc.robot.commands.AutoBasicCommandGroup;
 import frc.robot.commands.AutoDriveCommand;
+import frc.robot.commands.AutoDriveToBallCommand;
 import frc.robot.commands.BallManipulateCommand;
 import frc.robot.commands.BallOverrideCommand;
 import frc.robot.commands.ClimberLowerCommand;
@@ -63,7 +65,10 @@ public class RobotContainer {
   public final ShooterSubsystem m_shooterSubsystem  = new ShooterSubsystem();
   public final TurretSubsystem m_turretSubsystem = new TurretSubsystem();
 
+  public final AutoBasicCommandGroup m_autoBasicCommandGroup = new AutoBasicCommandGroup(m_drivetrainSubsystem, m_shooterSubsystem, m_ballManipulatorSubsystem, m_ballCounterSubsystem, m_intakeSubsystem, m_limelightSubsystem, m_turretSubsystem);
+  
   public final AutoDriveCommand m_autoDriveCommand = new AutoDriveCommand(m_drivetrainSubsystem);
+  public final AutoDriveToBallCommand m_autoDriveToBallCommand = new AutoDriveToBallCommand(m_drivetrainSubsystem, m_ballCounterSubsystem, Robot.ourFieldPosition);
   public final BallOverrideCommand m_ballOverrideCommand = new BallOverrideCommand(m_ballManipulatorSubsystem, m_ballCounterSubsystem, m_intakeSubsystem);
   public final BallManipulateCommand m_ballManipulateCommand = new BallManipulateCommand(m_ballManipulatorSubsystem, m_ballCounterSubsystem);
   public final ClimberLowerCommand m_climberLowerCommand = new ClimberLowerCommand(m_climberSubsystem);
@@ -144,4 +149,11 @@ public class RobotContainer {
     // An ExampleCommand will run in autonomous
     return m_autoCommand;
   }
+
+public static Command m_autoBasicCommandGroup(DrivetrainSubsystem drivetrainSubsystem,
+		ShooterSubsystem shooterSubsystem, BallManipulatorSubsystem ballManipulatorSubsystem,
+		BallCounterSubsystem ballCounterSubsystem, IntakeSubsystem intakeSubsystem,
+		LimelightSubsystem limelightSubsystem, TurretSubsystem turretSubsystem) {
+	return null;
+}
 }

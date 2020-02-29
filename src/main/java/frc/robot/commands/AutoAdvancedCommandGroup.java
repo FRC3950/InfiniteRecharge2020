@@ -10,6 +10,7 @@ package frc.robot.commands;
 import edu.wpi.first.wpilibj2.command.ParallelCommandGroup;
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 import frc.robot.Robot;
+import frc.robot.RobotContainer;
 import frc.robot.subsystems.BallCounterSubsystem;
 import frc.robot.subsystems.BallManipulatorSubsystem;
 import frc.robot.subsystems.DrivetrainSubsystem;
@@ -31,10 +32,11 @@ public class AutoAdvancedCommandGroup extends SequentialCommandGroup {
     // super(new FooCommand(), new BarCommand());
     super();
     addCommands(
-      new AutoBasicCommandGroup(drivetrainSubsystem, shooterSubsystem, ballManipulatorSubsystem, ballCounterSubsystem, intakeSubsystem, limelightSubsystem, turretSubsystem),
+      RobotContainer.m_autoBasicCommandGroup(drivetrainSubsystem, shooterSubsystem, ballManipulatorSubsystem, ballCounterSubsystem, intakeSubsystem, limelightSubsystem, turretSubsystem),
       new ParallelCommandGroup(
         new AutoDriveToBallCommand(drivetrainSubsystem, ballCounterSubsystem, Robot.ourFieldPosition),
-        new IntakeBallCommand(intakeSubsystem, ballCounterSubsystem))
+        new IntakeBallCommand(intakeSubsystem, ballCounterSubsystem)),
+      new ShootBallCommand(shooterSubsystem, ballManipulatorSubsystem, ballCounterSubsystem, intakeSubsystem, limelightSubsystem, turretSubsystem)
     );
 
   }
