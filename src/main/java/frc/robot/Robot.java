@@ -61,11 +61,11 @@ public class Robot extends TimedRobot {
     // and running subsystem periodic() methods.  This must be called from the robot's periodic
     // block in order for anything in the Command-based framework to work.
     CommandScheduler.getInstance().run();
-    // SmartDashboard.putNumber("end conveyor values", m_robotContainer.m_ballCounterSubsystem.getEndConveyorSensorValue());
-    // SmartDashboard.putNumber("entry values", m_robotContainer.m_ballCounterSubsystem.getEntrySensorValue());
-    // SmartDashboard.putNumber("indexer values", m_robotContainer.m_ballCounterSubsystem.getIndexerSensorValue());
-    // SmartDashboard.putNumber("initial conveyor values", m_robotContainer.m_ballCounterSubsystem.getInitialConveyorSensorValue());
-    // SmartDashboard.putNumber("ball count", m_robotContainer.m_ballCounterSubsystem.getBallsInRobot());
+    SmartDashboard.putBoolean("end conveyor values", m_robotContainer.m_ballCounterSubsystem.endConveyorSensor.get());
+    SmartDashboard.putBoolean("entry values", m_robotContainer.m_ballCounterSubsystem.entrySensor.get());
+    SmartDashboard.putBoolean("indexer values", m_robotContainer.m_ballCounterSubsystem.indexerSensor.get());
+    SmartDashboard.putBoolean("initial conveyor values", m_robotContainer.m_ballCounterSubsystem.initialConveyorSensor.get());
+    SmartDashboard.putNumber("ball count", m_robotContainer.m_ballCounterSubsystem.getBallsInRobot());
     
 
   }
