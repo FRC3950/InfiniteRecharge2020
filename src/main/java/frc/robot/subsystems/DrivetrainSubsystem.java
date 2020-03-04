@@ -33,9 +33,14 @@ public class DrivetrainSubsystem extends SubsystemBase {
 
   public DrivetrainSubsystem() {
 
-    final SpeedControllerGroup left = new SpeedControllerGroup(m_frontLeft, m_backLeft);
-    final SpeedControllerGroup right = new SpeedControllerGroup(m_frontRight, m_backRight);
-    m_drive = new DifferentialDrive(left, right);
+    // final SpeedControllerGroup left = new SpeedControllerGroup(m_frontLeft, m_backLeft);
+    // final SpeedControllerGroup right = new SpeedControllerGroup(m_frontRight, m_backRight);
+    // m_drive = new DifferentialDrive(left, right);
+
+    m_frontLeft.follow(m_backLeft);
+    m_frontRight.follow(m_backRight);
+    m_drive = new DifferentialDrive(m_backLeft, m_backRight);
+
     m_drive.setSafetyEnabled(false);    
 
     m_frontLeft.setNeutralMode(NeutralMode.Brake);
@@ -53,11 +58,11 @@ public class DrivetrainSubsystem extends SubsystemBase {
 
   //Drives the robot based on joystick values
   public void drive(double y, double twist){
-    if (y < .05){ //May need to change the deadzone
-      y = 0;
-    }
+    // if (y < .05){ //May need to change the deadzone
+    //   y = 0;
+    // }
     y = y * y * y;
-    m_drive.arcadeDrive(y, twist);
+    m_drive.arcadeDrive(-y, twist);
   }
 
   //Sets the motor to a certain speed without the joystick 

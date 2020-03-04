@@ -25,11 +25,13 @@ public class IntakeSubsystem extends SubsystemBase {
 
   public IntakeSubsystem() {
 
-    m_intakeMotor = new WPI_TalonSRX(3);
+    m_intakeMotor = new WPI_TalonSRX(8);
     m_singulatorMotor = new WPI_TalonSRX(7);
 
     m_intakeLeftSolenoid = new DoubleSolenoid(2, 3);
     m_intakeRightSolenoid = new DoubleSolenoid(4, 5);
+
+    m_singulatorMotor.setInverted(true);
   }
 
   @Override
@@ -90,10 +92,10 @@ public class IntakeSubsystem extends SubsystemBase {
   public boolean intakeBalls(int ballCount, int ballInIntake, boolean intakePosition){
     if(ballCount == 4 && ballInIntake == 1){
       return true;
-    } else if(intakePosition){
+    } else if(!intakePosition){
       return true;
     } else{
-      setIntakeMotor(1);
+      setIntakeMotor(.75);
       setSingulatorMotor(.5); 
       return false;  
     }
