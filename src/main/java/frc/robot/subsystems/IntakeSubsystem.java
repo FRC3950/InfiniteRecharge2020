@@ -25,8 +25,8 @@ public class IntakeSubsystem extends SubsystemBase {
 
   public IntakeSubsystem() {
 
-    m_intakeMotor = new WPI_TalonSRX(8);
-    m_singulatorMotor = new WPI_TalonSRX(7);
+    m_intakeMotor = new WPI_TalonSRX(4);
+    m_singulatorMotor = new WPI_TalonSRX(6);
 
     m_intakeLeftSolenoid = new DoubleSolenoid(2, 3);
     m_intakeRightSolenoid = new DoubleSolenoid(4, 5);

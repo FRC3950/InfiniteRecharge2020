@@ -20,10 +20,10 @@ public class DrivetrainSubsystem extends SubsystemBase {
   /**
    * Creates a new DrivetrainSubystem.
    */
-  private final WPI_TalonFX m_frontLeft = new WPI_TalonFX(20);
-  private final WPI_TalonFX m_frontRight = new WPI_TalonFX(21);
-  private final WPI_TalonFX m_backLeft = new WPI_TalonFX(23);
-  private final WPI_TalonFX m_backRight = new WPI_TalonFX(22);
+  private final WPI_TalonFX m_frontLeft = new WPI_TalonFX(15);
+  private final WPI_TalonFX m_frontRight = new WPI_TalonFX(1);
+  private final WPI_TalonFX m_backLeft = new WPI_TalonFX(14);
+  private final WPI_TalonFX m_backRight = new WPI_TalonFX(0);
   private final DoubleSolenoid m_shiftGearSolenoid = new DoubleSolenoid(6, 7);
   
   

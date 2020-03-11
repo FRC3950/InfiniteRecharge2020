@@ -23,8 +23,8 @@ public class ClimberSubsystem extends SubsystemBase {
   
   public ClimberSubsystem() {
     
-    m_climberMotor = new WPI_TalonFX(25);
-    m_climberMotorFollower = new WPI_TalonFX(26);
+    m_climberMotor = new WPI_TalonFX(13);
+    m_climberMotorFollower = new WPI_TalonFX(12);
     
     m_climberSolenoid = new DoubleSolenoid(0, 1);
 

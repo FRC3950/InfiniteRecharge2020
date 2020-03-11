@@ -15,7 +15,7 @@ public class DriveCommand extends CommandBase {
   /**
    * Creates a new DriveCommand.
    */
-  private final Joystick stick = new Joystick(0);
+  public final Joystick stick = new Joystick(0);
 
   private final DrivetrainSubsystem m_drivetrainSubsystem;
 

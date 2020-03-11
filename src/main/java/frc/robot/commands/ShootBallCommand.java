@@ -56,24 +56,26 @@ public class ShootBallCommand extends CommandBase {
     double horizontalOffset = m_limelightSubsystem.getAngle();
     double distance = m_limelightSubsystem.calculateDistance();
     double speed = m_shooterSubsystem.setShooterSpeed(distance);
-    shoot = m_shooterSubsystem.shootBall(horizontalOffset, speed, distance);
     // if (shoot){
     if (true){
       m_ballManipulatorSubsystem.setConveyorMotor(.5);
-      m_ballManipulatorSubsystem.setBallIndexerMotor(.5);
-      m_shooterSubsystem.setShooterSpeed(distance);
+      m_ballManipulatorSubsystem.setBallIndexerMotor(-1);
+      //m_shooterSubsystem.setShooterSpeed(distance);
+      m_shooterSubsystem.setShooterMotor(1);
     }    
-    if(ballCount == 0){
-      Timer.delay(6); //may need to change this value
-      finished = true;
-    }
+    // if(ballCount == 0){
+    //   Timer.delay(6); //may need to change this value
+    //   finished = true;
+    // }
     
   }
 
   // Called once the command ends or is interrupted.
   @Override
   public void end(boolean interrupted) {
-    
+    m_ballManipulatorSubsystem.setConveyorMotor(0);
+    m_ballManipulatorSubsystem.setBallIndexerMotor(0);
+    m_shooterSubsystem.setShooterMotor(0);   
   }
 
   // Returns true when the command should end.

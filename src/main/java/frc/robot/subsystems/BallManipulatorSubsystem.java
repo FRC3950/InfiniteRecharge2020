@@ -21,8 +21,8 @@ public class BallManipulatorSubsystem extends SubsystemBase {
 
   public BallManipulatorSubsystem() {
 
-    m_conveyorMotor = new WPI_TalonSRX(3);
-    m_indexerMotor = new WPI_TalonSRX(5);
+    m_conveyorMotor = new WPI_TalonSRX(5);
+    m_indexerMotor = new WPI_TalonSRX(10);
 
 
   }

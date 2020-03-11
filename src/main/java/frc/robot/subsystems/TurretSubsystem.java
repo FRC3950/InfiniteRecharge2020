@@ -24,7 +24,7 @@ public class TurretSubsystem extends SubsystemBase {
 /** Hey guys whats up hally here yall are dumb haha bye */
   public TurretSubsystem() {
 
-    m_turretMotor = new WPI_TalonSRX(0);//FIX LATER
+    m_turretMotor = new WPI_TalonSRX(11);
 
   }
 

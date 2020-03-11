@@ -132,7 +132,7 @@ public class RobotContainer {
    */
   private void configureButtonBindings() {
     xboxControllerAButton.whenPressed(m_colorSpinToColor);
-    xboxControllerBButton.whenPressed(m_shootBallCommand);
+    xboxControllerBButton.toggleWhenPressed(m_shootBallCommand);
     xboxControllerXButton.whenPressed(m_intakeLiftCommand);
     xboxControllerYButton.whenPressed(m_colorSpinNumberOfTimes);
     xboxControllerLBButton.whenPressed(m_climberLowerCommand);

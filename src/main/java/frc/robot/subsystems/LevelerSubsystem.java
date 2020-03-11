@@ -20,7 +20,7 @@ public class LevelerSubsystem extends SubsystemBase {
   private final WPI_TalonFX m_levelerMotor;
   
   public LevelerSubsystem() {
-    m_levelerMotor = new WPI_TalonFX(4);
+    m_levelerMotor = new WPI_TalonFX(7);
   }
 
   @Override

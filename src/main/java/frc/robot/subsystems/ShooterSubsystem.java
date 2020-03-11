@@ -20,12 +20,12 @@ public class ShooterSubsystem extends SubsystemBase {
 
   public ShooterSubsystem() {
 
-    m_shooterMotor = new WPI_TalonSRX(1);
-    m_shooterMotorFollower = new WPI_TalonSRX(2);
+    m_shooterMotor = new WPI_TalonSRX(2);
+    m_shooterMotorFollower = new WPI_TalonSRX(3);
     
     m_shooterMotor.setInverted(true);
     m_shooterMotorFollower.setInverted(true);
-    m_shooterMotor.setSensorPhase(true);
+    //m_shooterMotor.setSensorPhase(true);
 
     m_shooterMotorFollower.follow(m_shooterMotor);
 
@@ -46,10 +46,15 @@ public class ShooterSubsystem extends SubsystemBase {
     return getVelocityFromEncoder() / 4096 * 600;
   }
 
+  public void setShooterMotor(double speed){
+    m_shooterMotor.set(speed);
+  }
+
   //Converts the distance determined by a formula and the limelight to the speed the ball needs to be shot at
   public double setShooterSpeed(double distance){
     //CREATE FORMULA BASED ON DISTANCE TO CALCULATE THE NECESSARY SPEED
     double speed = 1;
+    m_shooterMotor.set(speed);
     return speed;
   }
 
