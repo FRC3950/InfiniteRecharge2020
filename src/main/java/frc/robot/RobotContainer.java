@@ -135,8 +135,8 @@ public class RobotContainer {
     xboxControllerBButton.toggleWhenPressed(m_shootBallCommand);
     xboxControllerXButton.whenPressed(m_intakeLiftCommand);
     xboxControllerYButton.whenPressed(m_colorSpinNumberOfTimes);
-    xboxControllerLBButton.whenPressed(m_climberLowerCommand);
-    xboxControllerRBButton.whenPressed(m_climberRaiseCommand);
+    xboxControllerLBButton.whileHeld(m_climberLowerCommand);
+    xboxControllerRBButton.whileHeld(m_climberRaiseCommand);
     xboxControllerStartButton.whenPressed(m_ballOverrideCommand);
 
     driveStick2Button.whenPressed(m_driveShiftGearCommand);

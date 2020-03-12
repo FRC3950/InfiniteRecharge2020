@@ -9,6 +9,8 @@ package frc.robot.commands;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.subsystems.IntakeSubsystem;
+import edu.wpi.first.wpilibj.DoubleSolenoid;
+import edu.wpi.first.wpilibj.DoubleSolenoid.Value;
 
 public class IntakeLiftCommand extends CommandBase {
   /**
@@ -16,6 +18,7 @@ public class IntakeLiftCommand extends CommandBase {
    */
 
   private final IntakeSubsystem m_intakeSubsystem;
+  DoubleSolenoid.Value position;
   boolean finished;
   public IntakeLiftCommand(IntakeSubsystem intakeSubsystem) {
     m_intakeSubsystem = intakeSubsystem;
@@ -26,12 +29,27 @@ public class IntakeLiftCommand extends CommandBase {
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
+    position = m_intakeSubsystem.m_intakeSolenoid.get();
+    System.out.println(position);
   }
 
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    m_intakeSubsystem.changeIntakePosition();
+    // if(m_intakeSubsystem.m_intakeSolenoid.get() == Value.kReverse){
+    //   m_intakeSubsystem.m_intakeSolenoid.set(Value.kForward);
+    //   System.out.println(m_intakeSubsystem.m_intakeSolenoid.get());
+    //   finished = true;
+    // } else {
+    //   System.out.println("R" + m_intakeSubsystem.m_intakeSolenoid.get());
+    //   finished = true;
+    // }    
+    //finished = m_intakeSubsystem.changeIntakePosition();
+    if(position == Value.kForward ||position == DoubleSolenoid.Value.kOff){
+      m_intakeSubsystem.m_intakeSolenoid.set(DoubleSolenoid.Value.kReverse);
+    } else if(position == DoubleSolenoid.Value.kReverse){
+      m_intakeSubsystem.m_intakeSolenoid.set(DoubleSolenoid.Value.kForward);
+    }
   }
 
   // Called once the command ends or is interrupted.
@@ -42,6 +60,6 @@ public class IntakeLiftCommand extends CommandBase {
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
-    return finished;
+    return true;
   }
 }

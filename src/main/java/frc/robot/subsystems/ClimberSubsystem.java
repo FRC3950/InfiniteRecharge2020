@@ -26,7 +26,7 @@ public class ClimberSubsystem extends SubsystemBase {
     m_climberMotor = new WPI_TalonFX(13);
     m_climberMotorFollower = new WPI_TalonFX(12);
     
-    m_climberSolenoid = new DoubleSolenoid(0, 1);
+    m_climberSolenoid = new DoubleSolenoid(4,5);
 
     m_climberLimitSwitch = new DigitalInput(7);
     m_climberMotorFollower.follow(m_climberMotor);
@@ -69,10 +69,9 @@ public class ClimberSubsystem extends SubsystemBase {
     boolean climberAtTop = m_climberMotor.getSelectedSensorPosition() >= 18000; //NEED TO FIX WHEN WE TEST CLIMBER
     if(climberAtTop){ 
       setClimberMotor(0);
-      setLockGear(true);
       return true;
     }else{
-      setClimberMotor(.5);
+      setClimberMotor(-1);
       return false;
     }
   }
@@ -80,14 +79,13 @@ public class ClimberSubsystem extends SubsystemBase {
   //Checks to see if the climber is at the bottom position by seeing if the climber limit switch is set off
   //Safety check to make sure that if the climber is at the bottom it turns the motor off
   public boolean lowerClimber(){
-    boolean climberAtBottom = m_climberLimitSwitch.get();
+    //boolean climberAtBottom = m_climberLimitSwitch.get();
+    boolean climberAtBottom = false;
     if(climberAtBottom){
       setClimberMotor(0);
-      setLockGear(true);
-      resetEncoderValue();
       return true;
     }else{
-      setClimberMotor(.5);
+      setClimberMotor(1);
       return false;
     }
     

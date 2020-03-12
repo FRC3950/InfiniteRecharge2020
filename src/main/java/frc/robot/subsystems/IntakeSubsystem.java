@@ -20,16 +20,14 @@ public class IntakeSubsystem extends SubsystemBase {
   private final WPI_TalonSRX m_intakeMotor;
   private final WPI_TalonSRX m_singulatorMotor;
 
-  private final DoubleSolenoid m_intakeLeftSolenoid;
-  private final DoubleSolenoid m_intakeRightSolenoid;
+  public final DoubleSolenoid m_intakeSolenoid;
 
   public IntakeSubsystem() {
 
     m_intakeMotor = new WPI_TalonSRX(4);
     m_singulatorMotor = new WPI_TalonSRX(6);
 
-    m_intakeLeftSolenoid = new DoubleSolenoid(2, 3);
-    m_intakeRightSolenoid = new DoubleSolenoid(4, 5);
+    m_intakeSolenoid = new DoubleSolenoid(0, 1);
 
     m_singulatorMotor.setInverted(true);
   }
@@ -52,30 +50,29 @@ public class IntakeSubsystem extends SubsystemBase {
 
   //Allows the driver to raise or lower the intake with a button
   public boolean changeIntakePosition(){
-    if(m_intakeLeftSolenoid.get() == DoubleSolenoid.Value.kReverse && m_intakeRightSolenoid.get() == DoubleSolenoid.Value.kReverse){
-      m_intakeLeftSolenoid.set(DoubleSolenoid.Value.kForward);
-      m_intakeRightSolenoid.set(DoubleSolenoid.Value.kForward);
+    System.out.println(m_intakeSolenoid.get());
+    if(m_intakeSolenoid.get() == DoubleSolenoid.Value.kReverse){
+      m_intakeSolenoid.set(DoubleSolenoid.Value.kForward);
+      System.out.println(m_intakeSolenoid.get());
+      return true;
     } else {
-      m_intakeLeftSolenoid.set(DoubleSolenoid.Value.kReverse);
-      m_intakeRightSolenoid.set(DoubleSolenoid.Value.kReverse);
-    }
-    return true;
+      m_intakeSolenoid.set(DoubleSolenoid.Value.kReverse);
+      return true;
+    }    
   }
 
   //Sets the intake to a position based on a boolean value
   public void setIntakePosition(boolean upOrDown){
     if(upOrDown == true){
-      m_intakeLeftSolenoid.set(DoubleSolenoid.Value.kForward);
-      m_intakeRightSolenoid.set(DoubleSolenoid.Value.kForward);
+      m_intakeSolenoid.set(DoubleSolenoid.Value.kForward);
     } else {
-      m_intakeLeftSolenoid.set(DoubleSolenoid.Value.kReverse);
-      m_intakeRightSolenoid.set(DoubleSolenoid.Value.kReverse);
+      m_intakeSolenoid.set(DoubleSolenoid.Value.kReverse);
     }
   }
 
   //Checks whether the intake is in the raised position or the lowered position
   public boolean intakePosition(){
-    if(m_intakeLeftSolenoid.get() == DoubleSolenoid.Value.kReverse && m_intakeRightSolenoid.get() == DoubleSolenoid.Value.kReverse){
+    if(m_intakeSolenoid.get() == DoubleSolenoid.Value.kReverse){
       return true;
     } else {
      return false;
