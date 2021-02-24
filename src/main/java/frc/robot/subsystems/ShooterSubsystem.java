@@ -24,7 +24,7 @@ public class ShooterSubsystem extends SubsystemBase {
     m_shooterMotorFollower = new WPI_TalonSRX(3);
     
     m_shooterMotor.setInverted(true);
-    m_shooterMotorFollower.setInverted(true);
+    //m_shooterMotorFollower.setInverted(true);
     //m_shooterMotor.setSensorPhase(true);
 
     m_shooterMotorFollower.follow(m_shooterMotor);

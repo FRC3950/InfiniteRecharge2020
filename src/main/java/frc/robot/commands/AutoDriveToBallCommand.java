@@ -33,7 +33,7 @@ public class AutoDriveToBallCommand extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    m_drivetrainSubsystem.autoDriveToBall(Robot.ourFieldPosition, m_ballCounterSubsystem.getBallsInRobot(), m_ballCounterSubsystem.getEntrySensorValue());
+    m_drivetrainSubsystem.autoDriveToBall(Robot.ourFieldPosition, m_ballCounterSubsystem.ballCounter(m_ballCounterSubsystem.getSensorValues().charAt(1),  m_ballCounterSubsystem.getSensorValues().charAt(3)), m_ballCounterSubsystem.getEntrySensorValue());
   }
 
   // Called once the command ends or is interrupted.

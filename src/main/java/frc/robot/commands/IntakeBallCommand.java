@@ -35,16 +35,20 @@ public class IntakeBallCommand extends CommandBase {
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {    
-    m_intakeSubsystem.setIntakePosition(true);//Might need to change to false
+    //m_intakeSubsystem.setIntakePosition(true);//Might need to change to false
   }
 
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    int ballCount = m_ballCounterSubsystem.getBallsInRobot();
-    int ballInIntake = m_ballCounterSubsystem.getEntrySensorValue();
-    boolean intakePosition = m_intakeSubsystem.intakePosition();
-    finished = m_intakeSubsystem.intakeBalls(ballCount, ballInIntake, intakePosition);
+    //int ballCount = m_ballCounterSubsystem.getBallsInRobot();
+    //int ballInIntake = m_ballCounterSubsystem.getEntrySensorValue();
+    //boolean intakePosition = m_intakeSubsystem.intakePosition();
+    if(m_intakeSubsystem.intakePosition()){
+      m_intakeSubsystem.setIntakeMotor(1);
+    }
+    //finished = m_intakeSubsystem.intakeBalls(ballCount, ballInIntake, intakePosition);
+    //m_intakeSubsystem.autoBallIntakeMotors(m_ballCounterSubsystem.getMotorsBasedOnBalls(), intakePosition);
     SmartDashboard.putString("intake" ,"on");
 
   }
@@ -53,7 +57,7 @@ public class IntakeBallCommand extends CommandBase {
   @Override
   public void end(boolean interrupted) {
     m_intakeSubsystem.setIntakeMotor(0);
-    m_intakeSubsystem.setSingulatorMotor(0);
+    //m_intakeSubsystem.setIntakePosition(false);
     SmartDashboard.putString("intake" ," off");
 
   }
@@ -61,6 +65,6 @@ public class IntakeBallCommand extends CommandBase {
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
-    return finished;
+    return false;
   }
 }

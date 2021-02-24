@@ -34,8 +34,14 @@ public class TurretSubsystem extends SubsystemBase {
   }
 
   //Sets the turret motor to a certain velocity
-  public void turretSpin(){
-    m_turretMotor.set(.1);
+  public void turretSpin(double speed){
+    m_turretMotor.set(speed);
+    if(m_leftPosition.get() == false){
+      m_turretMotor.set(0);
+    } 
+    if (m_rightPosition.get() == false){
+      m_turretMotor.set(0);
+      }
   }
 
   //Makes sure that if the turret begins to turn to far it will stop based off limit switches

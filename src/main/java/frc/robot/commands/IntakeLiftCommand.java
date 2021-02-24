@@ -11,15 +11,15 @@ import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.subsystems.IntakeSubsystem;
 import edu.wpi.first.wpilibj.DoubleSolenoid;
 import edu.wpi.first.wpilibj.DoubleSolenoid.Value;
+import edu.wpi.first.wpilibj.DoubleSolenoid.Value.*;
 
 public class IntakeLiftCommand extends CommandBase {
   /**
    * Creates a new IntakeLiftCommand.
    */
-
+  
   private final IntakeSubsystem m_intakeSubsystem;
-  DoubleSolenoid.Value position;
-  boolean finished;
+ 
   public IntakeLiftCommand(IntakeSubsystem intakeSubsystem) {
     m_intakeSubsystem = intakeSubsystem;
     // Use addRequirements() here to declare subsystem dependencies.
@@ -29,13 +29,15 @@ public class IntakeLiftCommand extends CommandBase {
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
-    position = m_intakeSubsystem.m_intakeSolenoid.get();
-    System.out.println(position);
+    
   }
 
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
+    m_intakeSubsystem.changeIntakePosition();
+    // position = m_intakeSubsystem.m_intakeSolenoid.get().toString();
+    // System.out.println(position);
     // if(m_intakeSubsystem.m_intakeSolenoid.get() == Value.kReverse){
     //   m_intakeSubsystem.m_intakeSolenoid.set(Value.kForward);
     //   System.out.println(m_intakeSubsystem.m_intakeSolenoid.get());
@@ -45,16 +47,21 @@ public class IntakeLiftCommand extends CommandBase {
     //   finished = true;
     // }    
     //finished = m_intakeSubsystem.changeIntakePosition();
-    if(position == Value.kForward ||position == DoubleSolenoid.Value.kOff){
-      m_intakeSubsystem.m_intakeSolenoid.set(DoubleSolenoid.Value.kReverse);
-    } else if(position == DoubleSolenoid.Value.kReverse){
-      m_intakeSubsystem.m_intakeSolenoid.set(DoubleSolenoid.Value.kForward);
-    }
+    // System.out.println("execute");
+    // if(position == "kForward" || position == "kOff"){
+    //   m_intakeSubsystem.setIntakePosition(true);
+    //   System.out.println("kForward to kREverse");
+
+    //   finished = true;
+    // } else if (position == "kReverse"){
+    //   m_intakeSubsystem.setIntakePosition(false);
+    // }
   }
 
   // Called once the command ends or is interrupted.
   @Override
   public void end(boolean interrupted) {
+    System.out.println("end");
   }
 
   // Returns true when the command should end.

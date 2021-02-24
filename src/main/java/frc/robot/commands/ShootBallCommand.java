@@ -52,16 +52,16 @@ public class ShootBallCommand extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    int ballCount = m_ballCounterSubsystem.getBallsInRobot();
+    //int ballCount = m_ballCounterSubsystem.getBallsInRobot();
     double horizontalOffset = m_limelightSubsystem.getAngle();
     double distance = m_limelightSubsystem.calculateDistance();
     double speed = m_shooterSubsystem.setShooterSpeed(distance);
     // if (shoot){
     if (true){
-      m_ballManipulatorSubsystem.setConveyorMotor(.5);
-      m_ballManipulatorSubsystem.setBallIndexerMotor(-1);
+      m_ballManipulatorSubsystem.setConveyorMotor(-.5);
+      m_ballManipulatorSubsystem.setBallIndexerMotor(1);
       //m_shooterSubsystem.setShooterSpeed(distance);
-      m_shooterSubsystem.setShooterMotor(1);
+      m_shooterSubsystem.setShooterMotor(-1);
     }    
     // if(ballCount == 0){
     //   Timer.delay(6); //may need to change this value

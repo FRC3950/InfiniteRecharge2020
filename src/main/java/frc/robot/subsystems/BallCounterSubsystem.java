@@ -66,13 +66,30 @@ public class BallCounterSubsystem extends SubsystemBase {
 
   //Gets the values of the four sensors and makes their values into a string
   public String getSensorValues(){
-    String sensorValues = "" + getEntrySensorValue() + getInitialConveyorSensorValue() + getEndConveyorSensorValue() + getIndexerSensorValue(); 
+    final String sensorValues = "" + getEntrySensorValue() + getInitialConveyorSensorValue() + getEndConveyorSensorValue() + getIndexerSensorValue(); 
     return sensorValues;
   }
 
   //Determines how many balls are inside the robot by comparing the current sensor value to the previous sensor value with a 50 ms delay
-  public int getBallsInRobot(){
-    return ballCount;
+  // public int getBallsInRobot(){
+  //   if(getSensorValues() == "1111"){
+  //     ballCount = 5;
+  //   }else if(getSensorValues() == "0000"){
+  //     ballCount = 0;
+  //   }
+  //   return ballCount;
+  // }
+
+  //0 = all off, 1 = intake on, 2 = conveyor and intake on, 3 = all on
+  public int getMotorsBasedOnBalls(String sensorValues){
+    if(sensorValues.equals("0000")){
+      return 1;
+    }else if(sensorValues.equals("1110") || sensorValues.equals("1100") || sensorValues.equals("1010") || sensorValues.equals("1000") || sensorValues.equals("0110") || sensorValues.equals("0100") || sensorValues.equals("0110")|| sensorValues.equals("0010")){
+      return 2;
+    }else if(sensorValues.equals("1111") || sensorValues.equals("1101") || sensorValues.equals("1011") || sensorValues.equals("1001")|| sensorValues.equals("0111") || sensorValues.equals("0101") || sensorValues.equals("0011") || sensorValues.equals("0001")){
+      return 3;
+    }
+    return 3;
   }
 
   //Determines if there is a ball in the indexer 
@@ -92,5 +109,18 @@ public class BallCounterSubsystem extends SubsystemBase {
   //Resets the ball count to zero
   public void resetBallCount(){
     ballCount = 0;
+  }
+
+  public int ballCounter(char initialEnterValue, char initalExitValue){
+    int count = 0;
+    char currentEnterValue = getSensorValues().charAt(1);
+    char currentExitValue = getSensorValues().charAt(3);
+    if(currentEnterValue == '1' && initialEnterValue == '0'){
+      count++;
+    }
+    if(currentExitValue == '0' && initalExitValue == '1'){
+      count--;
+    }
+    return count;
   }
 }

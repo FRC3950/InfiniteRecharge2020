@@ -16,6 +16,7 @@ import frc.robot.commands.AutoAdvancedCommandGroup;
 import frc.robot.commands.AutoBasicCommandGroup;
 import frc.robot.commands.AutoDriveCommand;
 import frc.robot.commands.AutoDriveToBallCommand;
+import frc.robot.commands.BUTTONShootBallCommand;
 import frc.robot.commands.BallManipulateCommand;
 import frc.robot.commands.BallOverrideCommand;
 import frc.robot.commands.ClimberLowerCommand;
@@ -27,7 +28,11 @@ import frc.robot.commands.DriveShiftGearCommand;
 import frc.robot.commands.ExampleCommand;
 import frc.robot.commands.IntakeBallCommand;
 import frc.robot.commands.IntakeLiftCommand;
+import frc.robot.commands.MoveBallCommandGroup;
+import frc.robot.commands.ResetBallCountCommand;
 import frc.robot.commands.ShootBallCommand;
+import frc.robot.commands.TurretSpinLeftCommand;
+import frc.robot.commands.TurretSpinRightCommand;
 import frc.robot.subsystems.BallCounterSubsystem;
 import frc.robot.subsystems.BallManipulatorSubsystem;
 import frc.robot.subsystems.ClimberSubsystem;
@@ -72,7 +77,7 @@ public class RobotContainer {
   public final AutoDriveCommand m_autoDriveCommand = new AutoDriveCommand(m_drivetrainSubsystem);
   public final AutoDriveToBallCommand m_autoDriveToBallCommand = new AutoDriveToBallCommand(m_drivetrainSubsystem, m_ballCounterSubsystem, Robot.ourFieldPosition);
   public final BallOverrideCommand m_ballOverrideCommand = new BallOverrideCommand(m_ballManipulatorSubsystem, m_ballCounterSubsystem, m_intakeSubsystem);
-  public final BallManipulateCommand m_ballManipulateCommand = new BallManipulateCommand(m_ballManipulatorSubsystem, m_ballCounterSubsystem);
+  public final BallManipulateCommand m_ballManipulateCommand = new BallManipulateCommand(m_intakeSubsystem, m_ballManipulatorSubsystem, m_ballCounterSubsystem);
   public final ClimberLowerCommand m_climberLowerCommand = new ClimberLowerCommand(m_climberSubsystem);
   public final ClimberRaiseCommand m_climberRaiseCommand = new ClimberRaiseCommand(m_climberSubsystem);
   public final ColorSpinNumberOfTimes m_colorSpinNumberOfTimes = new ColorSpinNumberOfTimes(m_colorSensorSubsystem);
@@ -81,10 +86,15 @@ public class RobotContainer {
   public final DriveShiftGearCommand m_driveShiftGearCommand = new DriveShiftGearCommand(m_drivetrainSubsystem);
   public final IntakeBallCommand m_intakeBallCommand = new IntakeBallCommand(m_intakeSubsystem, m_ballCounterSubsystem);
   public final IntakeLiftCommand m_intakeLiftCommand = new IntakeLiftCommand(m_intakeSubsystem);
+  public final MoveBallCommandGroup m_moveBallCommand = new MoveBallCommandGroup(m_ballManipulatorSubsystem, m_ballCounterSubsystem, m_intakeSubsystem);
+  public final ResetBallCountCommand m_resetBallCountCommand = new ResetBallCountCommand(m_ballCounterSubsystem);
   public final ShootBallCommand m_shootBallCommand = new ShootBallCommand(m_shooterSubsystem, 
       m_ballManipulatorSubsystem, m_ballCounterSubsystem, m_intakeSubsystem, m_limelightSubsystem, m_turretSubsystem);
+  public final BUTTONShootBallCommand m_BUTTONShootBallCommand = new BUTTONShootBallCommand(m_ballManipulatorSubsystem, m_shooterSubsystem, m_intakeSubsystem);
   // public final TurretSetAngleCommand m_turretSetAngleCommand = new TurretSetAngleCommand(m_limelightSubsystem, m_turretSubsystem);
   // public final TurretSpinCommand m_turretSpinCommand = new TurretSpinCommand(m_turretSubsystem);
+  public final TurretSpinLeftCommand m_turretSpinLeftCommand = new TurretSpinLeftCommand(m_turretSubsystem);
+  public final TurretSpinRightCommand m_turretSpinRightCommand = new TurretSpinRightCommand(m_turretSubsystem);
     
     public Joystick driveStick = new Joystick(0);
     public XboxController xboxController = new XboxController(1);
@@ -120,26 +130,33 @@ public class RobotContainer {
     // Configure the button bindings
     configureButtonBindings();    
     CommandScheduler.getInstance().setDefaultCommand(m_drivetrainSubsystem, m_driveCommand);
-    CommandScheduler.getInstance().setDefaultCommand(m_intakeSubsystem, m_intakeBallCommand);
+    //CommandScheduler.getInstance().setDefaultCommand(m_intakeSubsystem, m_intakeBallCommand);
     //CommandScheduler.getInstance().setDefaultCommand(m_ballManipulatorSubsystem, m_ballManipulateCommand);
   }
 
 /**
    * Use this method to define your button->command mappings.  Buttons can be created by
+   * 
+   * 
    * instantiating a {@link GenericHID} or one of its subclasses ({@link
    * edu.wpi.first.wpilibj.Joystick} or {@link XboxController}), and then passing it to a
-   * {@link edu.wpi.first.wpilibj2.command.button.JoystickButton}.
+   * {@link edu.wpi.first
+   * .wpilibj2.command.button.JoystickButton}.
    */
   private void configureButtonBindings() {
-    xboxControllerAButton.whenPressed(m_colorSpinToColor);
-    xboxControllerBButton.toggleWhenPressed(m_shootBallCommand);
-    xboxControllerXButton.whenPressed(m_intakeLiftCommand);
-    xboxControllerYButton.whenPressed(m_colorSpinNumberOfTimes);
+    driveStick11Button.whileHeld(m_turretSpinLeftCommand);
+    driveStick12Button.whileHeld(m_turretSpinRightCommand);
+    xboxControllerAButton.whileHeld(m_BUTTONShootBallCommand);
+    //xboxControllerBButton.toggleWhenPressed(m_shootBallCommand);
+    xboxControllerBButton.whenPressed(m_intakeLiftCommand);
+    xboxControllerXButton.whileHeld(m_intakeBallCommand);
+    xboxControllerYButton.toggleWhenPressed(m_ballManipulateCommand);
     xboxControllerLBButton.whileHeld(m_climberLowerCommand);
     xboxControllerRBButton.whileHeld(m_climberRaiseCommand);
     xboxControllerStartButton.whenPressed(m_ballOverrideCommand);
-
+    xboxControllerBackButton.whileHeld(m_ballOverrideCommand);
     driveStick2Button.whenPressed(m_driveShiftGearCommand);
+    driveStick9Button.whenPressed(m_resetBallCountCommand);
   }
 
 

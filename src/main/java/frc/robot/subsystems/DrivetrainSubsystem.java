@@ -24,7 +24,7 @@ public class DrivetrainSubsystem extends SubsystemBase {
   private final WPI_TalonFX m_frontRight = new WPI_TalonFX(1);
   private final WPI_TalonFX m_backLeft = new WPI_TalonFX(14);
   private final WPI_TalonFX m_backRight = new WPI_TalonFX(0);
-  private final DoubleSolenoid m_shiftGearSolenoid = new DoubleSolenoid(2, 3);
+  private final DoubleSolenoid m_shiftGearSolenoid = new DoubleSolenoid(2,3);
   
   
   DifferentialDrive m_drive;

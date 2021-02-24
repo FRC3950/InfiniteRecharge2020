@@ -31,8 +31,7 @@ public class TurretSpinCommand extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    m_turretSubsystem.turretSpin();
-    m_turretSubsystem.turretLimit();
+    m_turretSubsystem.turretSpin(.1);
     //Need to figure out connection to limelight
   }
 

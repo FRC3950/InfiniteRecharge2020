@@ -65,8 +65,9 @@ public class Robot extends TimedRobot {
     SmartDashboard.putBoolean("entry values", m_robotContainer.m_ballCounterSubsystem.entrySensor.get());
     SmartDashboard.putBoolean("indexer values", m_robotContainer.m_ballCounterSubsystem.indexerSensor.get());
     SmartDashboard.putBoolean("initial conveyor values", m_robotContainer.m_ballCounterSubsystem.initialConveyorSensor.get());
-    SmartDashboard.putNumber("ball count", m_robotContainer.m_ballCounterSubsystem.getBallsInRobot());
-    
+    SmartDashboard.putString("sensor values", m_robotContainer.m_ballCounterSubsystem.getSensorValues());
+    SmartDashboard.putNumber("ball count", m_robotContainer.m_ballCounterSubsystem.ballCounter(m_robotContainer.m_ballCounterSubsystem.getSensorValues().charAt(1),  m_robotContainer.m_ballCounterSubsystem.getSensorValues().charAt(3)));
+    SmartDashboard.putNumber("distance from target", m_robotContainer.m_limelightSubsystem.calculateDistance());
 
   }
 
